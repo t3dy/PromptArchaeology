@@ -80,6 +80,11 @@ time into the light.</p>
 
 <div class="section-title">Surfaces</div>
 <div class="cards">
+  <a class="card" href="coach.html">
+    <div class="card-label">Coach</div>
+    <h3>Glimmung-companion</h3>
+    <p>Cards, openers, challenges, questions. Low-pressure forever.</p>
+  </a>
   <a class="card" href="narrative.html">
     <div class="card-label">Lineage</div>
     <h3>Building on prior projects</h3>
@@ -93,12 +98,12 @@ time into the light.</p>
   <a class="card" href="queries.html">
     <div class="card-label">Queries</div>
     <h3>Saved SQL incantations</h3>
-    <p>Eight ways of looking at a corpus of one's own writing.</p>
+    <p>Eleven ways of looking at a corpus of one's own writing.</p>
   </a>
   <a class="card" href="code.html">
     <div class="card-label">Code</div>
     <h3>Python &amp; schema</h3>
-    <p>The runner, the chunker, the views over megabase.</p>
+    <p>The runner, the chunker, the coach, the views over megabase.</p>
   </a>
   <a class="card" href="manuscripts.html">
     <div class="card-label">Manuscripts</div>
@@ -209,7 +214,29 @@ def main():
     code_html.append("</ul>")
     write_page(DOCS / "code.html", "Code", "\n".join(code_html))
 
-    # 6) Manuscripts
+    # 6a) Coach
+    coach_dir = ROOT / "coach"
+    coach_links = [
+        '<h1>Coach mode</h1>',
+        '<p><em>Glimmung-companion. Low-pressure offerings — one card, one question, one challenge at a time. Never asks "did you ship?" Never recommends new projects. Always: follow your lead.</em></p>',
+        '<p>Invoke from any Claude Code session: <code>coach me</code>, <code>give me a card</code>, <code>I&rsquo;m tired</code>, <code>ask me a question</code>.</p>',
+        '<p>Or run directly:</p>',
+        '<pre><code>python tools/coach.py                   # random pull from any pool\npython tools/coach.py --kind opener     # session opener\npython tools/coach.py --kind challenge  # bounded game\npython tools/coach.py --kind question   # Socratic question\npython tools/coach.py --kind card       # oblique strategy</code></pre>',
+        '<h2>Pools</h2>',
+        '<ul>',
+    ]
+    if coach_dir.exists():
+        for md_path in sorted(coach_dir.glob("*.md")):
+            slug = slugify(md_path.stem)
+            title = md_path.stem.replace("_", " ").title()
+            md_text = md_path.read_text(encoding="utf-8")
+            body = render_markdown(md_text)
+            write_page(DOCS / "coach" / f"{slug}.html", title, body)
+            coach_links.append(f'<li><a href="coach/{slug}.html">{html.escape(title)}</a></li>')
+    coach_links.append("</ul>")
+    write_page(DOCS / "coach.html", "Coach", "\n".join(coach_links))
+
+    # 6b) Manuscripts
     manu_dir = ROOT / "manuscripts"
     manu_links = ['<h1>Manuscripts</h1>',
                   '<p>Companion documents from the workshop sessions: tired-mode prompt libraries, learning-journal protocols, audit questions, project briefings, and other planning artifacts that orbit this tool.</p>',

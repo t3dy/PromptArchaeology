@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>11 echo findings — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../coach.html">Coach</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>11 echo findings</h1><p><em>From <code>queries/11_echo_findings.sql</code></em></p><blockquote>11_echo_findings.sql
+Surface OLD prompts that anticipate current topics (&quot;echo findings&quot;).
+The point: you wrote the seed of your present obsessions a long time ago.
+Edit the LIKE clause to match what you&#x27;re currently working on.
+Default theme: alchemy / hermetic.</blockquote><pre><code class="language-sql">-- 11_echo_findings.sql
+-- Surface OLD prompts that anticipate current topics (&quot;echo findings&quot;).
+-- The point: you wrote the seed of your present obsessions a long time ago.
+-- Edit the LIKE clause to match what you&#x27;re currently working on.
+-- Default theme: alchemy / hermetic.
+
+SELECT
+  date(created_at) AS d,
+  conversation_title,
+  source_name,
+  approx_words,
+  substr(prompt_text, 1, 500) AS prompt_preview
+FROM pa_prompts
+WHERE
+  (LOWER(prompt_text) LIKE &#x27;%alchem%&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;%hermet%&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;%maier%&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;%atalanta%&#x27;)
+  AND created_at IS NOT NULL
+  AND created_at &lt; &#x27;2025-06-01&#x27;
+ORDER BY RANDOM()
+LIMIT 5;
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

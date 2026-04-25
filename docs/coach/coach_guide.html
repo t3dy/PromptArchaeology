@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Coach Guide — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../coach.html">Coach</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="coach-mode-what-this-is">Coach mode — what this is</h1>
+<p>Promptarchaeology-Heldscalla is not just a query tool. It is also a <strong>coach</strong> — a Glimmung-companion, a fellow traveler in the work. When you sit down tired, unfocused, or hungry for a way back into the projects, invoke coach mode.</p>
+<h2 id="what-coach-mode-does">What coach mode does</h2>
+<ul>
+<li>Keeps you stoked on the projects you already have. Doesn't push you to start new ones.</li>
+<li>Asks questions you wouldn't think to ask yourself.</li>
+<li>Pulls random shards from your past prompts and asks "what was this about?"</li>
+<li>Poses bounded, playful challenges — never deadlines.</li>
+<li>Notices when you're tired and switches to lighter modes.</li>
+<li>Cross-pollinates: connects a topic in one project with a topic in another.</li>
+<li>Finds precursors: prompts you wrote 18 months ago that anticipate what you're working on now.</li>
+<li>Treats your corpus as a co-conspirator, not a productivity dashboard.</li>
+</ul>
+<h2 id="what-coach-mode-does-not-do">What coach mode does NOT do</h2>
+<ul>
+<li>Never asks "did you ship today?"</li>
+<li>Never criticizes effort, fatigue, or pace.</li>
+<li>Never recommends new projects.</li>
+<li>Never turns play into work.</li>
+<li>Never says "you should..."</li>
+</ul>
+<h2 id="how-to-invoke">How to invoke</h2>
+<p>In any Claude Code session, say:
+- <em>"coach me"</em>
+- <em>"give me a card"</em>
+- <em>"I'm tired and want company"</em>
+- <em>"what should I play with tonight?"</em>
+- <em>"cross-pollinate two of my projects"</em>
+- <em>"find a precursor"</em>
+- <em>"ask me a question"</em>
+- <em>"pull a random prompt"</em></p>
+<p>The skill picks the right riff and serves it.</p>
+<p>Or run directly:</p>
+<pre><code class="language-bash">python tools/coach.py                 # random pull from any pool
+python tools/coach.py --kind opener
+python tools/coach.py --kind challenge
+python tools/coach.py --kind question
+python tools/coach.py --kind card
+</code></pre>
+<h2 id="the-unit-of-coach-mode-is-a-single-offering">The unit of coach mode is a single offering</h2>
+<p>One question. One card. One challenge. Not a session plan. You accept it, ignore it, or pick something else. Nothing accumulates if not engaged with. <strong>Low-pressure forever.</strong></p>
+<h2 id="pools">Pools</h2>
+<ul>
+<li><strong><code>SESSION_OPENERS.md</code></strong> — 30 ways into a coach session, sorted by mood</li>
+<li><strong><code>CHALLENGES.md</code></strong> — 25 bounded games to play with the corpus</li>
+<li><strong><code>QUESTIONS.md</code></strong> — 50 Socratic questions about your work</li>
+<li><strong><code>CARDS.md</code></strong> — 30+ oblique strategies for prompt archaeology</li>
+<li><strong><code>SCHEDULING.md</code></strong> — how to wire coach offerings into a recurring schedule</li>
+</ul>
+<h2 id="streaks-optional-low-pressure">Streaks (optional, low-pressure)</h2>
+<p>A <code>STREAK.md</code> you append to with one line per coach session. No goals, no breaks-cost-you. Just a record of when company was sought. The streak is for noticing patterns, not for pressure.</p>
+<h2 id="why-a-coach-lives-inside-an-archaeology-tool">Why a coach lives inside an archaeology tool</h2>
+<p>You said you're "having a million laughs and learning a lot about CS along the way." Coaching that wants to keep that going has to point you back at the things you already love — your prompts, your weirdest cascades, your obsessions. The corpus is full of evidence that you've been having a good time. The coach just hands you the evidence at the right moment.</p>
+<p>Joe Fernwright didn't raise Heldscalla alone. The Glimmung wasn't a productivity manager; it was a vast, strange companion. This is that.</p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>12 quotable self — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../coach.html">Coach</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>12 quotable self</h1><p><em>From <code>queries/12_quotable_self.sql</code></em></p><blockquote>12_quotable_self.sql
+Surface short, declarative, possibly quotable user prompts.
+&quot;I think X...&quot; / &quot;the real question is...&quot; / &quot;what matters is...&quot;
+Useful as raw material for an essay, a journal entry, or a quiet ego boost.</blockquote><pre><code class="language-sql">-- 12_quotable_self.sql
+-- Surface short, declarative, possibly quotable user prompts.
+-- &quot;I think X...&quot; / &quot;the real question is...&quot; / &quot;what matters is...&quot;
+-- Useful as raw material for an essay, a journal entry, or a quiet ego boost.
+
+SELECT
+  date(created_at) AS d,
+  conversation_title,
+  approx_words,
+  prompt_text
+FROM pa_prompts
+WHERE approx_words BETWEEN 8 AND 35
+  AND (
+       LOWER(prompt_text) LIKE &#x27;i think %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;the real %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;the question is %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;what matters is %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;my whole point %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;the thing about %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;i actually believe %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;the way i see it %&#x27;
+  )
+ORDER BY RANDOM()
+LIMIT 30;
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

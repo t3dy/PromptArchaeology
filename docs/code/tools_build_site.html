@@ -12,6 +12,7 @@
     <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
     <span class="nav">
       <a href="../narrative.html">Lineage</a>
+      <a href="../coach.html">Coach</a>
       <a href="../docs.html">Docs</a>
       <a href="../queries.html">Queries</a>
       <a href="../code.html">Code</a>
@@ -103,6 +104,11 @@ time into the light.&lt;/p&gt;
 
 &lt;div class=&quot;section-title&quot;&gt;Surfaces&lt;/div&gt;
 &lt;div class=&quot;cards&quot;&gt;
+  &lt;a class=&quot;card&quot; href=&quot;coach.html&quot;&gt;
+    &lt;div class=&quot;card-label&quot;&gt;Coach&lt;/div&gt;
+    &lt;h3&gt;Glimmung-companion&lt;/h3&gt;
+    &lt;p&gt;Cards, openers, challenges, questions. Low-pressure forever.&lt;/p&gt;
+  &lt;/a&gt;
   &lt;a class=&quot;card&quot; href=&quot;narrative.html&quot;&gt;
     &lt;div class=&quot;card-label&quot;&gt;Lineage&lt;/div&gt;
     &lt;h3&gt;Building on prior projects&lt;/h3&gt;
@@ -116,12 +122,12 @@ time into the light.&lt;/p&gt;
   &lt;a class=&quot;card&quot; href=&quot;queries.html&quot;&gt;
     &lt;div class=&quot;card-label&quot;&gt;Queries&lt;/div&gt;
     &lt;h3&gt;Saved SQL incantations&lt;/h3&gt;
-    &lt;p&gt;Eight ways of looking at a corpus of one&#x27;s own writing.&lt;/p&gt;
+    &lt;p&gt;Eleven ways of looking at a corpus of one&#x27;s own writing.&lt;/p&gt;
   &lt;/a&gt;
   &lt;a class=&quot;card&quot; href=&quot;code.html&quot;&gt;
     &lt;div class=&quot;card-label&quot;&gt;Code&lt;/div&gt;
     &lt;h3&gt;Python &amp;amp; schema&lt;/h3&gt;
-    &lt;p&gt;The runner, the chunker, the views over megabase.&lt;/p&gt;
+    &lt;p&gt;The runner, the chunker, the coach, the views over megabase.&lt;/p&gt;
   &lt;/a&gt;
   &lt;a class=&quot;card&quot; href=&quot;manuscripts.html&quot;&gt;
     &lt;div class=&quot;card-label&quot;&gt;Manuscripts&lt;/div&gt;
@@ -232,7 +238,29 @@ def main():
     code_html.append(&quot;&lt;/ul&gt;&quot;)
     write_page(DOCS / &quot;code.html&quot;, &quot;Code&quot;, &quot;\n&quot;.join(code_html))
 
-    # 6) Manuscripts
+    # 6a) Coach
+    coach_dir = ROOT / &quot;coach&quot;
+    coach_links = [
+        &#x27;&lt;h1&gt;Coach mode&lt;/h1&gt;&#x27;,
+        &#x27;&lt;p&gt;&lt;em&gt;Glimmung-companion. Low-pressure offerings — one card, one question, one challenge at a time. Never asks &quot;did you ship?&quot; Never recommends new projects. Always: follow your lead.&lt;/em&gt;&lt;/p&gt;&#x27;,
+        &#x27;&lt;p&gt;Invoke from any Claude Code session: &lt;code&gt;coach me&lt;/code&gt;, &lt;code&gt;give me a card&lt;/code&gt;, &lt;code&gt;I&amp;rsquo;m tired&lt;/code&gt;, &lt;code&gt;ask me a question&lt;/code&gt;.&lt;/p&gt;&#x27;,
+        &#x27;&lt;p&gt;Or run directly:&lt;/p&gt;&#x27;,
+        &#x27;&lt;pre&gt;&lt;code&gt;python tools/coach.py                   # random pull from any pool\npython tools/coach.py --kind opener     # session opener\npython tools/coach.py --kind challenge  # bounded game\npython tools/coach.py --kind question   # Socratic question\npython tools/coach.py --kind card       # oblique strategy&lt;/code&gt;&lt;/pre&gt;&#x27;,
+        &#x27;&lt;h2&gt;Pools&lt;/h2&gt;&#x27;,
+        &#x27;&lt;ul&gt;&#x27;,
+    ]
+    if coach_dir.exists():
+        for md_path in sorted(coach_dir.glob(&quot;*.md&quot;)):
+            slug = slugify(md_path.stem)
+            title = md_path.stem.replace(&quot;_&quot;, &quot; &quot;).title()
+            md_text = md_path.read_text(encoding=&quot;utf-8&quot;)
+            body = render_markdown(md_text)
+            write_page(DOCS / &quot;coach&quot; / f&quot;{slug}.html&quot;, title, body)
+            coach_links.append(f&#x27;&lt;li&gt;&lt;a href=&quot;coach/{slug}.html&quot;&gt;{html.escape(title)}&lt;/a&gt;&lt;/li&gt;&#x27;)
+    coach_links.append(&quot;&lt;/ul&gt;&quot;)
+    write_page(DOCS / &quot;coach.html&quot;, &quot;Coach&quot;, &quot;\n&quot;.join(coach_links))
+
+    # 6b) Manuscripts
     manu_dir = ROOT / &quot;manuscripts&quot;
     manu_links = [&#x27;&lt;h1&gt;Manuscripts&lt;/h1&gt;&#x27;,
                   &#x27;&lt;p&gt;Companion documents from the workshop sessions: tired-mode prompt libraries, learning-journal protocols, audit questions, project briefings, and other planning artifacts that orbit this tool.&lt;/p&gt;&#x27;,

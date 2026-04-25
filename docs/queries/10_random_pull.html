@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>01 first prompts — Promptarchaeology-Heldscalla</title>
+  <title>10 random pull — Promptarchaeology-Heldscalla</title>
   <link rel="stylesheet" href="../style.css">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 </head>
@@ -22,26 +22,25 @@
   </nav>
   <div class="page">
     <article>
-<h1>01 first prompts</h1><p><em>From <code>queries/01_first_prompts.sql</code></em></p><blockquote>01_first_prompts.sql
-The first user message of every conversation, chronologically.
-These are pre-influence: what you walked in wanting before AI shaped framing.
-Expected: ~5,271 total. Limit to 200 most recent by default.</blockquote><pre><code class="language-sql">-- 01_first_prompts.sql
--- The first user message of every conversation, chronologically.
--- These are pre-influence: what you walked in wanting before AI shaped framing.
--- Expected: ~5,271 total. Limit to 200 most recent by default.
+<h1>10 random pull</h1><p><em>From <code>queries/10_random_pull.sql</code></em></p><blockquote>10_random_pull.sql
+Pull one random substantive prompt from the corpus.
+Use as a coach-mode discussion seed: &quot;what was this about?&quot;
+Filtered to prompts with &gt;30 words to skew toward something with substance.</blockquote><pre><code class="language-sql">-- 10_random_pull.sql
+-- Pull one random substantive prompt from the corpus.
+-- Use as a coach-mode discussion seed: &quot;what was this about?&quot;
+-- Filtered to prompts with &gt;30 words to skew toward something with substance.
 
 SELECT
-  date(created_at)     AS d,
-  source_name,
+  date(created_at) AS d,
   conversation_title,
+  source_name,
   approx_words,
-  ROUND(estimated_pages, 1) AS pages,
-  substr(prompt_text, 1, 280) AS prompt_preview
+  prompt_text
 FROM pa_prompts
-WHERE is_first_in_conversation = 1
-  AND created_at IS NOT NULL AND created_at != &#x27;&#x27;
-ORDER BY created_at DESC
-LIMIT 200;
+WHERE created_at IS NOT NULL AND created_at != &#x27;&#x27;
+  AND approx_words &gt; 30
+ORDER BY RANDOM()
+LIMIT 1;
 </code></pre>
     </article>
   </div>

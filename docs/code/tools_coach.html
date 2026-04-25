@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>coach.py — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../coach.html">Coach</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>coach.py</h1><p><em>tools/coach.py</em></p><pre><code class="language-python">&quot;&quot;&quot;
+Coach mode — pick a random offering for a tired session.
+
+Usage:
+    python tools/coach.py                   # random pull from any pool
+    python tools/coach.py --kind opener     # session opener
+    python tools/coach.py --kind challenge  # bounded game
+    python tools/coach.py --kind question   # Socratic question
+    python tools/coach.py --kind card       # oblique strategy
+    python tools/coach.py --list            # list pool sizes
+&quot;&quot;&quot;
+import sys
+import random
+import re
+import pathlib
+
+# Windows consoles default to cp1252 and choke on the ❦ glyph; force UTF-8.
+if hasattr(sys.stdout, &quot;reconfigure&quot;):
+    try:
+        sys.stdout.reconfigure(encoding=&quot;utf-8&quot;)
+    except Exception:
+        pass
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+COACH = ROOT / &quot;coach&quot;
+
+POOLS = {
+    &quot;opener&quot;:    (&quot;SESSION_OPENERS.md&quot;, &quot;an opener&quot;),
+    &quot;challenge&quot;: (&quot;CHALLENGES.md&quot;,      &quot;a challenge&quot;),
+    &quot;question&quot;:  (&quot;QUESTIONS.md&quot;,       &quot;a question&quot;),
+    &quot;card&quot;:      (&quot;CARDS.md&quot;,           &quot;a card&quot;),
+}
+
+
+def parse_items(path: pathlib.Path):
+    &quot;&quot;&quot;Pull numbered or bulleted items from a markdown file (skip headers and prose).&quot;&quot;&quot;
+    items = []
+    for line in path.read_text(encoding=&quot;utf-8&quot;).splitlines():
+        m = re.match(r&quot;^\s*(?:\d+\.|\-|\*)\s+(.+?)\s*$&quot;, line)
+        if not m:
+            continue
+        item = m.group(1).strip()
+        if not item or item.startswith(&quot;#&quot;):
+            continue
+        items.append(item)
+    return items
+
+
+def pick(kind=None):
+    if kind is None:
+        kind = random.choice(list(POOLS))
+    fname, label = POOLS[kind]
+    path = COACH / fname
+    if not path.exists():
+        raise SystemExit(f&quot;missing pool: {path}&quot;)
+    items = parse_items(path)
+    if not items:
+        raise SystemExit(f&quot;no items in {path}&quot;)
+    return kind, label, random.choice(items)
+
+
+def list_pools():
+    print()
+    for kind, (fname, label) in POOLS.items():
+        path = COACH / fname
+        n = len(parse_items(path)) if path.exists() else 0
+        print(f&quot;  {kind:10s}  {n:3d} items  ({fname})&quot;)
+    print()
+
+
+def main():
+    args = sys.argv[1:]
+    if &quot;--list&quot; in args:
+        list_pools()
+        return
+    kind = None
+    if &quot;--kind&quot; in args:
+        idx = args.index(&quot;--kind&quot;)
+        if idx + 1 &gt;= len(args):
+            raise SystemExit(&quot;--kind requires a value&quot;)
+        kind = args[idx + 1]
+        if kind not in POOLS:
+            raise SystemExit(f&quot;--kind must be one of {list(POOLS)}&quot;)
+    k, label, item = pick(kind)
+    print()
+    print(f&quot;  ❦  Heldscalla offers {label}:&quot;)
+    print()
+    # Wrap long lines for readability
+    width = 76
+    words = item.split()
+    line = &quot;  &quot;
+    for word in words:
+        if len(line) + len(word) + 1 &gt; width:
+            print(line)
+            line = &quot;  &quot; + word
+        else:
+            line += (&quot; &quot; if line.strip() else &quot;&quot;) + word
+    if line.strip():
+        print(line)
+    print()
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>
