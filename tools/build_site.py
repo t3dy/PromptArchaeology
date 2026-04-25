@@ -235,8 +235,25 @@ def main():
         ("THE_LOWER_HEAVEN_FILE.md",      "The Lower-Heaven File"),
         ("CASCADES_BENEATH_THE_TIDE.md",  "Cascades Beneath the Tide"),
     ]
+    playful_files = [
+        ("EMBLEMATA_TEDIGANI.md",          "Emblemata Tediganī"),
+        ("BESTIARY_OF_RECURRING_FIGURES.md","Bestiary of Recurring Figures"),
+        ("TWEETS_YOU_SHOULD_HAVE_WRITTEN.md","Tweets You Should Have Written"),
+        ("FIELD_NOTES_FROM_2247.md",       "Field Notes from 2247"),
+        ("CARDS_OF_THE_PROJECTS.md",       "The Tediganus Set (MTG cards)"),
+    ]
     if findings_dir.exists():
         for fname, title in synthesis_files:
+            md_path = findings_dir / fname
+            if not md_path.exists():
+                continue
+            slug = slugify(md_path.stem)
+            md_text = md_path.read_text(encoding="utf-8")
+            write_page(DOCS / "shards" / f"{slug}.html", title, render_markdown(md_text))
+            shards_links.append(f'<li><a href="shards/{slug}.html">{html.escape(title)}</a></li>')
+        shards_links.append("</ul>")
+        shards_links.append("<h2>Playful artifacts</h2><ul>")
+        for fname, title in playful_files:
             md_path = findings_dir / fname
             if not md_path.exists():
                 continue
