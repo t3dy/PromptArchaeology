@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>06 obsession lines — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>06 obsession lines</h1><p><em>From <code>queries/06_obsession_lines.sql</code></em></p><blockquote>06_obsession_lines.sql
+Theme tracking by month. Add or remove keyword columns to track other interests.
+Each integer is &quot;how many user-prompts that month mentioned the term family.&quot;
+Plot the columns as lines over months and you have a visual of your obsessions.</blockquote><pre><code class="language-sql">-- 06_obsession_lines.sql
+-- Theme tracking by month. Add or remove keyword columns to track other interests.
+-- Each integer is &quot;how many user-prompts that month mentioned the term family.&quot;
+-- Plot the columns as lines over months and you have a visual of your obsessions.
+
+SELECT
+  strftime(&#x27;%Y-%m&#x27;, created_at) AS month,
+  COUNT(*) AS total_prompts,
+  SUM(CASE WHEN LOWER(prompt_text) LIKE &#x27;%alchem%&#x27; OR LOWER(prompt_text) LIKE &#x27;%hermet%&#x27; THEN 1 ELSE 0 END) AS alchemy_hermetic,
+  SUM(CASE WHEN LOWER(prompt_text) LIKE &#x27;%pkd%&#x27; OR LOWER(prompt_text) LIKE &#x27;%philip k%&#x27; OR LOWER(prompt_text) LIKE &#x27;% dick %&#x27; THEN 1 ELSE 0 END) AS pkd,
+  SUM(CASE WHEN LOWER(prompt_text) LIKE &#x27;%nes %&#x27; OR LOWER(prompt_text) LIKE &#x27;%nsf%&#x27; OR LOWER(prompt_text) LIKE &#x27;%chiptune%&#x27; THEN 1 ELSE 0 END) AS nes_chiptune,
+  SUM(CASE WHEN LOWER(prompt_text) LIKE &#x27;% mtg %&#x27; OR LOWER(prompt_text) LIKE &#x27;%magic the gathering%&#x27; OR LOWER(prompt_text) LIKE &#x27;%commander deck%&#x27; THEN 1 ELSE 0 END) AS mtg,
+  SUM(CASE WHEN LOWER(prompt_text) LIKE &#x27;%marx%&#x27; OR LOWER(prompt_text) LIKE &#x27;%capital%&#x27; THEN 1 ELSE 0 END) AS marxism,
+  SUM(CASE WHEN LOWER(prompt_text) LIKE &#x27;%shakespear%&#x27; THEN 1 ELSE 0 END) AS shakespeare,
+  SUM(CASE WHEN LOWER(prompt_text) LIKE &#x27;%maier%&#x27; OR LOWER(prompt_text) LIKE &#x27;%atalanta%&#x27; OR LOWER(prompt_text) LIKE &#x27;%hypnerotomach%&#x27; THEN 1 ELSE 0 END) AS scholarly_texts,
+  SUM(CASE WHEN LOWER(prompt_text) LIKE &#x27;%dog%&#x27; OR LOWER(prompt_text) LIKE &#x27;%okie%&#x27; OR LOWER(prompt_text) LIKE &#x27;%attila%&#x27; OR LOWER(prompt_text) LIKE &#x27;%crockett%&#x27; THEN 1 ELSE 0 END) AS dogs,
+  SUM(CASE WHEN LOWER(prompt_text) LIKE &#x27;%reaper%&#x27; OR LOWER(prompt_text) LIKE &#x27;%jsfx%&#x27; OR LOWER(prompt_text) LIKE &#x27;%midi%&#x27; THEN 1 ELSE 0 END) AS audio_tooling,
+  SUM(CASE WHEN LOWER(prompt_text) LIKE &#x27;%sqlite%&#x27; OR LOWER(prompt_text) LIKE &#x27;%database%&#x27; THEN 1 ELSE 0 END) AS databases
+FROM pa_prompts
+WHERE created_at IS NOT NULL AND created_at != &#x27;&#x27;
+GROUP BY month
+ORDER BY month;
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

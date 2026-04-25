@@ -1,0 +1,8 @@
+reports/
+__pycache__/
+*.pyc
+.venv/
+*.db
+*.db-journal
+notebooks/
+.claude/

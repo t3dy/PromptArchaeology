@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>chunk_cascade.py — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>chunk_cascade.py</h1><p><em>tools/chunk_cascade.py</em></p><pre><code class="language-python">&quot;&quot;&quot;
+Chunk a single large cascade into prompt-only markdown files.
+Useful for the 1000-page conversations where the whole thing is too long to read at once.
+
+Usage:
+    python tools/chunk_cascade.py &lt;conversation_id&gt;
+    python tools/chunk_cascade.py &lt;conversation_id&gt; --chunk-size 30
+
+Outputs:
+    reports/cascades/&lt;title-slug&gt;/chunk_NNN.md   — 50 prompts each by default
+    reports/cascades/&lt;title-slug&gt;/TIMELINE.md    — index with date ranges
+&quot;&quot;&quot;
+import sys
+import sqlite3
+import pathlib
+import re
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+MEGABASE = pathlib.Path(r&quot;C:\Dev\megabase\megabase.db&quot;)
+VIEWS = ROOT / &quot;schema&quot; / &quot;views.sql&quot;
+
+
+def slugify(text: str) -&gt; str:
+    s = re.sub(r&quot;[^A-Za-z0-9]+&quot;, &quot;_&quot;, text or &quot;untitled&quot;).strip(&quot;_&quot;)
+    return s[:60] or &quot;untitled&quot;
+
+
+def chunk_cascade(conv_id: int, chunk_size: int = 50):
+    uri = f&quot;file:{MEGABASE.as_posix()}?mode=ro&quot;
+    conn = sqlite3.connect(uri, uri=True)
+    conn.row_factory = sqlite3.Row
+    conn.executescript(VIEWS.read_text(encoding=&quot;utf-8&quot;))
+
+    info = conn.execute(
+        &quot;SELECT conversation_title, source_name, prompt_count, estimated_pages &quot;
+        &quot;FROM pa_cascades WHERE conversation_id = ?&quot;,
+        (conv_id,),
+    ).fetchone()
+    if not info:
+        raise SystemExit(f&quot;no cascade with conversation_id={conv_id}&quot;)
+
+    title = info[&quot;conversation_title&quot;] or f&quot;conv_{conv_id}&quot;
+    print(f&quot;chunking: {title}  ({info[&#x27;prompt_count&#x27;]} prompts, {info[&#x27;estimated_pages&#x27;]:.0f} pages)&quot;)
+
+    rows = conn.execute(
+        &quot;SELECT message_id, created_at, prompt_text, approx_words, reacts_to_output &quot;
+        &quot;FROM pa_prompts WHERE conversation_id = ? ORDER BY message_id&quot;,
+        (conv_id,),
+    ).fetchall()
+
+    out_dir = ROOT / &quot;reports&quot; / &quot;cascades&quot; / slugify(title)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    timeline = [
+        f&quot;# Cascade: {title}&quot;,
+        &quot;&quot;,
+        f&quot;- conversation_id: `{conv_id}`&quot;,
+        f&quot;- source: `{info[&#x27;source_name&#x27;]}`&quot;,
+        f&quot;- total prompts: **{len(rows)}**&quot;,
+        f&quot;- estimated pages: **{info[&#x27;estimated_pages&#x27;]:.0f}**&quot;,
+        f&quot;- chunk size: {chunk_size}&quot;,
+        &quot;&quot;,
+        &quot;Legend: `▷` first turn, `↳` reacting to AI output.&quot;,
+        &quot;&quot;,
+        &quot;## Chunks&quot;,
+        &quot;&quot;,
+    ]
+
+    n_chunks = (len(rows) + chunk_size - 1) // chunk_size
+    for chunk_idx in range(n_chunks):
+        start = chunk_idx * chunk_size
+        chunk_rows = rows[start:start + chunk_size]
+        chunk_path = out_dir / f&quot;chunk_{chunk_idx:03d}.md&quot;
+        lines = [
+            f&quot;# {title} — chunk {chunk_idx:03d}&quot;,
+            &quot;&quot;,
+            f&quot;Prompts {start + 1}–{start + len(chunk_rows)} of {len(rows)}.&quot;,
+            &quot;&quot;,
+        ]
+        for row in chunk_rows:
+            ts = row[&quot;created_at&quot;] or &quot;(no timestamp)&quot;
+            marker = &quot;↳&quot; if row[&quot;reacts_to_output&quot;] else &quot;▷&quot;
+            lines.append(f&quot;## {marker} {ts}  *({row[&#x27;approx_words&#x27;]} words)*&quot;)
+            lines.append(&quot;&quot;)
+            lines.append((row[&quot;prompt_text&quot;] or &quot;(empty)&quot;).rstrip())
+            lines.append(&quot;&quot;)
+            lines.append(&quot;---&quot;)
+            lines.append(&quot;&quot;)
+        chunk_path.write_text(&quot;\n&quot;.join(lines), encoding=&quot;utf-8&quot;)
+
+        first_ts = (chunk_rows[0][&quot;created_at&quot;] or &quot;?&quot;)[:10]
+        last_ts = (chunk_rows[-1][&quot;created_at&quot;] or &quot;?&quot;)[:10]
+        timeline.append(f&quot;- [chunk_{chunk_idx:03d}.md]({chunk_path.name}) — {first_ts} → {last_ts}&quot;)
+
+    (out_dir / &quot;TIMELINE.md&quot;).write_text(&quot;\n&quot;.join(timeline), encoding=&quot;utf-8&quot;)
+    print(f&quot;wrote {n_chunks} chunks + TIMELINE.md to {out_dir}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    if len(sys.argv) &lt; 2:
+        print(__doc__)
+        sys.exit(1)
+    cid = int(sys.argv[1])
+    cs = 50
+    if &quot;--chunk-size&quot; in sys.argv:
+        cs = int(sys.argv[sys.argv.index(&quot;--chunk-size&quot;) + 1])
+    chunk_cascade(cid, cs)
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

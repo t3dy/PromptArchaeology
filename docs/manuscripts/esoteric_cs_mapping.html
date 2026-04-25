@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ESOTERIC CS MAPPING — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="esoteric_cs_mapping-where-your-interests-in-alchemy-pkd-marxism-actually-map-onto-cs-concepts">ESOTERIC_CS_MAPPING — Where your interests in alchemy / PKD / Marxism actually map onto CS concepts</h1>
+<p><strong>Date:</strong> 2026-04-25
+<strong>Use:</strong> You aestheticize your CS work with hermetic / PKD vocabulary. The previous critique called this "cosplay." Both readings are partly right. This file tries the <em>constructive</em> reading: where do these traditions genuinely illuminate CS concepts? Where are they decorative? When you know which is which, the aesthetic stops being a cost.</p>
+<hr />
+<h2 id="the-honest-distinction">The honest distinction</h2>
+<p>Not all aesthetic naming is the same. There are three categories:</p>
+<ol>
+<li><strong>Genuinely illuminating.</strong> The metaphor <em>teaches you something</em> about the CS concept that a literal name wouldn't. Worth keeping; the cost is real but the benefit is too.</li>
+<li><strong>Mnemonically helpful.</strong> The metaphor doesn't teach the concept but helps you <em>remember</em> it under fatigue. Acceptable. Costs real but small.</li>
+<li><strong>Decorative.</strong> The metaphor is just dress-up; nothing about the CS concept becomes clearer or stickier. Pure cost.</li>
+</ol>
+<p>Most of your aesthetic naming is currently in category 3. Some is in 2. A surprising amount could be moved into 1 with a little rigor.</p>
+<hr />
+<h2 id="genuine-mappings-category-1-keep-these-and-lean-in">Genuine mappings (Category 1) — keep these and lean in</h2>
+<h3 id="alchemy-compilation-transformation-pipelines">Alchemy → Compilation / Transformation pipelines</h3>
+<p>The alchemical <em>opus</em> is a multi-stage transformation: prima materia → nigredo → albedo → rubedo. Each stage has a state, a process, and a verification.</p>
+<p>CS analog: a compiler. Source → AST → IR → optimized IR → bytecode → machine code. Each stage has a representation, a transformation, a verification.</p>
+<p><strong>Why this is real:</strong> Both traditions explicitly think about <em>what intermediate representations make sense</em>. Alchemists argued about whether nigredo had to precede albedo, just as compiler engineers argue about IR design. Your NSFRIPPER and REAPERBEYONDNES Frame IR work is <em>literally</em> in this register — choosing a canonical intermediate form is the alchemical move.</p>
+<p><strong>Use it like this:</strong> Next time you design an IR, ask "what is the state being transmuted, what's the visible color of this stage's output, what verification proves transmutation occurred." Not silly — these are the right questions. The alchemical vocabulary makes them memorable.</p>
+<h3 id="hermeticism-symbol-reference-resolution">Hermeticism → Symbol → Reference → Resolution</h3>
+<p>Hermetic correspondences: <em>as above, so below</em>. A symbol on one plane stands for something on another. The interpretive work is in the mapping.</p>
+<p>CS analog: name resolution. Variable scopes. Symbol tables. Pointers. URI resolution.</p>
+<p><strong>Why this is real:</strong> Hermeticism gave Western thought a vocabulary for "this thing stands for that thing in a different domain." That's pointer thinking. That's symbolic linking. It's not metaphor; it's the same cognitive move.</p>
+<p><strong>Use it like this:</strong> When debugging a name-resolution bug (wrong variable found, wrong file imported), the question "where does this symbol find its referent" is hermetic exegesis. Naming the move helps.</p>
+<h3 id="philip-k-dick-distributed-systems-concurrency-consistency">Philip K. Dick → Distributed systems / Concurrency / Consistency</h3>
+<p>PKD's obsessions: which version of reality is the real one? Whose memories can be trusted? When two characters disagree about what just happened, who's right?</p>
+<p>CS analog: distributed consensus. CRDTs. Vector clocks. Read-your-own-writes. Consistency models.</p>
+<p><strong>Why this is real:</strong> PKD spent a career intuiting problems that the distributed-systems literature later formalized. <em>A Scanner Darkly</em> is essentially about an agent whose two views of the world fail to converge — a CAP-theorem story. <em>Ubik</em> is about replicated state with corrupting writes. These aren't decorative parallels; they're the same problem shape.</p>
+<p><strong>Use it like this:</strong> When you face an eventual-consistency problem, ask "what's the <em>Ubik</em> version of this?" The PKD framing makes you remember the question because it's a question you actually care about.</p>
+<h3 id="marxism-resource-economics-performance-accounting">Marxism → Resource economics / Performance accounting</h3>
+<p>Capital's labor theory + commodity fetishism: where does <em>value</em> come from in a system, and what hides it?</p>
+<p>CS analog: performance accounting. Where do CPU cycles go? Where does latency get spent? What costs are hidden by abstraction layers?</p>
+<p><strong>Why this is real:</strong> Both traditions ask "where is the work <em>actually</em> happening, and what abstractions disguise it." When you profile a Python program and find that 80% of time is in an unexpected place, that's the same epistemic move as Marx asking where value is in a commodity.</p>
+<p><strong>Use it like this:</strong> When optimizing, ask explicitly "what abstraction is hiding the labor here." The Marxian framing makes the question feel important rather than tedious.</p>
+<h3 id="atalanta-fugiens-emblems-visualization-dashboards">Atalanta Fugiens emblems → Visualization / dashboards</h3>
+<p>Each emblem of <em>Atalanta Fugiens</em> combines motto + image + epigram + score — four redundant encodings of one alchemical idea.</p>
+<p>CS analog: good dashboards combine multiple representations of one underlying state. A row in a database, a metric in Grafana, a chart, a colored cell — same data, different sensory channels.</p>
+<p><strong>Why this is real:</strong> Maier was solving a UX problem: how do you make an abstract idea memorable through multiple modalities? The emblem-book design is multimodal information design. So is a good observability dashboard.</p>
+<p><strong>Use it like this:</strong> When designing UI for any of your DH projects, think emblematically: motto (one-line label), image (visualization), epigram (caption), score (sortable metric). Strong design pattern.</p>
+<hr />
+<h2 id="mnemonic-mappings-category-2-keep-but-dont-oversell">Mnemonic mappings (Category 2) — keep but don't oversell</h2>
+<h3 id="pkd-characters-slash-command-names">PKD characters → Slash command names</h3>
+<p>Joe Chip (broke, dignified, observant) → <code>/plan-joe-chip-scope</code>. The character is <em>useful</em> for remembering "scope means asking what minimal resources will let you proceed." But the character isn't <em>teaching</em> you scoping; it's helping you recall it.</p>
+<p>This is fine. It's the same trick teachers use with mnemonic devices. As long as you remember the mnemonic isn't doing the teaching, you keep the benefit and avoid the trap.</p>
+<p><strong>Where this becomes Category 3:</strong> When you forget what <code>/plan-deckard-boundary</code> does and you have to look it up. Then the mnemonic isn't earning its keep.</p>
+<p><strong>Diagnostic:</strong> Skill descriptions you can't recall from the name = Category 3. Skill descriptions you <em>can</em> recall from the name = Category 2.</p>
+<h3 id="hermetic-operational-vocabulary-in-reaperbeyondnes">Hermetic operational vocabulary in REAPERBEYONDNES</h3>
+<p>THE_LITURGY, THE_GAZETTEER, THE_MEMORY_PALACE — these are mnemonics for "the rules doc, the index, the memory store." They make the docs feel important and load-bearing.</p>
+<p>This is borderline. The names <em>are</em> memorable. But "RULES.md, INDEX.md, MEMORY.md" would be just as memorable while being greppable. The cost-benefit tilts toward Category 3 because you sacrifice convention compatibility for atmosphere.</p>
+<p><strong>Recommendation:</strong> Either rename these to conventional names AND keep the hermetic atmosphere internal to the prose, OR commit to the bit and accept the search-friction cost.</p>
+<hr />
+<h2 id="pure-decoration-category-3-fine-to-keep-but-dont-pretend-its-load-bearing">Pure decoration (Category 3) — fine to keep but don't pretend it's load-bearing</h2>
+<ul>
+<li>Naming a project <code>EmeraldTablet</code> instead of <code>hermetic-database</code> — pure aesthetic. No CS insight gained.</li>
+<li>Calling a status doc <code>THE_LIMINAL_THRESHOLD.md</code> — atmosphere, not function.</li>
+<li>Skill names like <code>/plan-eldritch-swarm</code> — vibes-based.</li>
+</ul>
+<p><strong>Honest reading:</strong> Decoration is fine. You enjoy it. It's part of why you're still building. Don't apologize. Just don't oversell — these names aren't earning anything, and that's OK.</p>
+<hr />
+<h2 id="a-practical-exercise">A practical exercise</h2>
+<p>Go through your CLAUDE.md mandates and aesthetic vocabulary. For each named thing, ask:</p>
+<ul>
+<li><strong>Could a reader infer what this does from the name?</strong> If no → Category 3.</li>
+<li><strong>Does the metaphor teach me something about the underlying concept?</strong> If yes → Category 1.</li>
+<li><strong>Does the metaphor help me <em>remember</em> the concept under fatigue?</strong> If yes → Category 2.</li>
+</ul>
+<p>Keep Category 1. Audit Category 2 (do you actually remember it?). Be honest about Category 3 (it's decoration, not engineering).</p>
+<hr />
+<h2 id="reading-list-to-deepen-category-1-mappings">Reading list to deepen Category 1 mappings</h2>
+<p>Since some of your aesthetic naming is <em>almost</em> doing real work, these books would tighten the bridge:</p>
+<ul>
+<li><em>The Reflective Practitioner</em> — Donald Schön. Why expert intuition is structured.</li>
+<li><em>Computers as Theatre</em> — Brenda Laurel. Drama theory applied to UI.</li>
+<li><em>Surfaces and Essences</em> — Hofstadter &amp; Sander. Analogy as the core of cognition.</li>
+<li><em>The Information</em> — James Gleick. History of "information" as a concept across disciplines.</li>
+<li><em>Cybernetics and the Origin of Hermes</em> (working title; doesn't exist) — write it yourself someday.</li>
+</ul>
+<p>These would let you tell the difference between "alchemy is metaphor for compilers" (Category 3) and "alchemy and compilation are both species of the broader cognitive pattern of staged symbolic transformation" (Category 1). The second framing is real.</p>
+<hr />
+<h2 id="open-questions-for-you">Open questions for you</h2>
+<ul>
+<li>Which mappings feel <em>most</em> alive to you? Those are worth doubling down on; the others can be decoration.</li>
+<li>Is there a writing project lurking here? "Esoteric CS" is a real and underrepresented register — <em>Distant Reading meets Alchemy meets Compilers</em>. Could be one essay. Could be the thing you actually publish someday.</li>
+<li>Are there mappings I missed? Marxist computing has a literature (Kontonatsios, Gere, Steyerl) — your interest in capital might map to GPU / accelerator economics in interesting ways.</li>
+<li>Should this file become a regular practice — quarterly add new mappings as they emerge?</li>
+</ul>
+<p>The aesthetic isn't the enemy of the engineering. They share more than the critique allowed. Just be honest about which mappings earn their keep.</p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

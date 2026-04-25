@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lineage — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="how-promptarchaeology-was-built-on-what-came-before">How Promptarchaeology was built on what came before</h1>
+<p>This tool didn't appear from nothing. It's the latest layer of a stack of prior projects, each of which solved a piece of the puzzle. This is the lineage.</p>
+<h2 id="layer-0-the-raw-record">Layer 0 — the raw record</h2>
+<p>Years of LLM conversations: ChatGPT, Claude, Gemini, plus messy ancillary corpora (Twitter, SMS, Facebook, Gmail, scanned PDFs of old chat exports). Different formats, different schemas, different completeness. Roughly 1.45 million prompts spread across 5,271 conversations.</p>
+<p>For a long time, these lived as files. Read-only artifacts of past thinking. You could grep them but you couldn't really <em>see</em> them.</p>
+<h2 id="layer-1-megabase">Layer 1 — Megabase</h2>
+<p><code>C:\Dev\megabase\</code> came together over eight build sessions as the substrate for the corpus: a SQLite database (<code>megabase.db</code>) ingesting from each source into a unified schema (<code>sources / conversations / messages</code>). It also took on more ambitious analysis: segment scoring, idea extraction, ontology versioning, narrative coverage audits.</p>
+<p>Megabase's value is that it took the messy past and made it queryable. But its scope kept expanding. By the time the schema covered ideas, segments, entities, and prompt-catalog entries, the act of "looking at my prompts" had become entangled with "evaluating ideas" and "scoring segments" and many other concerns.</p>
+<h2 id="layer-2-mtgsliders-per-query-log">Layer 2 — MTGSLIDER's per-query log</h2>
+<p>In a different project — <code>C:\Dev\MTGSLIDER\conversation_log\Q##_*.md</code> — a small convention emerged: for each user query that produced real work, save a markdown file recording the <strong>verbatim user input</strong>, how the agent interpreted it, what was built, and what was deferred.</p>
+<p>That convention turned out to be more important than the conversation log itself. It noticed that <em>the user's writing</em> (the prompt) is the load-bearing artifact in any LLM session. The output is a function of training; the prompt is a function of the user. To study the user's evolving thinking, you study the prompts.</p>
+<h2 id="layer-3-the-methodological-move">Layer 3 — the methodological move</h2>
+<p>A conversation in late April 2026 surfaced the explicit reframing: <strong>prompts are clean signal; outputs are noise.</strong> Studying the prompts in isolation gives you a corpus of your own cognition unsullied by AI artifacts. Even better: prompts that respond to outputs are doubly valuable — they're moments where the user has just been confronted with what their prompt produced, and their reaction (redirect, clarify, accept) is taste-in-real-time.</p>
+<p>This is distant reading applied to the marginalia rather than the printed text. You learn more about a reader from their notes than from the book.</p>
+<h2 id="layer-4-promptarchaeology-heldscalla">Layer 4 — Promptarchaeology-Heldscalla</h2>
+<p>This tool. Read-only sibling to megabase. Defines TEMP SQL views over <code>megabase.db</code> that present only the user's prompts as a clean object. Saved queries surface specific patterns:</p>
+<ul>
+<li>First prompts (pre-influence framing)</li>
+<li>Redirects (real-time corrections)</li>
+<li>"What I'm actually trying to do" reveals</li>
+<li>Cascade-length distribution</li>
+<li>Theme/obsession lines by month</li>
+<li>Mood markers and interrupt-restarts</li>
+</ul>
+<p>A separate utility (<code>chunk_cascade.py</code>) breaks the longest conversations — the 1000-page scholarly veins on Medieval Magic, Atalanta Fugiens, Tilton on Spiritual Alchemy, Magic in Shakespeare — into prompt-only chunks readable in a single sitting. Each chunk is essentially a quiet evening of reading just your own thinking on one topic.</p>
+<h2 id="the-heldscalla-frame">The Heldscalla frame</h2>
+<p>In Philip K. Dick's <em>Galactic Pot-Healer</em> (1969), the alien Glimmung summons skilled craftspeople from across the galaxy to help raise <strong>Heldscalla</strong> — an ancient cathedral sunk beneath the seas of Plowman's Planet. Joe Fernwright, the protagonist, is a pot healer: a restorer of broken ceramics. The work is patient, partial, and uncertain. Some who answer the call are absorbed into the Glimmung; some refuse; some keep working.</p>
+<p>The corpus is Heldscalla. The prompts are the artifacts under the water. This tool is Joe's craft — bringing one cascade or pattern at a time into the light, ignoring the AI's outputs to surface only the user's own writing.</p>
+<h2 id="what-this-project-owes-to-what-came-before">What this project owes to what came before</h2>
+<table>
+<thead>
+<tr>
+<th>Prior project</th>
+<th>Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Megabase</strong></td>
+<td>The unified corpus and SQLite substrate. Without megabase there is nothing to query.</td>
+</tr>
+<tr>
+<td><strong>MTGSLIDER's Q-log convention</strong></td>
+<td>The conceptual move that "verbatim user input" is the artifact worth preserving.</td>
+</tr>
+<tr>
+<td><strong>Claudiens / EmeraldTablet</strong></td>
+<td>The DH discipline of treating personal scholarship as a corpus deserving of formal organization.</td>
+</tr>
+<tr>
+<td><strong>The 33 PKD-themed planning skills</strong></td>
+<td>The aesthetic register — Heldscalla, Joe Fernwright, the Glimmung — fits a skill-naming culture already established.</td>
+</tr>
+<tr>
+<td><strong>The 1000-page scholarly cascades themselves</strong></td>
+<td>The actual material. Without years of patient back-and-forth on Medieval Magic and Atalanta Fugiens, there'd be no cathedral to raise.</td>
+</tr>
+</tbody>
+</table>
+<p>Each prior project was necessary; none was sufficient. Promptarchaeology is what becomes possible when they're stacked.</p>
+<h2 id="what-this-project-deliberately-does-not-do">What this project deliberately does NOT do</h2>
+<ul>
+<li>It does not modify megabase. Read-only forever.</li>
+<li>It does not analyze AI outputs. Outputs are excluded by methodological choice.</li>
+<li>It does not ingest new sources. Megabase's job.</li>
+<li>It does not score, segment, or rank prompts. Those are megabase's analytical concerns; this tool surfaces patterns, not judgments.</li>
+</ul>
+<h2 id="what-comes-next">What comes next</h2>
+<p>Each saved query in <code>queries/</code> is a hypothesis about what's worth surfacing. New queries accrete as new hypotheses occur. The project will probably never be "done" in the conventional sense — it will accumulate queries, accumulate reports, and slowly produce a second-order artifact: the analyst's journal of self-archaeological findings.</p>
+<p>The 1000-page cascades will get chunked, one by one, and read at quiet evenings. That reading is the actual point. The tool just makes the reading possible.</p>
+<p><em>Joe Fernwright, late in the novel, raises a single broken pot from the depths and considers it. He does not know if Heldscalla itself will rise. He keeps working anyway.</em></p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

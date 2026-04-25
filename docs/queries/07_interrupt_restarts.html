@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>07 interrupt restarts — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>07 interrupt restarts</h1><p><em>From <code>queries/07_interrupt_restarts.sql</code></em></p><blockquote>07_interrupt_restarts.sql
+Interrupt-and-restart pattern: a new conversation began within ~10 minutes
+of another conversation&#x27;s last prompt. Often signals &quot;halfway through I realized
+the framing was wrong; let me restart.&quot; May also just mean &quot;context-window full.&quot;
+
+Note: requires reasonable created_at on messages. May be slow on full corpus.
+Limited to most recent 100.</blockquote><pre><code class="language-sql">-- 07_interrupt_restarts.sql
+-- Interrupt-and-restart pattern: a new conversation began within ~10 minutes
+-- of another conversation&#x27;s last prompt. Often signals &quot;halfway through I realized
+-- the framing was wrong; let me restart.&quot; May also just mean &quot;context-window full.&quot;
+--
+-- Note: requires reasonable created_at on messages. May be slow on full corpus.
+-- Limited to most recent 100.
+
+WITH conv_bounds AS (
+  SELECT
+    conversation_id,
+    conversation_title,
+    source_name,
+    MIN(created_at) AS started,
+    MAX(created_at) AS ended
+  FROM pa_prompts
+  WHERE created_at IS NOT NULL AND created_at != &#x27;&#x27;
+  GROUP BY conversation_id, conversation_title, source_name
+)
+SELECT
+  date(a.ended) AS d,
+  a.source_name        AS first_source,
+  a.conversation_title AS first_title,
+  b.conversation_title AS next_title,
+  CAST((julianday(b.started) - julianday(a.ended)) * 24 * 60 AS INTEGER) AS minutes_gap
+FROM conv_bounds a
+JOIN conv_bounds b
+  ON b.started &gt; a.ended
+ AND a.source_name = b.source_name
+ AND (julianday(b.started) - julianday(a.ended)) * 24 * 60 &lt; 10
+ AND a.conversation_id != b.conversation_id
+ORDER BY a.ended DESC
+LIMIT 100;
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

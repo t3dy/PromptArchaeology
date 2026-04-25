@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>08 thousand page anatomy — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>08 thousand page anatomy</h1><p><em>From <code>queries/08_thousand_page_anatomy.sql</code></em></p><blockquote>08_thousand_page_anatomy.sql
+The really long cascades. Each is essentially a book-length conversation on one topic.
+Use chunk_cascade.py &lt;conversation_id&gt; to break each into prompt-only readable chunks.
+The 1000-page conversations are your highest-signal scholarly artifacts.</blockquote><pre><code class="language-sql">-- 08_thousand_page_anatomy.sql
+-- The really long cascades. Each is essentially a book-length conversation on one topic.
+-- Use chunk_cascade.py &lt;conversation_id&gt; to break each into prompt-only readable chunks.
+-- The 1000-page conversations are your highest-signal scholarly artifacts.
+
+SELECT
+  conversation_id,
+  conversation_title,
+  source_name,
+  prompt_count,
+  ROUND(estimated_pages, 1) AS pages,
+  ROUND(avg_prompt_words, 1) AS avg_prompt_words,
+  reactions_to_outputs,
+  date(started) AS started,
+  date(ended)   AS ended,
+  CAST(julianday(ended) - julianday(started) AS INTEGER) AS span_days
+FROM pa_cascades
+WHERE estimated_pages &gt;= 50
+ORDER BY estimated_pages DESC
+LIMIT 100;
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

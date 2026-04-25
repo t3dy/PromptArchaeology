@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>04 cascade lengths — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>04 cascade lengths</h1><p><em>From <code>queries/04_cascade_lengths.sql</code></em></p><blockquote>04_cascade_lengths.sql
+Distribution of cascade lengths.
+Long cascades = unstable framing or deep exploration.
+Short cascades = operational, single-turn requests.</blockquote><pre><code class="language-sql">-- 04_cascade_lengths.sql
+-- Distribution of cascade lengths.
+-- Long cascades = unstable framing or deep exploration.
+-- Short cascades = operational, single-turn requests.
+
+SELECT
+  CASE
+    WHEN prompt_count = 1 THEN &#x27;1 (one-shot)&#x27;
+    WHEN prompt_count &lt;= 3 THEN &#x27;02-03&#x27;
+    WHEN prompt_count &lt;= 10 THEN &#x27;04-10&#x27;
+    WHEN prompt_count &lt;= 30 THEN &#x27;11-30&#x27;
+    WHEN prompt_count &lt;= 100 THEN &#x27;031-100&#x27;
+    WHEN prompt_count &lt;= 300 THEN &#x27;101-300&#x27;
+    WHEN prompt_count &lt;= 1000 THEN &#x27;301-1000&#x27;
+    ELSE &#x27;1000+&#x27;
+  END AS bucket,
+  COUNT(*)                   AS cascade_count,
+  ROUND(AVG(estimated_pages), 1) AS avg_pages,
+  ROUND(AVG(avg_prompt_words), 1) AS avg_prompt_words
+FROM pa_cascades
+GROUP BY bucket
+ORDER BY MIN(prompt_count);
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

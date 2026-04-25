@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>README — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="promptarchaeology-heldscalla">Promptarchaeology-Heldscalla</h1>
+<p>Distant-reading tool for your own LLM prompt history.</p>
+<h2 id="heldscalla">Heldscalla</h2>
+<p>In Philip K. Dick's <em>Galactic Pot-Healer</em> (1969), the alien Glimmung summons skilled craftspeople from across the galaxy to help raise <strong>Heldscalla</strong> — an ancient cathedral sunk beneath the seas of Plowman's Planet. Joe Fernwright, the protagonist, is a pot healer: a restorer of broken ceramics. The work is patient, partial, and uncertain.</p>
+<p>Your prompt corpus across <code>megabase.db</code> (5,271 conversations, ~1.45M prompts) is Heldscalla. This tool is Joe's craft — bringing one cascade at a time into the light, ignoring the AI's outputs to surface only your own writing.</p>
+<h2 id="what-this-is">What this is</h2>
+<p>A read-only analytical layer over <code>C:\Dev\megabase\megabase.db</code>. Defines TEMP SQL views that present the user-prompt subset of the corpus as a clean object, plus saved queries that surface specific patterns:</p>
+<ul>
+<li>First prompts (pre-influence framing)</li>
+<li>Redirects ("no, actually I want...")</li>
+<li>"What I'm actually trying to do" reveals</li>
+<li>Cascade-length distribution</li>
+<li>Theme/obsession lines over months</li>
+<li>Interrupt-and-restart patterns</li>
+<li>1000-page cascade anatomy</li>
+<li>Mood markers (fatigue, excitement, frustration)</li>
+</ul>
+<h2 id="what-this-is-not">What this is NOT</h2>
+<ul>
+<li>An ingestion pipeline. Megabase already has the data.</li>
+<li>An output-analyzer. We deliberately ignore assistant outputs to isolate your own writing.</li>
+<li>A modification of megabase. Read-only forever.</li>
+</ul>
+<h2 id="quick-start">Quick start</h2>
+<pre><code class="language-bash">cd C:\Dev\promptarchaeology
+python tools/run.py 01_first_prompts
+</code></pre>
+<p>Output lands in <code>reports/YYYY-MM-DD_01_first_prompts.md</code>.</p>
+<p>To anatomize a single 1000-page cascade:</p>
+<pre><code class="language-bash">python tools/chunk_cascade.py &lt;conversation_id&gt;
+</code></pre>
+<p>Find conversation IDs via <code>python tools/run.py 08_thousand_page_anatomy</code>.</p>
+<h2 id="layout">Layout</h2>
+<pre><code>promptarchaeology/
+  README.md
+  CLAUDE.md                     — agent instructions
+  schema/
+    views.sql                   — pa_prompts, pa_cascades (TEMP views)
+  queries/
+    01_first_prompts.sql
+    02_redirects.sql
+    03_what_im_actually.sql
+    04_cascade_lengths.sql
+    06_obsession_lines.sql
+    07_interrupt_restarts.sql
+    08_thousand_page_anatomy.sql
+    09_mood_markers.sql
+  tools/
+    run.py                      — `python tools/run.py &lt;query&gt;`
+    chunk_cascade.py            — break large cascades into prompt-only chunks
+  reports/                      — dated query outputs (markdown)
+  fixtures/                     — known-prompt validation
+</code></pre>
+<h2 id="adding-a-query">Adding a query</h2>
+<ol>
+<li>Drop a <code>.sql</code> file in <code>queries/</code>. Use views from <code>schema/views.sql</code>.</li>
+<li>Run via <code>python tools/run.py &lt;basename&gt;</code>.</li>
+<li>Output goes to <code>reports/</code>.</li>
+</ol>
+<p>That's the whole loop.</p>
+<h2 id="skill">Skill</h2>
+<p>This tool has a companion slash command at <code>~/.claude/skills/promptarchaeology-heldscalla/SKILL.md</code>. Invoke it when you want analysis without manually picking a query.</p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

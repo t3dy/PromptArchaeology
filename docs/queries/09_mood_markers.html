@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>09 mood markers — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>09 mood markers</h1><p><em>From <code>queries/09_mood_markers.sql</code></em></p><blockquote>09_mood_markers.sql
+Prompts carrying emotional markers: fatigue, frustration, excitement, humor, confusion.
+Tracks affective valence over time as a proxy for relationship to the work.
+Crude — these are surface markers, not real sentiment analysis.</blockquote><pre><code class="language-sql">-- 09_mood_markers.sql
+-- Prompts carrying emotional markers: fatigue, frustration, excitement, humor, confusion.
+-- Tracks affective valence over time as a proxy for relationship to the work.
+-- Crude — these are surface markers, not real sentiment analysis.
+
+SELECT
+  date(created_at) AS d,
+  conversation_title,
+  CASE
+    WHEN LOWER(prompt_text) LIKE &#x27;%ugh%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%frustrat%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%annoy%&#x27; THEN &#x27;frustration&#x27;
+    WHEN LOWER(prompt_text) LIKE &#x27;%love this%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%this is great%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%perfect!%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%amazing%&#x27; THEN &#x27;excitement&#x27;
+    WHEN LOWER(prompt_text) LIKE &#x27;%i&#x27;&#x27;m tired%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%exhausted%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%can&#x27;&#x27;t think%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%too tired%&#x27; THEN &#x27;fatigue&#x27;
+    WHEN LOWER(prompt_text) LIKE &#x27;%lol%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%haha%&#x27; THEN &#x27;humor&#x27;
+    WHEN LOWER(prompt_text) LIKE &#x27;%confused%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%stuck%&#x27;
+      OR LOWER(prompt_text) LIKE &#x27;%don&#x27;&#x27;t understand%&#x27; THEN &#x27;confusion&#x27;
+    ELSE &#x27;unknown&#x27;
+  END AS mood,
+  approx_words,
+  substr(prompt_text, 1, 240) AS preview
+FROM pa_prompts
+WHERE
+     LOWER(prompt_text) LIKE &#x27;%ugh%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%frustrat%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%annoy%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%love this%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%this is great%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%perfect!%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%amazing%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%i&#x27;&#x27;m tired%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%exhausted%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%can&#x27;&#x27;t think%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%too tired%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%lol%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%haha%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%confused%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%stuck%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%don&#x27;&#x27;t understand%&#x27;
+ORDER BY created_at DESC
+LIMIT 300;
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

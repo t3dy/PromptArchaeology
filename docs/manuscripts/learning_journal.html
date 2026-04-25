@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LEARNING JOURNAL — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="learning_journal-protocol-template-seed-prompts">LEARNING_JOURNAL — Protocol + template + seed prompts</h1>
+<p><strong>Date:</strong> 2026-04-25
+<strong>Use:</strong> Build a single file that compounds your CS education over months. Tired-mode-friendly. Token-burn-converts-to-knowledge.</p>
+<hr />
+<h2 id="why-this-exists">Why this exists</h2>
+<p>You said: <em>"I'm having a million laughs and learning a lot about CS along the way."</em> Right now that learning evaporates. Each session ends; the insight goes with it. Six months from now, you'll have built more, but you won't be able to point to <em>what you learned</em> — just to <em>what you have</em>.</p>
+<p>A learning journal fixes this. One file. Append-only. Searchable. Read it back annually and the line-of-progress is visible.</p>
+<h2 id="the-single-rule">The single rule</h2>
+<p><strong>One line per session, minimum.</strong> That's it. If you have nothing else, write the one line. The discipline is the line, not the prose.</p>
+<p>Format:</p>
+<pre><code>2026-04-25 — [project] — [one thing I learned, in plain English]
+</code></pre>
+<p>Examples:</p>
+<pre><code>2026-04-25 — MTGSLIDER — SQLite ATTACH lets you query across DBs without merging schemas
+2026-04-26 — NSFRIPPER — APU length counters silence channels via different mechanisms per driver family
+2026-04-27 — DOGSGAME — event sourcing means storing what happened, not what is
+2026-04-28 — n/a — Python's contextlib.suppress is shorter than try/except/pass and reads better
+</code></pre>
+<p>That's enough. If you write only the one line for a year, you'll have ~250 entries that map your CS evolution.</p>
+<h2 id="optional-the-long-form-entry">Optional: the long-form entry</h2>
+<p>When something genuinely surprised you, expand:</p>
+<pre><code>2026-04-25 — MTGSLIDER — SQLite ATTACH lets you query across DBs without merging schemas
+
+Surprise: I assumed I'd have to ETL my alchemy_db and mtg_db into one mega-DB to join across them.
+Actually: ATTACH lets you mount multiple DBs in one connection and write joins like
+   SELECT a.term, m.card_name FROM alchemy.terms a JOIN mtg.cards m ON ...
+Implication: my &quot;federated SQLite&quot; idea in MTGSLIDER/CONTEXT_ENGINEERING.md is a one-liner, not a project.
+What I might do with this: rewrite three of my projects' multi-DB queries.
+</code></pre>
+<p>Five-field shape: <strong>Surprise / Actually / Implication / What I might do.</strong></p>
+<h2 id="30-prompts-that-produce-journal-worthy-moments">30 prompts that produce journal-worthy moments</h2>
+<p>Use these to <em>generate</em> journal entries. Run any of these post-session; capture the answer.</p>
+<ol>
+<li><code>What was the thing I just figured out, in one sentence a non-programmer could understand?</code></li>
+<li><code>What did the AI suggest that I almost rejected but turned out to be right?</code></li>
+<li><code>What pattern did this code have that I'd seen before but didn't have a name for?</code></li>
+<li><code>What was the smallest change in this session that had the biggest effect?</code></li>
+<li><code>What in this codebase confused me an hour ago and doesn't now?</code></li>
+<li><code>If I were teaching this concept to a 10-year-old, what's the metaphor?</code></li>
+<li><code>What would have saved me an hour today, that I now know for next time?</code></li>
+<li><code>What CS idea did I bump into without knowing its name?</code></li>
+<li><code>What assumption did I have walking in that turned out to be wrong?</code></li>
+<li><code>What did the AI know that I didn't, that I now do?</code></li>
+<li><code>What's a function I wrote today that I'd write more elegantly tomorrow?</code></li>
+<li><code>What's a thing the language/library does for me that I was about to do manually?</code></li>
+<li><code>What Python pattern emerged in my code today that I should add to my mental toolkit?</code></li>
+<li><code>What's a debugging move I tried first that didn't work — and the move that did?</code></li>
+<li><code>What part of the codebase did I touch today that's weirder than I realized?</code></li>
+<li><code>What did I learn about my own thinking process today?</code></li>
+<li><code>What's a question I should have asked at the start of this session that would have shortened it?</code></li>
+<li><code>What did I avoid doing today that I'll regret tomorrow?</code></li>
+<li><code>What's a name I gave to something today that's worse than it should be?</code></li>
+<li><code>What's a connection between this work and something else I've built?</code></li>
+<li><code>What's an analogy from outside CS that explains what I just did?</code></li>
+<li><code>What's a thing I now know that contradicts something I wrote in my own docs three months ago?</code></li>
+<li><code>What's a single keyword I should look up tonight that would make me smarter tomorrow?</code></li>
+<li><code>What's the cheapest experiment I could run to learn something I currently guess about?</code></li>
+<li><code>What's the riskiest assumption in the code I just wrote?</code></li>
+<li><code>What library function did I almost reimplement before checking the stdlib?</code></li>
+<li><code>What's a habit I noticed in myself today, good or bad?</code></li>
+<li><code>What's a wrong turn that taught me something the right turn wouldn't have?</code></li>
+<li><code>What did I read in this codebase that I want to steal?</code></li>
+<li><code>What's the question this session left me with?</code></li>
+</ol>
+<h2 id="weekly-compression-workflow">Weekly compression workflow</h2>
+<p>Once a week, run this:</p>
+<pre><code>1. /plan-fat-compress LEARNING_JOURNAL.md last 7 days
+2. Output: a 200-word &quot;this week in CS&quot; paragraph at the bottom of LEARNING_JOURNAL.md
+3. Tag the paragraph with WEEKLY_2026_W17 or similar
+4. The original entries stay; the summary just adds a layer
+</code></pre>
+<p>Quarterly: read all weekly summaries. That's your CS journey, distilled.</p>
+<h2 id="yearly-archaeology">Yearly archaeology</h2>
+<p>End of year:</p>
+<pre><code>ask AI: &quot;Read my LEARNING_JOURNAL.md. What's the throughline? What did I get good at?
+Where did I stagnate? What's a curriculum the future me should follow based on the gaps?&quot;
+</code></pre>
+<p>That output becomes next year's <code>CS_CURRICULUM_TED.md</code>.</p>
+<h2 id="open-questions-for-you">Open questions for you</h2>
+<ul>
+<li>Do you want this in markdown or in a SQLite table? (Table = queryable. Markdown = greppable + readable.)</li>
+<li>Where should this live? <code>C:\Dev\LEARNING_JOURNAL.md</code> (top-level) or <code>C:\Users\PC\.claude\projects\C--Dev\LEARNING_JOURNAL.md</code> (memory tier)?</li>
+<li>Do you want an automated daily prompt via <code>/loop daily "Ask me what I learned today"</code>?</li>
+</ul>
+<p>Pick one, start writing tonight, don't aim for fancy.</p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

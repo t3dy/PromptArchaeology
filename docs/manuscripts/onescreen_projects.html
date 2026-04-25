@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ONESCREEN PROJECTS — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="onescreen_projects-tiny-project-ideas-that-fit-on-one-screen">ONESCREEN_PROJECTS — Tiny project ideas that fit on one screen</h1>
+<p><strong>Date:</strong> 2026-04-25
+<strong>Use:</strong> When you want to <em>build something</em> but are too tired for architecture, pick one of these. Constraint: the whole project fits in one Python file under 200 lines, runs in one terminal, and produces output you can show to one human (or just yourself for the laughs).</p>
+<hr />
+<h2 id="the-constraint-set">The constraint set</h2>
+<p>A one-screen project must satisfy:</p>
+<ul>
+<li><strong>One file.</strong> No directory tree. <code>tinything.py</code> and that's it.</li>
+<li><strong>Under 200 lines.</strong> Counting comments and blank lines. If it's growing past that, the project is over.</li>
+<li><strong>One run command.</strong> <code>python tinything.py</code> produces output. No setup, no config files, no .env.</li>
+<li><strong>One artifact per run.</strong> A printed table, a generated image, a piece of text, a sound file. One thing.</li>
+<li><strong>No dependencies you don't already have.</strong> Stdlib + whatever's in your usual Python — no <code>pip install</code> for new tools.</li>
+</ul>
+<p>That's it. The constraint is the point. Anything that grows out of these boundaries is a different project; park it.</p>
+<hr />
+<h2 id="25-one-screen-project-ideas">25 one-screen project ideas</h2>
+<h3 id="mtg-esoteric-flavor">MTG / Esoteric flavor</h3>
+<ol>
+<li><strong>Card oracle.</strong> Pick a random MTG card from your alchemy_scryfall DB. Print the card text alongside one related hermetic axiom from EmeraldTablet/HERMETICDB. Run before each MTG game for the laughs.</li>
+<li>
+<p><em>Prompt to start:</em> <code>Write a 100-line Python script that picks a random card from C:\Dev\alchemy_scryfall\&lt;db&gt; and a random concept from C:\Dev\EmeraldTablet\db\&lt;db&gt; and prints them paired. Plain text output.</code></p>
+</li>
+<li>
+<p><strong>Etymology generator.</strong> Input: any English word. Output: 3 plausible (real-or-invented) etymologies in the style of OED. Have the AI generate; you grade.</p>
+</li>
+<li>
+<p><em>Prompt to start:</em> <code>Generate a script that takes a word as argv[1] and prints three OED-style etymologies. Two from real reference, one I write as a fake.</code></p>
+</li>
+<li>
+<p><strong>Daily hermetic axiom.</strong> Generate one 1-sentence hermetic-sounding axiom per day, save to <code>axioms.txt</code>. Read at end of week for laughs.</p>
+</li>
+<li>
+<p><strong>Mana-color personality test.</strong> 10-question quiz that prints WUBRG color identity. Run with friends.</p>
+</li>
+<li>
+<p><strong>MTG card → tarot card.</strong> Input: MTG card name. Output: tarot equivalent with one-paragraph reading.</p>
+</li>
+</ol>
+<h3 id="distant-reading-toys">Distant reading toys</h3>
+<ol>
+<li><strong>Word frequency over time in your own writing.</strong> Point at <code>voicenotes/</code> or any text directory. Print top 20 words by month. ASCII bar chart.</li>
+<li>
+<p><em>Prompt:</em> <code>Write a 150-line script that counts words in all .txt files in a dir, groups by file mtime month, and prints top-20 words per month with ASCII bars.</code></p>
+</li>
+<li>
+<p><strong>Self-quote miner.</strong> Find the 5 most-quoted-by-you phrases in your own writing. ASCII output.</p>
+</li>
+<li>
+<p><strong>Project name graph.</strong> List all C:\Dev subdirectories, count files, sort by recency. Print as ASCII bar chart.</p>
+</li>
+<li>
+<p><strong>Two-corpus diff.</strong> Compare word distributions in any two corpora you have (e.g., GPT.txt vs your own writing). Print the words most distinctively in each.</p>
+</li>
+<li>
+<p><strong>Lexicon shift detector.</strong> Across a year of voice notes, which words appear in the second half but not the first? Vice versa?</p>
+</li>
+</ol>
+<h3 id="game-simulation-toys">Game / simulation toys</h3>
+<ol>
+<li>
+<p><strong>Two-dog physics sim.</strong> Tiny ASCII grid. One dog moves toward bone. Other dog steals it. Print every tick. (Calibrating for DOGSGAME without committing.)</p>
+</li>
+<li>
+<p><strong>Roguelike-in-100-lines.</strong> Single screen, you (@), one monster (M), one stairs (&gt;). Walk around. Whatever.</p>
+</li>
+<li>
+<p><strong>MTG draft pick simulator.</strong> Given a real or generated pack, "draft" one card based on a set of weighted rules. Print the pick + reasoning.</p>
+</li>
+<li>
+<p><strong>Yard tile renderer.</strong> ASCII-render the DOGSGAME yard from a hard-coded layout. Stop at rendering. No game logic.</p>
+</li>
+<li>
+<p><strong>PKD novel mood-tracker.</strong> Map each chapter of a PKD novel to a single emoji or color block. Print as a 2D grid.</p>
+</li>
+</ol>
+<h3 id="audio-toys-low-energy-chiptune-flavor">Audio toys (low-energy chiptune flavor)</h3>
+<ol>
+<li>
+<p><strong>NES note-name converter.</strong> Given an MIDI note number, print the NES register value, channel suggestion, and one historical NES song that uses it. Tiny but uses your existing NSFRIPPER knowledge.</p>
+</li>
+<li>
+<p><strong>Chiptune name generator.</strong> Output: random chiptune-band-style names. ("Toxic Lich on the Throne of TR808"). For laughs.</p>
+</li>
+<li>
+<p><strong>WAV file inspector.</strong> Print the WAV header of any file you point it at. Sample rate, bit depth, channels, length, RMS level. Stdlib only.</p>
+</li>
+</ol>
+<h3 id="personal-infrastructure-micro-tools">Personal infrastructure micro-tools</h3>
+<ol>
+<li>
+<p><strong>TODO grepper.</strong> Walk C:\Dev, find every TODO/FIXME/HACK comment, print sorted by file age. Decide: real, dead, aspirational.</p>
+</li>
+<li>
+<p><strong>Project freshness report.</strong> For each subdirectory of C:\Dev, print last commit date and last file mtime. Color the cold ones.</p>
+</li>
+<li>
+<p><strong>Stale memory finder.</strong> Walk your <code>memory/</code> directory, flag any memory file not modified in 60+ days. Suggest review.</p>
+</li>
+<li>
+<p><strong>Skill audit.</strong> List all your slash commands. Print the description of each. Mark any whose description you no longer remember writing.</p>
+</li>
+</ol>
+<h3 id="pure-absurdity">Pure absurdity</h3>
+<ol>
+<li>
+<p><strong>PKD oracle.</strong> Random sentence generated from a Markov chain trained on PKD prose. (You can find PKD corpora online; cite where.) Print one sentence per day.</p>
+</li>
+<li>
+<p><strong>Crockett the senior dog's daily affirmation.</strong> Generate one ironic affirmation per day, in the voice of an arthritic 11-year-old toy-thieving dog.</p>
+</li>
+<li>
+<p><strong>Maier-style emblem describer.</strong> Input: any noun. Output: a fake Atalanta Fugiens emblem description (motto, image, epigram). Three lines max each.</p>
+</li>
+</ol>
+<hr />
+<h2 id="how-to-use-this-list">How to use this list</h2>
+<ol>
+<li><strong>Pick one when:</strong> you want to code, you're tired, you have an hour.</li>
+<li><strong>Don't elaborate.</strong> If the project starts wanting a directory tree, kill it. Park the elaborated version for fresh-mode.</li>
+<li><strong>Show one human OR don't.</strong> The artifact is the point; sharing is optional.</li>
+<li><strong>Save the file.</strong> Even one-screen projects deserve a place to live. Drop them in <code>C:\Dev\onescreen/&lt;name&gt;.py</code>. After 12 of them, you have a folder of small interesting things.</li>
+<li><strong>No dependencies upgrade.</strong> If you find yourself wanting <code>pip install pandas</code>, kill the project.</li>
+</ol>
+<hr />
+<h2 id="why-this-category-matters">Why this category matters</h2>
+<p>These projects:
+- Produce something runnable and <em>done</em> in one sitting (the rare experience your portfolio lacks)
+- Teach you Python tricks at the small scale, where they're easier to internalize
+- Convert tired-mode hours into discrete completed artifacts (even if private)
+- Maintain your sense that <em>building is fun</em>, which is the actual fuel
+- Build a folder of tiny weird tools that, in aggregate, become a portfolio of taste</p>
+<p>You said: <em>"I'm having a million laughs."</em> Ten one-screen projects = ten micro-laughs you can revisit. The discipline of fitting a thing in one file is itself a teacher.</p>
+<hr />
+<h2 id="open-questions-for-you">Open questions for you</h2>
+<ul>
+<li>Want a <code>C:\Dev\onescreen/</code> folder set up with a README that links these prompts? Easy.</li>
+<li>Want me to flesh out 5 of these into ready-to-paste full-spec prompts? Tell me which 5.</li>
+<li>Should this be a <code>/loop weekly</code> thing — "pick a one-screen idea, build it, post in here"?</li>
+<li>Are there tiny project categories I missed that fit you? (e.g., MarxistTradition flavor — "labor-time of my own commits"?)</li>
+</ul>
+<p>Pick one tonight. 90 minutes max. Don't grow it.</p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

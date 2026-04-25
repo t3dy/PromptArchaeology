@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Heldscalla — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="narrative.html">Lineage</a>
+      <a href="docs.html">Docs</a>
+      <a href="queries.html">Queries</a>
+      <a href="code.html">Code</a>
+      <a href="manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+
+<div class="hero">
+  <h1>Heldscalla</h1>
+  <p class="sub">Promptarchaeology — distant reading of one's own prompt history</p>
+  <div class="epigraph">
+    "He raised the broken pot and considered it. He did not know if Heldscalla itself
+    would rise. He kept working anyway."
+    <cite>— gloss on <em>Galactic Pot-Healer</em>, Philip K. Dick, 1969</cite>
+  </div>
+</div>
+
+<p>This is a tool that reads <strong>only the user's prompts</strong> across
+1.45M LLM messages and 5,271 conversations, ignoring the AI's outputs. The
+methodological commitment is intentional: the user's writing lives in their
+prompts; the output is a function of the AI's training. To study the user's
+evolving thinking and values, study only the prompts.</p>
+
+<p>The corpus is Heldscalla — sunken, partially indexed, organized by accident.
+This tool is the craft of pot-healing: bringing one cascade or pattern at a
+time into the light.</p>
+
+<div class="section-title">Surfaces</div>
+<div class="cards">
+  <a class="card" href="narrative.html">
+    <div class="card-label">Lineage</div>
+    <h3>Building on prior projects</h3>
+    <p>From megabase to MTGSLIDER's Q-log convention to here.</p>
+  </a>
+  <a class="card" href="docs.html">
+    <div class="card-label">Documentation</div>
+    <h3>README, CLAUDE.md</h3>
+    <p>How the tool is structured and how the agent navigates it.</p>
+  </a>
+  <a class="card" href="queries.html">
+    <div class="card-label">Queries</div>
+    <h3>Saved SQL incantations</h3>
+    <p>Eight ways of looking at a corpus of one's own writing.</p>
+  </a>
+  <a class="card" href="code.html">
+    <div class="card-label">Code</div>
+    <h3>Python &amp; schema</h3>
+    <p>The runner, the chunker, the views over megabase.</p>
+  </a>
+  <a class="card" href="manuscripts.html">
+    <div class="card-label">Manuscripts</div>
+    <h3>Workshop documents</h3>
+    <p>Tired-mode prompts, learning journal protocol, audit questions, and other planning artifacts.</p>
+  </a>
+</div>
+
+<div class="water-line"></div>
+
+<div class="section-title">The methodological move</div>
+<p>Every prompt is a moment of intentional direction. Output is a function of the AI's
+training distribution; the prompt is a function of you — your current framing, your
+unspoken assumptions, your mood, the vocabulary that occurred to you under whatever
+pressure. A pure prompt corpus is closer to unfiltered cognition than almost any
+journal one might keep.</p>
+
+<p>Crucially: <em>prompts that respond to outputs are the highest-signal artifacts in the
+corpus.</em> When you write a follow-up, you've just been confronted with what your prompt
+actually produced. Your reaction — redirect, clarify, push back, accept, pivot — is your
+taste in real-time contact with output. Output-only analysis tells you what AI does.
+Prompt-only analysis tells you what you reject and what you accept. The latter is closer
+to <em>values</em> than almost anything else one could study.</p>
+
+<div class="section-title">What lives below</div>
+<ul>
+  <li><strong>Megabase</strong> — the unified SQLite corpus across 11 sources (chats, SMS, Facebook, Twitter, PDF, gmail). 1.45M user prompts, 5,271 conversations.</li>
+  <li><strong>The 1000-page cascades</strong> — Medieval Magic (1206 pp.), Atalanta Fugiens (988 pp.), Tilton on Spiritual Alchemy (892 pp.), Magic in Shakespeare (757 pp.). Book-length conversations on single topics.</li>
+  <li><strong>The Q-log convention</strong> — verbatim user input as the artifact worth preserving (precursor convention from MTGSLIDER).</li>
+</ul>
+
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

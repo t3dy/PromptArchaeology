@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CS CURRICULUM TED — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="cs_curriculum_ted-a-personalized-path-tuned-to-your-interests-and-projects">CS_CURRICULUM_TED — A personalized path tuned to your interests and projects</h1>
+<p><strong>Date:</strong> 2026-04-25
+<strong>Use:</strong> Stop reading random tutorials. Pick a path. Each path connects to a project you already have, so learning compounds with building.</p>
+<hr />
+<h2 id="the-principle">The principle</h2>
+<p>Generic CS curricula don't fit you. You're not trying to get hired; you're not trying to follow a formal degree path. You're a builder with strong aesthetic interests (PKD, alchemy, esoterica), real Python/SQLite chops, and 8 active projects. The right curriculum is one that turns each existing project into a vehicle for learning a specific CS area.</p>
+<p>Six paths. Pick ONE. Run it for 8 weeks before adding another.</p>
+<hr />
+<h2 id="path-1-parsers-vehicle-nsfripper-mtgslider-decklist-parsing">Path 1 — PARSERS (vehicle: NSFRIPPER, MTGSLIDER decklist parsing)</h2>
+<p><strong>Why this fits you:</strong> You already write driver-family parsers for NES games. You parse decklists. You ingest scholarly databases. Parsing is a core CS skill you do constantly without naming it.</p>
+<p><strong>The book:</strong> <em>Crafting Interpreters</em> by Bob Nystrom (free online).</p>
+<p><strong>The 8-week arc:</strong>
+- Weeks 1–2: Parts I + II (tree-walk interpreter for Lox)
+- Weeks 3–4: Apply to NSFRIPPER — rewrite one driver-family parser using a proper lexer/parser split
+- Weeks 5–6: Build a tiny DSL for MTG decklist queries — <code>cards where mana_cost &lt;= 3 and color contains W</code>
+- Weeks 7–8: Either continue Crafting Interpreters Part III (bytecode VM) or apply patterns elsewhere</p>
+<p><strong>Prompts to fire weekly:</strong>
+- <code>Read my [parser file]. Identify which parts are doing tokenization vs parsing vs evaluation. Are they tangled?</code>
+- <code>Take this regex-based parser: [paste]. Rewrite as recursive descent. Show me the tradeoffs.</code>
+- <code>Quiz me on the difference between LL and LR parsing. Use my NSFRIPPER drivers as examples.</code></p>
+<p><strong>Endpoint:</strong> You can read any parser in any codebase with confidence and write a clean one when needed.</p>
+<hr />
+<h2 id="path-2-databases-vehicle-emeraldtablet-claudiens-megabase-mtgslider-your-federated-sqlite-idea">Path 2 — DATABASES (vehicle: EmeraldTablet, Claudiens, Megabase, MTGSLIDER, your "federated SQLite" idea)</h2>
+<p><strong>Why this fits you:</strong> You have at least 6 SQLite databases across projects. You've written FTS, you've sketched federated queries, you've mused about vector stores. You're a database person who hasn't read the database book.</p>
+<p><strong>The book:</strong> <em>Designing Data-Intensive Applications</em> by Martin Kleppmann.</p>
+<p><strong>The 8-week arc:</strong>
+- Weeks 1–2: Chapters 1–4 (foundations, encoding, replication basics)
+- Weeks 3–4: Apply — design a real federated query layer across two of your DBs (alchemy_scryfall + Claudiens, say)
+- Weeks 5–6: Chapters 5–9 (replication deep, partitioning, transactions). Apply: implement WAL-aware backups across your DBs.
+- Weeks 7–8: Chapters 10–12 (batch, stream, future). Apply: an event-sourced micro-architecture for DOGSGAME.</p>
+<p><strong>Prompts to fire weekly:</strong>
+- <code>Read my schema [path]. Identify the third normal form violations. Tell me which ones are actually fine and which need fixing.</code>
+- <code>Walk me through how SQLite's WAL works. Use my [project] as a case study.</code>
+- <code>Explain CAP theorem using my projects as examples. Which ones are CP, which are AP, which are CA-by-being-single-node?</code>
+- <code>Show me how an event-sourced DOGSGAME differs from a state-storing DOGSGAME, in concrete schema terms.</code></p>
+<p><strong>Endpoint:</strong> You can choose between datastores knowingly. You can talk about consistency models. Your SQLite use becomes deliberate, not habitual.</p>
+<hr />
+<h2 id="path-3-dsp-audio-vehicle-nsfripper-reaperbeyondnes">Path 3 — DSP &amp; AUDIO (vehicle: NSFRIPPER, REAPERBEYONDNES)</h2>
+<p><strong>Why this fits you:</strong> You've spent months on chiptune extraction. You've hit hard problems (non-linear DAC mix, length-counter idiosyncrasies). You're already inside DSP without the formal underpinnings.</p>
+<p><strong>The books/resources:</strong>
+- <em>The Scientist and Engineer's Guide to Digital Signal Processing</em> by Steven W. Smith (free online)
+- <em>Audio Programming Book</em> (Boulanger, Lazzarini, eds.) — chapters on synthesis
+- ChibiAkumas chiptune resources (informal but on-topic)</p>
+<p><strong>The 8-week arc:</strong>
+- Weeks 1–2: DSP basics (sampling, aliasing, FFT). Apply: write a tiny WAV analyzer that prints fundamental frequencies.
+- Weeks 3–4: Filter design (FIR, IIR, biquads). Apply: write a biquad lowpass in Python and one in JSFX. Compare outputs against <code>scipy.signal</code>.
+- Weeks 5–6: Synthesis (additive, subtractive, FM, wavetable). Apply: build a 30-line wavetable synth that matches your NES triangle channel.
+- Weeks 7–8: Mix &amp; master fundamentals. Apply: master one NSFRIPPER track to broadcast loudness standards.</p>
+<p><strong>Prompts to fire weekly:</strong>
+- <code>Explain why my non-linear DAC mix is approximate. Show me the math.</code>
+- <code>Why does the NES triangle channel "hold" DAC value on gate-off? What's the physics?</code>
+- <code>Walk me through how a biquad coefficient set encodes a filter response. Use my JSFX code.</code>
+- <code>Compare my JSFX synth to my Python stems for one frame. Where exactly do they diverge?</code></p>
+<p><strong>Endpoint:</strong> The "two DSP codebases drift apart" problem becomes a <em>measurable</em> problem you can characterize and solve, not a fogged hard problem.</p>
+<hr />
+<h2 id="path-4-distant-reading-corpus-nlp-vehicle-megabase-your-chatgptclaude-exports">Path 4 — DISTANT READING / CORPUS NLP (vehicle: Megabase, your ChatGPT/Claude exports)</h2>
+<p><strong>Why this fits you:</strong> You want to understand your own intellectual evolution. You have years of LLM chats. You've sketched megabase. This is the path that turns introspection into method.</p>
+<p><strong>The books/resources:</strong>
+- <em>Speech and Language Processing</em> by Jurafsky &amp; Martin (3rd ed., free online)
+- Franco Moretti's <em>Distant Reading</em> (the humanities side)
+- Voyant Tools / spaCy / Hugging Face docs as reference</p>
+<p><strong>The 8-week arc:</strong>
+- Weeks 1–2: Tokenization, basic stats (TF-IDF, word frequencies). Apply: top-50 words in your ChatGPT exports per quarter.
+- Weeks 3–4: Topic modeling (LDA, BERTopic). Apply: produce a topic-shift chart across 24 months of your output.
+- Weeks 5–6: Embeddings + similarity. Apply: build a semantic search across all your project README files.
+- Weeks 7–8: One real essay: <em>"What Distant Reading of My Own LLM Sessions Reveals."</em> 1,500 words. Anchored in actual data.</p>
+<p><strong>Prompts to fire weekly:</strong>
+- <code>Walk me through TF-IDF using my own corpus as the example.</code>
+- <code>What's the difference between LSA and BERTopic, and which fits my "introspect my chats" use case?</code>
+- <code>Read this paragraph from one of my old chats. What latent assumptions does it carry?</code></p>
+<p><strong>Endpoint:</strong> Megabase becomes a real tool, not a planned tool. You produce one essay other humans could read about your own thinking.</p>
+<hr />
+<h2 id="path-5-game-logic-event-sourcing-vehicle-dogsgame-dungeon-architect">Path 5 — GAME LOGIC &amp; EVENT SOURCING (vehicle: DOGSGAME, dungeon-architect)</h2>
+<p><strong>Why this fits you:</strong> You sketch games but don't ship them. The blocker isn't "I don't know how to code games." It's that you haven't internalized the patterns (entity-component, event sourcing, fixed-timestep update). Once those click, DOGSGAME could be 200 lines.</p>
+<p><strong>The book/resources:</strong>
+- <em>Game Programming Patterns</em> by Robert Nystrom (free online)
+- Roguelike Development resources at /r/roguelikedev FAQ</p>
+<p><strong>The 8-week arc:</strong>
+- Weeks 1–2: Read patterns 1–8. Apply: refactor DOGSGAME's planned architecture to one named pattern.
+- Weeks 3–4: Implement DOGSGAME v1 (Okie + bush) in 200 lines using event sourcing.
+- Weeks 5–6: Add the second behavior (Tex belly-roll) and notice what generalizes.
+- Weeks 7–8: Implement a bare bones save/replay using event log alone. The whole game state is a fold over events.</p>
+<p><strong>Prompts to fire weekly:</strong>
+- <code>Explain entity-component-system using DOGSGAME's four dogs as a worked example.</code>
+- <code>Show me three ways to implement DOGSGAME's event bus, weakest to strongest.</code>
+- <code>Why is event sourcing perfect for a game where dogs have moods that depend on history?</code></p>
+<p><strong>Endpoint:</strong> A playable DOGSGAME prototype. Pattern fluency that transfers to dungeon-architect, MTG simulators, and anything else game-like.</p>
+<hr />
+<h2 id="path-6-static-sites-build-pipelines-vehicle-claudiens-emeraldtablet-mtgslider-pkd-fest">Path 6 — STATIC SITES &amp; BUILD PIPELINES (vehicle: Claudiens, EmeraldTablet, MTGSLIDER, PKD Fest)</h2>
+<p><strong>Why this fits you:</strong> You have ~5 sites that should deploy cleanly. The shared substrate is "data → templates → static HTML." Doing this <em>well</em> once unlocks all of them.</p>
+<p><strong>The books/resources:</strong>
+- Eleventy / Astro / Hugo docs — pick one
+- <em>The Pragmatic Programmer</em> (Hunt &amp; Thomas) on build pipelines
+- GitHub Actions docs for CI</p>
+<p><strong>The 8-week arc:</strong>
+- Weeks 1–2: Pick a static site generator (recommend Eleventy for Python-friendliness). Build a tiny dummy site.
+- Weeks 3–4: Migrate ONE existing project (e.g., EmeraldTablet) to it. Notice what generalizes.
+- Weeks 5–6: Set up GitHub Actions to build + deploy automatically.
+- Weeks 7–8: Apply the pattern to a second site. The third is a copy job.</p>
+<p><strong>Prompts to fire weekly:</strong>
+- <code>Compare Eleventy / Astro / Hugo for my use case. Pick one. Defend it.</code>
+- <code>Walk me through how my SQLite → static HTML pipeline could be expressed as Eleventy data files.</code>
+- <code>Show me the GitHub Actions YAML for a pipeline that runs python scripts THEN builds the site.</code></p>
+<p><strong>Endpoint:</strong> A unified deploy story across your DH sites. Future sites take a day, not a month.</p>
+<hr />
+<h2 id="open-questions-for-you">Open questions for you</h2>
+<ul>
+<li>Which path resonates first? My guess: <strong>Path 2 (Databases)</strong> because it touches the most projects, OR <strong>Path 1 (Parsers)</strong> because it builds a fundamental skill you exercise weekly without naming.</li>
+<li>Are 8 weeks the right cadence? Could be 12 if energy is variable.</li>
+<li>Do you want a <code>/loop weekly</code> reminder to do the prompts? Easy to set up.</li>
+<li>Should the curriculum live as one file per path or one combined file?</li>
+</ul>
+<p>Pick a path. Set up <code>LEARNING_JOURNAL.md</code> first. Run the curriculum's prompts in tired-mode sessions; do the project work in fresh-mode sessions. Compounds over months.</p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

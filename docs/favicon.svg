@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#0a1628"/>
+  <!-- water lines -->
+  <path d="M0 18 Q16 14 32 18 T64 18" stroke="#1f4d6e" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M0 24 Q16 20 32 24 T64 24" stroke="#1f4d6e" stroke-width="1" fill="none" opacity="0.4"/>
+  <!-- cathedral spires -->
+  <polygon points="20,52 24,32 28,52" fill="#c9a14a"/>
+  <polygon points="28,52 36,22 44,52" fill="#e8c46f"/>
+  <polygon points="40,52 44,32 48,52" fill="#c9a14a"/>
+  <!-- spire crosses -->
+  <line x1="36" y1="22" x2="36" y2="18" stroke="#e8c46f" stroke-width="1"/>
+  <line x1="34" y1="20" x2="38" y2="20" stroke="#e8c46f" stroke-width="1"/>
+  <!-- base -->
+  <rect x="16" y="50" width="32" height="6" fill="#8b3a1c"/>
+</svg>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WEEKLY CADENCE — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="weekly_cadence-a-working-rhythm-that-fits-a-teachers-week">WEEKLY_CADENCE — A working rhythm that fits a teacher's week</h1>
+<p><strong>Date:</strong> 2026-04-25
+<strong>Use:</strong> Tired-mode rules and warm-up routines work session-by-session. This file is the layer above: a <em>week shape</em> that protects energy, builds compounding practice, and respects that you have a real job that takes most of your daytime cognition.</p>
+<hr />
+<h2 id="the-core-insight">The core insight</h2>
+<p>You're not a full-time builder. Trying to follow a full-time builder's rhythm produces guilt and burnout. Your week has a real structure already (Monday–Friday school, weekends, evenings) — the cadence should match that, not fight it.</p>
+<p>Most "developer productivity" advice assumes 35–45 hours of fresh focus per week. You have closer to 8–15 stolen hours, of variable quality. The shape that works is <em>very different</em>.</p>
+<hr />
+<h2 id="the-seven-types-of-session">The seven types of session</h2>
+<p>A week has different <em>kinds</em> of sessions, each with different goals. Naming them helps you pick the right type for the moment.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>When</th>
+<th>Length</th>
+<th>Goal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tired Tuesday</strong></td>
+<td>Weekday evening, low energy</td>
+<td>30–60 min</td>
+<td>Capture, compress, archive</td>
+</tr>
+<tr>
+<td><strong>Warm Wednesday</strong></td>
+<td>Weekday evening, medium energy</td>
+<td>60 min</td>
+<td>Extend a warm project (one thing)</td>
+</tr>
+<tr>
+<td><strong>Learning Loop</strong></td>
+<td>Anywhere, with energy for tutoring</td>
+<td>30–60 min</td>
+<td>Burn tokens for CS knowledge</td>
+</tr>
+<tr>
+<td><strong>Saturday Build</strong></td>
+<td>Weekend morning, fresh</td>
+<td>2–4 hours</td>
+<td>Real architecture, real building</td>
+</tr>
+<tr>
+<td><strong>Sunday Garden</strong></td>
+<td>Weekend, mellow</td>
+<td>60–90 min</td>
+<td>Memory hygiene, audits, briefings</td>
+</tr>
+<tr>
+<td><strong>Jam Night</strong></td>
+<td>Whenever the spirit hits</td>
+<td>≤ 60 min</td>
+<td>Pure play, no artifact required</td>
+</tr>
+<tr>
+<td><strong>Recovery</strong></td>
+<td>Whenever needed</td>
+<td>n/a</td>
+<td>NO coding. Walk dogs. Read. Sleep.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="a-baseline-week">A baseline week</h2>
+<p>This is <em>one</em> possible shape. Adjust to your reality:</p>
+<pre><code>Mon evening   — Tired Tuesday riff (30 min cap, hard stop)
+Tue evening   — Recovery OR Tired Tuesday (your call by 6pm)
+Wed evening   — Warm Wednesday (60 min on warm project)
+Thu evening   — Learning Loop OR Recovery
+Fri evening   — Jam Night (let off steam, no goals)
+Sat morning   — Saturday Build (2–4 hours, real work)
+Sat afternoon — Recovery (walk, read, dogs)
+Sun morning   — Sunday Garden (memory + audits + briefings)
+Sun afternoon — Recovery
+</code></pre>
+<p>Total: ~8–10 hours of code, distributed across 6 of 7 days, with explicit recovery built in.</p>
+<hr />
+<h2 id="why-this-shape-works-for-a-teacher">Why this shape works for a teacher</h2>
+<ul>
+<li><strong>Monday is the worst day.</strong> You walked into Monday rested; Monday wiped you out. Tuesday is when the cumulative fatigue hits. Honor it. Don't book hard work on Tuesday.</li>
+<li><strong>Wednesday is the swing day.</strong> You've adjusted to the school week's rhythm. Energy is medium. Warm Wednesday becomes the place where small but real progress lives.</li>
+<li><strong>Thursday is recovery or learning.</strong> You're tired but the weekend is in sight. Reading mode, tutoring mode, journal mode.</li>
+<li><strong>Friday is psychic release.</strong> Jam Night gives the laughs that compensate for the week. No goals = no failure mode.</li>
+<li><strong>Saturday morning is your one true builder window.</strong> Treat it like sacred time. No errands until 11am. This is when real architecture or hard problems get attention.</li>
+<li><strong>Saturday afternoon is recovery.</strong> Don't push two real-work blocks back-to-back. Walk. Pet dogs. Eat lunch slowly.</li>
+<li><strong>Sunday is hygiene + setup.</strong> Memory garden, briefings, prepare yourself for the school week. A 90-minute Sunday morning here saves 2 hours of disorientation across the week.</li>
+</ul>
+<hr />
+<h2 id="weekly-rituals-the-load-bearing-parts">Weekly rituals (the load-bearing parts)</h2>
+<p>Three rituals that, if you do nothing else, hold the practice together.</p>
+<h3 id="friday-afternoon-honest-week-in-review-10-minutes">Friday afternoon — Honest week-in-review (10 minutes)</h3>
+<p>Before any Jam Night, do this:</p>
+<pre><code>Open LEARNING_JOURNAL.md. Skim this week's entries.
+Open NEXT.md for each active warm project. Update them.
+Run: git log --since=&quot;Monday&quot; --shortstat (across all project dirs)
+Write ONE sentence: &quot;This week I learned X. I'm proud of Y. I'm carrying Z forward.&quot;
+Save it as the week's marker in LEARNING_JOURNAL.md.
+</code></pre>
+<p>That single sentence is the week. Even a brutal week produces one true sentence.</p>
+<h3 id="saturday-morning-builder-warm-up-5-minutes">Saturday morning — Builder warm-up (5 minutes)</h3>
+<p>Before any Saturday Build:</p>
+<pre><code>Read NEXT.md for the project you're working on.
+Run /plan-tagomi-briefing if more than 2 weeks have passed since last touch.
+Set a timer (90 min for the first chunk).
+Decide BEFORE starting: what's the artifact at the end of today?
+</code></pre>
+<p>The "decide before starting" line is the most important. Saturday Builds drift fastest because they're the longest sessions.</p>
+<h3 id="sunday-afternoon-set-up-the-week-15-minutes">Sunday afternoon — Set up the week (15 minutes)</h3>
+<p>Pick the warm project for next week. Write its NEXT.md as if for a stranger. Decide what days you'll likely have energy for what. (Schedule subject to change, but the <em>intention</em> matters.)</p>
+<hr />
+<h2 id="recovery-is-not-optional">Recovery is not optional</h2>
+<p>Coding 7 days a week post-school is how you broke yourself last quarter. The Recovery slots in this rhythm are <em>load-bearing</em>. They are not "wasted time"; they are the time that lets the other slots have value.</p>
+<p>A week with 2 recovery evenings is <em>more productive</em> than a week with zero, because you don't reach Friday wiped enough to ruin the weekend.</p>
+<p>If your evenings are consistently used for school prep, lesson planning, or family — that's also Recovery from the codebase's perspective. Don't double-book.</p>
+<hr />
+<h2 id="what-if-a-week-falls-apart">What if a week falls apart</h2>
+<p>It will. Some weeks the cadence is impossible. School emergencies, sick dogs, family stuff, your own bad week. When it falls apart:</p>
+<ul>
+<li><strong>Skip to Sunday Garden</strong> — even on a wrecked week, 30 minutes of memory hygiene Sunday morning resets the apparatus</li>
+<li><strong>Don't try to "make up" missed sessions</strong> — that always produces a worse session</li>
+<li><strong>Write one journal line</strong> — "Bad week, here's why, see you next week"</li>
+<li><strong>Trust the cadence to resume</strong> — the <em>practice</em> survives bad weeks; only the <em>output</em> drops</li>
+</ul>
+<hr />
+<h2 id="seasonal-arc">Seasonal arc</h2>
+<p>Beyond weekly: a quarterly arc.</p>
+<ul>
+<li><strong>Quarter 1:</strong> Establish the cadence. Don't add ambitions. Just live in the shape.</li>
+<li><strong>Quarter 2:</strong> Pick ONE curriculum path (CS_CURRICULUM_TED.md). Run it inside the existing shape.</li>
+<li><strong>Quarter 3:</strong> Do a real audit (AUDIT_QUESTIONS.md) of one project. Either freeze, finish, or refactor.</li>
+<li><strong>Quarter 4:</strong> Rest. Reflect. Plan next year.</li>
+</ul>
+<p>Treat the year as four 12-week sprints with explicit themes. Each sprint has the same weekly cadence underneath.</p>
+<hr />
+<h2 id="what-this-is-not">What this is NOT</h2>
+<ul>
+<li>It's not a productivity system. It's a <em>practice</em> system. You're not optimizing throughput; you're maintaining a working rhythm.</li>
+<li>It's not rigid. The shape is a default; deviations are expected.</li>
+<li>It's not for everyone. It's tuned to a teacher with dogs and a coding hobby; it would feel wrong for a freelance dev or a researcher with grants.</li>
+<li>It's not a replacement for shipping discipline. (We're not doing that part now per your redirect — but if you ever want it, this cadence accommodates a "ship something monthly" sub-loop on Saturday Builds.)</li>
+</ul>
+<hr />
+<h2 id="open-questions-for-you">Open questions for you</h2>
+<ul>
+<li>Is the weekly shape close to what your week already is, or does it require shifts?</li>
+<li>Does Saturday actually have a 2–4 hour fresh window for you, or is family/errands more dominant on weekends?</li>
+<li>Would having <code>/loop weekly</code> reminders for the three rituals help, or feel naggy?</li>
+<li>Is there a <em>daily</em> sub-rhythm worth specifying (e.g., evening start time, hard-stop time)?</li>
+<li>Are there seasonal patterns (school year vs summer break) that should change the cadence?</li>
+</ul>
+<p>Pick a Sunday and try the cadence for one week. Adjust. Repeat for three more weeks. The shape becomes yours.</p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

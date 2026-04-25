@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>02 redirects — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>02 redirects</h1><p><em>From <code>queries/02_redirects.sql</code></em></p><blockquote>02_redirects.sql
+Prompts where you pushed back on an AI output: &quot;no, actually I want...&quot;
+These are your real-time corrections — your highest-signal value statements.
+Each redirect is a moment where output failed to match desire and you said so.</blockquote><pre><code class="language-sql">-- 02_redirects.sql
+-- Prompts where you pushed back on an AI output: &quot;no, actually I want...&quot;
+-- These are your real-time corrections — your highest-signal value statements.
+-- Each redirect is a moment where output failed to match desire and you said so.
+
+SELECT
+  date(created_at) AS d,
+  source_name,
+  conversation_title,
+  approx_words,
+  substr(prompt_text, 1, 400) AS prompt_preview
+FROM pa_prompts
+WHERE reacts_to_output = 1
+  AND (
+       LOWER(prompt_text) LIKE &#x27;no,%&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;no.%&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;no %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;actually %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;actually,%&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;wait,%&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;wait %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;i don&#x27;&#x27;t want%&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;i didn&#x27;&#x27;t %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;that&#x27;&#x27;s not what%&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;not quite %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;hmm %&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;hmm,%&#x27;
+    OR LOWER(prompt_text) LIKE &#x27;stop %&#x27;
+  )
+ORDER BY created_at DESC
+LIMIT 300;
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

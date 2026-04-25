@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>run.py — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>run.py</h1><p><em>tools/run.py</em></p><pre><code class="language-python">&quot;&quot;&quot;
+Run a saved query from queries/ against megabase.db (read-only) and write a markdown report.
+
+Usage:
+    python tools/run.py 01_first_prompts
+    python tools/run.py 06
+    python tools/run.py obsession
+
+Partial matches accepted; the first matching .sql file wins.
+&quot;&quot;&quot;
+import sys
+import sqlite3
+import pathlib
+import datetime as dt
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+MEGABASE = pathlib.Path(r&quot;C:\Dev\megabase\megabase.db&quot;)
+VIEWS = ROOT / &quot;schema&quot; / &quot;views.sql&quot;
+QUERIES = ROOT / &quot;queries&quot;
+REPORTS = ROOT / &quot;reports&quot;
+
+
+def open_db() -&gt; sqlite3.Connection:
+    if not MEGABASE.exists():
+        raise FileNotFoundError(f&quot;megabase.db not found at {MEGABASE}&quot;)
+    uri = f&quot;file:{MEGABASE.as_posix()}?mode=ro&quot;
+    conn = sqlite3.connect(uri, uri=True)
+    conn.row_factory = sqlite3.Row
+    # apply TEMP views every run; main DB stays read-only
+    conn.executescript(VIEWS.read_text(encoding=&quot;utf-8&quot;))
+    return conn
+
+
+def resolve_query(name: str) -&gt; pathlib.Path:
+    direct = QUERIES / f&quot;{name}.sql&quot;
+    if direct.exists():
+        return direct
+    candidates = sorted(QUERIES.glob(f&quot;*{name}*.sql&quot;))
+    if not candidates:
+        raise FileNotFoundError(f&quot;no query matching &#x27;{name}&#x27; in {QUERIES}&quot;)
+    if len(candidates) &gt; 1:
+        names = &quot;\n  &quot;.join(c.name for c in candidates)
+        print(f&quot;multiple matches:\n  {names}\nusing: {candidates[0].name}&quot;)
+    return candidates[0]
+
+
+def run_query(name: str) -&gt; pathlib.Path:
+    sql_path = resolve_query(name)
+    sql = sql_path.read_text(encoding=&quot;utf-8&quot;)
+    conn = open_db()
+
+    started = dt.datetime.now()
+    cursor = conn.execute(sql)
+    columns = [d[0] for d in cursor.description] if cursor.description else []
+    rows = cursor.fetchall()
+    elapsed = (dt.datetime.now() - started).total_seconds()
+
+    REPORTS.mkdir(exist_ok=True)
+    out = REPORTS / f&quot;{dt.date.today().isoformat()}_{sql_path.stem}.md&quot;
+    out.write_text(format_markdown(sql_path.stem, columns, rows, elapsed, sql), encoding=&quot;utf-8&quot;)
+    print(f&quot;wrote {out} ({len(rows)} rows, {elapsed:.2f}s)&quot;)
+    return out
+
+
+def format_markdown(name, columns, rows, elapsed, sql):
+    lines = [
+        f&quot;# {name}&quot;,
+        &quot;&quot;,
+        f&quot;_Run: {dt.datetime.now().isoformat(timespec=&#x27;seconds&#x27;)} | Rows: {len(rows)} | Elapsed: {elapsed:.2f}s_&quot;,
+        &quot;&quot;,
+    ]
+    if not rows:
+        lines.append(&quot;No rows returned.&quot;)
+    else:
+        lines.append(&quot;| &quot; + &quot; | &quot;.join(columns) + &quot; |&quot;)
+        lines.append(&quot;|&quot; + &quot;|&quot;.join(&quot;---&quot; for _ in columns) + &quot;|&quot;)
+        for row in rows:
+            cells = []
+            for col in columns:
+                val = row[col]
+                if val is None:
+                    cells.append(&quot;&quot;)
+                else:
+                    s = str(val).replace(&quot;|&quot;, &quot;\\|&quot;).replace(&quot;\n&quot;, &quot; ⏎ &quot;).replace(&quot;\r&quot;, &quot;&quot;)
+                    cells.append(s)
+            lines.append(&quot;| &quot; + &quot; | &quot;.join(cells) + &quot; |&quot;)
+    lines.extend([&quot;&quot;, &quot;## Query&quot;, &quot;&quot;, &quot;```sql&quot;, sql.strip(), &quot;```&quot;])
+    return &quot;\n&quot;.join(lines)
+
+
+if __name__ == &quot;__main__&quot;:
+    if len(sys.argv) &lt; 2:
+        print(__doc__)
+        sys.exit(1)
+    run_query(sys.argv[1])
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

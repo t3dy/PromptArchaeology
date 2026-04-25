@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>build_site.py — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>build_site.py</h1><p><em>tools/build_site.py</em></p><pre><code class="language-python">&quot;&quot;&quot;
+Build the Promptarchaeology-Heldscalla static site into docs/ for GitHub Pages.
+
+Renders:
+- index.html  (cute landing)
+- narrative.html
+- docs.html (index of project docs: README, CLAUDE.md, NARRATIVE.md)
+- queries.html (catalog of saved SQL queries with syntax highlight)
+- code.html (Python code listings)
+- manuscripts.html (workspace .md files copied into manuscripts/)
+- one HTML per markdown file
+- one HTML per SQL or Python file (as code page)
+
+Usage:
+    python tools/build_site.py
+&quot;&quot;&quot;
+import sys
+import shutil
+import pathlib
+import re
+import html
+import datetime as dt
+import markdown
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+SITE = ROOT / &quot;site&quot;
+DOCS = ROOT / &quot;docs&quot;
+TEMPLATE = (SITE / &quot;template.html&quot;).read_text(encoding=&quot;utf-8&quot;)
+
+MD_EXT = [&quot;fenced_code&quot;, &quot;tables&quot;, &quot;toc&quot;]
+
+
+def render_markdown(md_text: str) -&gt; str:
+    return markdown.markdown(md_text, extensions=MD_EXT)
+
+
+def page(title: str, content_html: str, depth: int = 0) -&gt; str:
+    root_prefix = &quot;../&quot; * depth if depth else &quot;&quot;
+    return TEMPLATE.replace(&quot;{title}&quot;, html.escape(title)) \
+                   .replace(&quot;{root}&quot;, root_prefix) \
+                   .replace(&quot;{content}&quot;, content_html)
+
+
+def write_page(out_path: pathlib.Path, title: str, content_html: str):
+    depth = len(out_path.relative_to(DOCS).parts) - 1
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(page(title, content_html, depth), encoding=&quot;utf-8&quot;)
+
+
+def code_block(code: str, lang: str = &quot;&quot;) -&gt; str:
+    return f&quot;&lt;pre&gt;&lt;code class=\&quot;language-{lang}\&quot;&gt;{html.escape(code)}&lt;/code&gt;&lt;/pre&gt;&quot;
+
+
+def slugify(text: str) -&gt; str:
+    return re.sub(r&quot;[^a-z0-9]+&quot;, &quot;_&quot;, text.lower()).strip(&quot;_&quot;)
+
+
+def render_index() -&gt; str:
+    &quot;&quot;&quot;The cute landing page.&quot;&quot;&quot;
+    return &quot;&quot;&quot;
+&lt;div class=&quot;hero&quot;&gt;
+  &lt;h1&gt;Heldscalla&lt;/h1&gt;
+  &lt;p class=&quot;sub&quot;&gt;Promptarchaeology — distant reading of one&#x27;s own prompt history&lt;/p&gt;
+  &lt;div class=&quot;epigraph&quot;&gt;
+    &quot;He raised the broken pot and considered it. He did not know if Heldscalla itself
+    would rise. He kept working anyway.&quot;
+    &lt;cite&gt;— gloss on &lt;em&gt;Galactic Pot-Healer&lt;/em&gt;, Philip K. Dick, 1969&lt;/cite&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This is a tool that reads &lt;strong&gt;only the user&#x27;s prompts&lt;/strong&gt; across
+1.45M LLM messages and 5,271 conversations, ignoring the AI&#x27;s outputs. The
+methodological commitment is intentional: the user&#x27;s writing lives in their
+prompts; the output is a function of the AI&#x27;s training. To study the user&#x27;s
+evolving thinking and values, study only the prompts.&lt;/p&gt;
+
+&lt;p&gt;The corpus is Heldscalla — sunken, partially indexed, organized by accident.
+This tool is the craft of pot-healing: bringing one cascade or pattern at a
+time into the light.&lt;/p&gt;
+
+&lt;div class=&quot;section-title&quot;&gt;Surfaces&lt;/div&gt;
+&lt;div class=&quot;cards&quot;&gt;
+  &lt;a class=&quot;card&quot; href=&quot;narrative.html&quot;&gt;
+    &lt;div class=&quot;card-label&quot;&gt;Lineage&lt;/div&gt;
+    &lt;h3&gt;Building on prior projects&lt;/h3&gt;
+    &lt;p&gt;From megabase to MTGSLIDER&#x27;s Q-log convention to here.&lt;/p&gt;
+  &lt;/a&gt;
+  &lt;a class=&quot;card&quot; href=&quot;docs.html&quot;&gt;
+    &lt;div class=&quot;card-label&quot;&gt;Documentation&lt;/div&gt;
+    &lt;h3&gt;README, CLAUDE.md&lt;/h3&gt;
+    &lt;p&gt;How the tool is structured and how the agent navigates it.&lt;/p&gt;
+  &lt;/a&gt;
+  &lt;a class=&quot;card&quot; href=&quot;queries.html&quot;&gt;
+    &lt;div class=&quot;card-label&quot;&gt;Queries&lt;/div&gt;
+    &lt;h3&gt;Saved SQL incantations&lt;/h3&gt;
+    &lt;p&gt;Eight ways of looking at a corpus of one&#x27;s own writing.&lt;/p&gt;
+  &lt;/a&gt;
+  &lt;a class=&quot;card&quot; href=&quot;code.html&quot;&gt;
+    &lt;div class=&quot;card-label&quot;&gt;Code&lt;/div&gt;
+    &lt;h3&gt;Python &amp;amp; schema&lt;/h3&gt;
+    &lt;p&gt;The runner, the chunker, the views over megabase.&lt;/p&gt;
+  &lt;/a&gt;
+  &lt;a class=&quot;card&quot; href=&quot;manuscripts.html&quot;&gt;
+    &lt;div class=&quot;card-label&quot;&gt;Manuscripts&lt;/div&gt;
+    &lt;h3&gt;Workshop documents&lt;/h3&gt;
+    &lt;p&gt;Tired-mode prompts, learning journal protocol, audit questions, and other planning artifacts.&lt;/p&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;water-line&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;section-title&quot;&gt;The methodological move&lt;/div&gt;
+&lt;p&gt;Every prompt is a moment of intentional direction. Output is a function of the AI&#x27;s
+training distribution; the prompt is a function of you — your current framing, your
+unspoken assumptions, your mood, the vocabulary that occurred to you under whatever
+pressure. A pure prompt corpus is closer to unfiltered cognition than almost any
+journal one might keep.&lt;/p&gt;
+
+&lt;p&gt;Crucially: &lt;em&gt;prompts that respond to outputs are the highest-signal artifacts in the
+corpus.&lt;/em&gt; When you write a follow-up, you&#x27;ve just been confronted with what your prompt
+actually produced. Your reaction — redirect, clarify, push back, accept, pivot — is your
+taste in real-time contact with output. Output-only analysis tells you what AI does.
+Prompt-only analysis tells you what you reject and what you accept. The latter is closer
+to &lt;em&gt;values&lt;/em&gt; than almost anything else one could study.&lt;/p&gt;
+
+&lt;div class=&quot;section-title&quot;&gt;What lives below&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Megabase&lt;/strong&gt; — the unified SQLite corpus across 11 sources (chats, SMS, Facebook, Twitter, PDF, gmail). 1.45M user prompts, 5,271 conversations.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;The 1000-page cascades&lt;/strong&gt; — Medieval Magic (1206 pp.), Atalanta Fugiens (988 pp.), Tilton on Spiritual Alchemy (892 pp.), Magic in Shakespeare (757 pp.). Book-length conversations on single topics.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;The Q-log convention&lt;/strong&gt; — verbatim user input as the artifact worth preserving (precursor convention from MTGSLIDER).&lt;/li&gt;
+&lt;/ul&gt;
+&quot;&quot;&quot;
+
+
+def collect_files(*globs):
+    paths = []
+    for g in globs:
+        paths.extend(sorted(ROOT.glob(g)))
+    return paths
+
+
+def main():
+    if DOCS.exists():
+        shutil.rmtree(DOCS)
+    DOCS.mkdir()
+
+    # copy CSS + favicon
+    shutil.copy(SITE / &quot;style.css&quot;, DOCS / &quot;style.css&quot;)
+    shutil.copy(SITE / &quot;favicon.svg&quot;, DOCS / &quot;favicon.svg&quot;)
+
+    # 1) Index
+    write_page(DOCS / &quot;index.html&quot;, &quot;Heldscalla&quot;, render_index())
+
+    # 2) Narrative
+    narrative_md = (ROOT / &quot;NARRATIVE.md&quot;).read_text(encoding=&quot;utf-8&quot;)
+    write_page(DOCS / &quot;narrative.html&quot;, &quot;Lineage&quot;, render_markdown(narrative_md))
+
+    # 3) Docs index
+    doc_files = [
+        (&quot;README.md&quot;, &quot;README&quot;),
+        (&quot;CLAUDE.md&quot;, &quot;Agent Instructions (CLAUDE.md)&quot;),
+        (&quot;NARRATIVE.md&quot;, &quot;Lineage&quot;),
+    ]
+    docs_links = &quot;&lt;ul&gt;&quot;
+    for fname, title in doc_files:
+        slug = slugify(fname.replace(&quot;.md&quot;, &quot;&quot;))
+        out = DOCS / &quot;doc&quot; / f&quot;{slug}.html&quot;
+        md_path = ROOT / fname
+        if md_path.exists():
+            write_page(out, title, render_markdown(md_path.read_text(encoding=&quot;utf-8&quot;)))
+            docs_links += f&#x27;&lt;li&gt;&lt;a href=&quot;doc/{slug}.html&quot;&gt;{html.escape(title)}&lt;/a&gt;&lt;/li&gt;&#x27;
+    docs_links += &quot;&lt;/ul&gt;&quot;
+    write_page(DOCS / &quot;docs.html&quot;, &quot;Documentation&quot;,
+               f&quot;&lt;h1&gt;Documentation&lt;/h1&gt;&lt;p&gt;Project-internal documents that explain how Heldscalla works and how the agent navigates it.&lt;/p&gt;{docs_links}&quot;)
+
+    # 4) Queries
+    queries_html = [&quot;&lt;h1&gt;Saved Queries&lt;/h1&gt;&quot;,
+                    &quot;&lt;p&gt;Each &lt;code&gt;.sql&lt;/code&gt; file is one way of looking at the corpus. The keyword filters are visible (so the queries reveal the analyst&#x27;s interests) but the corpus content itself stays private.&lt;/p&gt;&quot;,
+                    &quot;&lt;ul&gt;&quot;]
+    for sql_path in sorted((ROOT / &quot;queries&quot;).glob(&quot;*.sql&quot;)):
+        slug = sql_path.stem
+        title = slug.replace(&quot;_&quot;, &quot; &quot;)
+        sql_text = sql_path.read_text(encoding=&quot;utf-8&quot;)
+        # Pull docstring from leading comments
+        intro = &quot;\n&quot;.join(line[3:].strip() for line in sql_text.splitlines() if line.startswith(&quot;--&quot;))
+        body = f&quot;&lt;h1&gt;{html.escape(title)}&lt;/h1&gt;&lt;p&gt;&lt;em&gt;From &lt;code&gt;queries/{sql_path.name}&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;&quot;
+        if intro:
+            body += f&quot;&lt;blockquote&gt;{html.escape(intro)}&lt;/blockquote&gt;&quot;
+        body += code_block(sql_text, &quot;sql&quot;)
+        write_page(DOCS / &quot;queries&quot; / f&quot;{slug}.html&quot;, title, body)
+        queries_html.append(f&#x27;&lt;li&gt;&lt;a href=&quot;queries/{slug}.html&quot;&gt;{html.escape(title)}&lt;/a&gt;&lt;/li&gt;&#x27;)
+    queries_html.append(&quot;&lt;/ul&gt;&quot;)
+    write_page(DOCS / &quot;queries.html&quot;, &quot;Queries&quot;, &quot;\n&quot;.join(queries_html))
+
+    # 5) Code
+    code_files = []
+    for py_path in sorted((ROOT / &quot;tools&quot;).glob(&quot;*.py&quot;)):
+        code_files.append((py_path, &quot;python&quot;))
+    for sql_path in sorted((ROOT / &quot;schema&quot;).glob(&quot;*.sql&quot;)):
+        code_files.append((sql_path, &quot;sql&quot;))
+
+    code_html = [&quot;&lt;h1&gt;Code&lt;/h1&gt;&quot;, &quot;&lt;p&gt;The runner, the cascade chunker, the schema views.&lt;/p&gt;&quot;, &quot;&lt;ul&gt;&quot;]
+    for path, lang in code_files:
+        slug = slugify(f&quot;{path.parent.name}_{path.stem}&quot;)
+        content = path.read_text(encoding=&quot;utf-8&quot;)
+        body = f&quot;&lt;h1&gt;{html.escape(path.name)}&lt;/h1&gt;&lt;p&gt;&lt;em&gt;{path.relative_to(ROOT).as_posix()}&lt;/em&gt;&lt;/p&gt;&quot; + code_block(content, lang)
+        write_page(DOCS / &quot;code&quot; / f&quot;{slug}.html&quot;, path.name, body)
+        code_html.append(f&#x27;&lt;li&gt;&lt;a href=&quot;code/{slug}.html&quot;&gt;&lt;code&gt;{html.escape(path.relative_to(ROOT).as_posix())}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#x27;)
+    code_html.append(&quot;&lt;/ul&gt;&quot;)
+    write_page(DOCS / &quot;code.html&quot;, &quot;Code&quot;, &quot;\n&quot;.join(code_html))
+
+    # 6) Manuscripts
+    manu_dir = ROOT / &quot;manuscripts&quot;
+    manu_links = [&#x27;&lt;h1&gt;Manuscripts&lt;/h1&gt;&#x27;,
+                  &#x27;&lt;p&gt;Companion documents from the workshop sessions: tired-mode prompt libraries, learning-journal protocols, audit questions, project briefings, and other planning artifacts that orbit this tool.&lt;/p&gt;&#x27;,
+                  &quot;&lt;ul&gt;&quot;]
+    if manu_dir.exists():
+        for md_path in sorted(manu_dir.glob(&quot;*.md&quot;)):
+            slug = slugify(md_path.stem)
+            title = md_path.stem.replace(&quot;_&quot;, &quot; &quot;)
+            md_text = md_path.read_text(encoding=&quot;utf-8&quot;)
+            body = render_markdown(md_text)
+            write_page(DOCS / &quot;manuscripts&quot; / f&quot;{slug}.html&quot;, title, body)
+            manu_links.append(f&#x27;&lt;li&gt;&lt;a href=&quot;manuscripts/{slug}.html&quot;&gt;{html.escape(title)}&lt;/a&gt;&lt;/li&gt;&#x27;)
+    manu_links.append(&quot;&lt;/ul&gt;&quot;)
+    write_page(DOCS / &quot;manuscripts.html&quot;, &quot;Manuscripts&quot;, &quot;\n&quot;.join(manu_links))
+
+    # add .nojekyll so GitHub Pages serves underscored files
+    (DOCS / &quot;.nojekyll&quot;).write_text(&quot;&quot;, encoding=&quot;utf-8&quot;)
+
+    print(f&quot;built site at {DOCS}&quot;)
+    print(f&quot;  pages: {sum(1 for _ in DOCS.rglob(&#x27;*.html&#x27;))}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MEMORY GARDENING — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="memory_gardening-a-quarterly-pruning-protocol-for-your-memory-apparatus">MEMORY_GARDENING — A quarterly pruning protocol for your memory + apparatus</h1>
+<p><strong>Date:</strong> 2026-04-25
+<strong>Use:</strong> Your memory accumulates without garden-keeping. Skills proliferate. Docs go stale. CLAUDE.md files duplicate facts. This is the protocol for the seasonal cleanup that keeps the apparatus from rotting.</p>
+<hr />
+<h2 id="why-a-quarterly-cadence">Why a <em>quarterly</em> cadence</h2>
+<ul>
+<li>Weekly is too often — you'll be cleaning the same files repeatedly</li>
+<li>Yearly is too rare — by then the rot is deep enough that pruning feels like demolition</li>
+<li>Quarterly maps to natural shifts in projects + interests; you'll have enough new material to evaluate but not so much that it's overwhelming</li>
+</ul>
+<p>Schedule it. Treat it like daylight savings — a known recurring chore.</p>
+<p>Suggested dates: solstices and equinoxes, if you like the aesthetic. Or 1st of January / April / July / October if you don't.</p>
+<hr />
+<h2 id="the-session-shape-90-minutes-fresh-mode">The session shape (90 minutes, fresh-mode)</h2>
+<p>This is <strong>not</strong> tired-mode work. Memory gardening requires judgment about what's still true. Do it on a Saturday morning, coffee, no school.</p>
+<p>Three passes, each 30 minutes:</p>
+<h3 id="pass-1-memory-files-cuserspcclaudeprojectsc-devmemory">Pass 1 — Memory files (<code>C:\Users\PC\.claude\projects\C--Dev\memory\</code>)</h3>
+<p>For each file in the directory:</p>
+<ol>
+<li><strong>Open it.</strong></li>
+<li><strong>Read every entry.</strong></li>
+<li><strong>For each entry, decide:</strong></li>
+<li><strong>Keep as-is</strong> — still accurate, still load-bearing</li>
+<li><strong>Update</strong> — partly true, needs correction (today's date, current state)</li>
+<li><strong>Compress</strong> — overstuffed, distill to essentials</li>
+<li><strong>Move</strong> — belongs in a project doc, not memory</li>
+<li>
+<p><strong>Delete</strong> — no longer true, or never load-bearing</p>
+</li>
+<li>
+<p><strong>Update <code>last_reviewed: YYYY-MM-DD</code></strong> on every kept file.</p>
+</li>
+<li>
+<p><strong>Sync <code>MEMORY.md</code> index</strong> — remove pointers to deleted files, add pointers to new ones.</p>
+</li>
+</ol>
+<p><strong>Specific entries you should always re-evaluate:</strong>
+- The "Pets" line in user_ted_profile.md — animals come and go (RIP Okie + Tex 2026)
+- "Active project" lists in any memory — verify the project is still active
+- "Current phase" in any project memory — phases shift
+- Any retracted content (the Attila temperament case from MTGSLIDER Q24/Q25 — make sure it stayed reverted)</p>
+<h3 id="pass-2-claudemd-hierarchy-root-per-project">Pass 2 — CLAUDE.md hierarchy (root + per-project)</h3>
+<p>Walk the CLAUDE.md tree:
+- <code>C:\Dev\CLAUDE.md</code> (root — multi-project)
+- Each project's CLAUDE.md (Claudiens, MTGSLIDER, NSFRIPPER, REAPERBEYONDNES, DOGSGAME, EmeraldTablet)
+- Sub-project CLAUDE.md files if any</p>
+<p>For each:
+1. <strong>Skim every section.</strong> Is it still accurate? Still useful?
+2. <strong>Identify duplications.</strong> What's said in this CLAUDE.md that's also in memory, in another doc, or in code? Pick ONE source of truth.
+3. <strong>Check the mandates.</strong> Any rule that says "always run /plan-X first" — is it still being followed? If not, either reform yourself or remove the mandate.
+4. <strong>Trim cross-references.</strong> Links to docs that no longer exist or have moved.
+5. <strong>Status block update.</strong> If you have a status block, refresh it.
+6. <strong>Token-budget check.</strong> Run <code>/plan-isidore-tokens</code> against the file. Trim if over budget.</p>
+<h3 id="pass-3-skills-scripts-inventory">Pass 3 — Skills + scripts inventory</h3>
+<p>Walk <code>~/.claude/skills/</code> and your slash commands:</p>
+<ol>
+<li><strong>List every PKD skill (<code>/plan-*</code>, <code>/write-*</code>).</strong></li>
+<li><strong>For each, ask:</strong> Have I used this in the last quarter? If yes — keep. If no — flag.</li>
+<li><strong>For flagged skills:</strong> Either delete, or confirm it's an "occasional but real" skill (e.g., once-a-year audits).</li>
+<li><strong>Look for duplication across skills.</strong> Two skills that do almost the same thing should merge.</li>
+<li><strong>Look for missing skills.</strong> Any task you've manually re-prompted 3+ times this quarter is a candidate for a skill — but <strong>prefer parking</strong> unless the recurrence is clear.</li>
+<li><strong>Update skill descriptions</strong> to reflect what they actually do, not what they were originally meant to do.</li>
+</ol>
+<hr />
+<h2 id="per-memory-question-template">Per-memory question template</h2>
+<p>For any memory entry you're uncertain about, ask:</p>
+<ul>
+<li>Is this still true?</li>
+<li>Is the date in the file recent?</li>
+<li>Have I referenced this memory in the last quarter (consciously or via Claude pulling it)?</li>
+<li>Does this memory contradict something I now believe?</li>
+<li>If a stranger read this, would they think it's load-bearing or trivia?</li>
+<li>Could this be three lines instead of fifteen?</li>
+<li>Does this belong in a project file instead of in memory?</li>
+</ul>
+<hr />
+<h2 id="suggested-compression-patterns">Suggested compression patterns</h2>
+<p>Most stale memory comes in these flavors. Here's how to prune each:</p>
+<h3 id="bloated-narrative-entries">Bloated narrative entries</h3>
+<p>Entry like: <em>"Project X is doing Y for reason Z, and last session we did A, B, C, and tomorrow we'll do D…"</em></p>
+<p>Compress to: <em>"Project X — current focus: Y. State as of [date]: ~50% complete on [thing]."</em></p>
+<p>The narrative belongs in git or in NEXT.md, not memory.</p>
+<h3 id="redundant-project-state">Redundant project state</h3>
+<p>Memory says "phase 3A complete." Project's PHASESTATUS.md also says "phase 3A complete." Pick one location. Memory should point to the project doc, not duplicate.</p>
+<h3 id="stale-current-project-lists">Stale "current project" lists</h3>
+<p>Lists of "currently active projects" decay fast. Move to a single <code>WHATS_HOT.md</code> at <code>C:\Dev</code> and update from there; don't list active projects in memory.</p>
+<h3 id="specific-facts-that-are-now-wrong">Specific facts that are now wrong</h3>
+<p>When you find a fact that's wrong, fix it AND figure out why it persisted. If memory recorded a fact that you later contradicted in code, the contradiction is also data — what about your workflow let the contradiction live?</p>
+<hr />
+<h2 id="a-5-minute-mini-version-not-a-substitute-for-quarterly">A 5-minute mini-version (not a substitute for quarterly)</h2>
+<p>If you skipped a quarter and the full 90 minutes feels insurmountable, do this:</p>
+<pre><code>1. Open MEMORY.md
+2. Pick ONE memory file at random
+3. Open it. Read it. Update the date. Trim one paragraph.
+4. /clear and walk away.
+</code></pre>
+<p>That's enough to keep rust from setting in. Better than nothing.</p>
+<hr />
+<h2 id="the-consolidate-memory-skill-workflow">The <code>consolidate-memory</code> skill workflow</h2>
+<p>Anthropic provides <code>anthropic-skills:consolidate-memory</code>. Use it as the <em>first</em> step in Pass 1:</p>
+<pre><code>1. Run anthropic-skills:consolidate-memory
+2. It surfaces duplicates, stale entries, formatting issues
+3. You decide what to act on
+4. Then proceed with the manual passes above
+</code></pre>
+<p>This skill exists because memory hygiene is a known problem; lean on it.</p>
+<hr />
+<h2 id="what-to-do-with-what-you-delete">What to do with what you delete</h2>
+<p>Don't actually delete-delete. Use a <code>MEMORY_ARCHIVE/</code> directory:</p>
+<pre><code>C:\Users\PC\.claude\projects\C--Dev\memory\
+  MEMORY.md
+  user_ted_profile.md
+  ...
+  ARCHIVE/
+    2026-04-25_session.md   ← bundle of deleted entries with date
+    2026-07-15_session.md
+</code></pre>
+<p>Archive entries are searchable but don't affect current memory load. After 2 years in archive, evaluate again — may be safe to truly delete.</p>
+<hr />
+<h2 id="open-questions-for-you">Open questions for you</h2>
+<ul>
+<li>Are you OK with quarterly cadence, or does monthly feel better?</li>
+<li>Should memory gardening be on a <code>/loop quarterly</code> reminder?</li>
+<li>Do you want me to do a first pass right now and surface candidates? I can run anthropic-skills:consolidate-memory and write up findings.</li>
+<li>The "Attila temperament" save/retract case — should we add a "retraction log" pattern to memory so future retractions leave a trail?</li>
+<li>Where should <code>WHATS_HOT.md</code> live if we adopt that pattern?</li>
+</ul>
+<p>The first quarterly pass is the longest. Subsequent ones are 30 minutes. Worth doing.</p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

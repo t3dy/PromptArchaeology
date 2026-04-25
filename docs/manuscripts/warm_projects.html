@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WARM PROJECTS — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="warm_projects-which-of-your-projects-can-be-always-ready-to-extend">WARM_PROJECTS — Which of your projects can be "always-ready-to-extend"</h1>
+<p><strong>Date:</strong> 2026-04-25
+<strong>Use:</strong> A warm project is one where, on a tired evening, you can open the directory, add 30–100 lines, commit, and walk away feeling good. It needs no mental warm-up. This file maps which of your projects qualify, what their extension menus look like, and what's needed to warm up the cold ones.</p>
+<hr />
+<h2 id="criteria-for-warmth">Criteria for warmth</h2>
+<p>A project is <strong>warm</strong> if all of these are true:</p>
+<ol>
+<li><strong>Cheap startup.</strong> <code>cd</code> + open editor + you know what to do, in under 60 seconds.</li>
+<li><strong>Modular extension.</strong> Adding one item (a deck, an entry, a card, a behavior) doesn't require touching architecture.</li>
+<li><strong>Trustworthy state.</strong> You can run a smoke command and know if it still works in &lt;30 seconds.</li>
+<li><strong>Bounded change.</strong> A typical session adds &lt;200 lines / 1 file / 1 row, not "refactor the engine."</li>
+<li><strong>Low cognitive entry tax.</strong> You don't need to re-read CLAUDE.md, MEMORY.md, or any planning doc to start.</li>
+</ol>
+<p>If any one is false, the project is <strong>lukewarm</strong>. If multiple are false, <strong>cold</strong>.</p>
+<hr />
+<h2 id="per-project-assessment">Per-project assessment</h2>
+<h3 id="mtgslider-warm">MTGSLIDER — WARM ✓</h3>
+<ul>
+<li>✓ Cheap startup: <code>cd MTGSLIDER &amp;&amp; python tools/regen_one.py</code> (if built)</li>
+<li>✓ Modular extension: each theme is independent</li>
+<li>✓ Trustworthy state: 29 tests pass; <code>pytest</code> is your smoke</li>
+<li>✓ Bounded change: add one theme spec → bulk_generate produces new deck</li>
+<li>✗ Cognitive tax: still has a PARKING_LOT, REFRAME_NOTES, and Q-log culture pulling you into meta-mode</li>
+</ul>
+<p><strong>Extension menu (do any in 30 min):</strong>
+- Add one new theme spec to <code>tools/theme_specs.py</code> based on a card you played this week
+- Add one new keyword to <code>writing/100_magical_keywords.md</code>
+- Write one esoteric copy piece in <code>writing/</code>
+- Improve one existing deck's speaker notes
+- Run <code>mtg-historical-trip</code> skill on a card you're curious about
+- Add one new style preset to the slideshow compiler</p>
+<p><strong>To make warmer:</strong> Build <code>tools/regen_one.py --theme NAME</code>. Stop authoring Q-log files for trivial sessions.</p>
+<hr />
+<h3 id="claudiens-lukewarm">Claudiens — LUKEWARM</h3>
+<ul>
+<li>✓ Cheap startup: cd, edit a markdown</li>
+<li>✓ Modular extension: per-text, per-image, per-biography entries</li>
+<li>~ Trustworthy state: pipeline rebuilds the site, but no smoke command</li>
+<li>~ Bounded change: phase work creeps; "just one more feature" pattern</li>
+<li>✗ Cognitive tax: DOCUMENTAIRTRAFFICCONTROL, PHASESTATUS, ONTOLOGY all front-load</li>
+</ul>
+<p><strong>Extension menu:</strong>
+- Add one biography entry
+- Add one missing image to an existing text
+- Write one short paragraph for a concept page
+- Tag one text with cross-references to others</p>
+<p><strong>To make warmer:</strong> Build <code>python scripts/smoke.py</code> that builds + serves the site locally with one command. Move PHASESTATUS into a 3-line block in CLAUDE.md.</p>
+<hr />
+<h3 id="emeraldtablet-lukewarm">EmeraldTablet — LUKEWARM</h3>
+<ul>
+<li>✓ Cheap startup</li>
+<li>✓ Modular extension</li>
+<li>✗ Trustworthy state: "rebuild from db" smoke missing</li>
+<li>~ Bounded change</li>
+<li>✗ Cognitive tax: 5 content types each at unknown completion</li>
+</ul>
+<p><strong>Extension menu:</strong>
+- Add one biography
+- Add one concept entry
+- Cross-reference two existing entries
+- Improve one weak entry</p>
+<p><strong>To make warmer:</strong> Pick ONE content type as the warm one (concepts? biographies?). Make extending that type the trivial path. Other types stay lukewarm and that's fine.</p>
+<hr />
+<h3 id="nsfripper-cold">NSFRIPPER — COLD</h3>
+<ul>
+<li>✗ Startup is heavy: ROM acquisition, driver detection, environment setup</li>
+<li>✗ Modular extension: each new game requires nontrivial driver work</li>
+<li>~ Trustworthy state: rendering works, but no fixture suite to verify nothing broke</li>
+<li>✗ Unbounded change: every fix is "one more rule"</li>
+<li>✗ Heavy cognitive tax: many docs, two DSP codebases</li>
+</ul>
+<p><strong>Tired-mode access via:</strong> read existing outputs, listen to BESTOUTPUT/ samples, write listening notes. Don't try to <em>extend</em> NSFRIPPER tired.</p>
+<hr />
+<h3 id="reaperbeyondnes-cold">REAPERBEYONDNES — COLD</h3>
+<ul>
+<li>✗ Whole project is currently architecture and vision; no warm extension surface</li>
+<li>THE_LITURGY mandates pre-load — anti-warmth by design</li>
+</ul>
+<p><strong>Tired-mode access:</strong> none recommended. Don't open this when tired.</p>
+<hr />
+<h3 id="dogsgame-cold-becomes-warm-after-v1-ships">DOGSGAME — COLD (becomes WARM after v1 ships)</h3>
+<p>Currently planning-only. After a v1 prototype exists:
+- ✓ Adding a new behavior (B011, B012...) becomes warm
+- ✓ Extending dialogue lines becomes warm
+- ✓ Adding new yard tiles becomes warm</p>
+<p><strong>Tired-mode access right now:</strong> Capture a new dog observation as a B### file in <code>canon/behaviors/</code>. That's it. Don't touch design/.</p>
+<hr />
+<h3 id="megabase-lukewarm">Megabase — LUKEWARM</h3>
+<ul>
+<li>Depends on what's currently built (you should write STATUS.md to clarify)</li>
+<li>Once a query interface exists, adding new saved queries is warm</li>
+</ul>
+<p><strong>Extension menu (once interface exists):</strong>
+- Add a new saved query
+- Tag corpus entries
+- Run a query and capture insights</p>
+<hr />
+<h3 id="pkd-fest-2026-site-lukewarm">PKD Fest 2026 site — LUKEWARM</h3>
+<ul>
+<li>✓ Cheap startup</li>
+<li>✓ Modular extension (events, schedule items, speaker bios)</li>
+<li>~ Trustworthy state depends on Vercel preview being stable</li>
+<li>✓ Bounded change (text edits mostly)</li>
+<li>~ Cognitive tax minimal</li>
+</ul>
+<p><strong>Extension menu:</strong>
+- Add one schedule item
+- Add or polish one section of copy
+- Tweak one design token in the VALIS palette
+- Add one image asset</p>
+<hr />
+<h3 id="dungeon-architect-unknown-probably-cold">dungeon-architect — UNKNOWN (probably cold)</h3>
+<p>You haven't touched it recently per memory. Run <code>/plan-tagomi-briefing</code> on it before declaring warmth.</p>
+<hr />
+<h2 id="strategy-pick-one-warm-by-default-project">Strategy: pick ONE warm-by-default project</h2>
+<p><strong>Recommendation:</strong> Make MTGSLIDER your default warm project.</p>
+<p>Reasons:
+- It's the warmest already
+- Each addition (theme spec, keyword, deck regen) is bounded
+- The PKD/alchemy/MTG aesthetic is the part of your work that produces "the laughs"
+- Adding to it doesn't fight the urge-to-architect</p>
+<p><strong>Discipline:</strong> When you sit down post-school and feel cooked, the default move is <code>cd MTGSLIDER</code>. Only deviate when there's a specific reason. That single rule prevents a lot of drift.</p>
+<hr />
+<h2 id="what-converts-a-cold-project-to-warm">What converts a cold project to warm</h2>
+<p>For any cold project, three concrete moves warm it up:</p>
+<ol>
+<li><strong>One smoke command.</strong> <code>make smoke</code> or <code>python tools/smoke.py</code> that exits 0 if the project still works.</li>
+<li><strong>One extension entry point.</strong> A single command that adds one new item (deck, entry, behavior, etc.) without touching architecture.</li>
+<li><strong>A <code>WARM_MENU.md</code> at the project root.</strong> A 1-page list of "things you can do in this project in 30 minutes when tired." When you open the project, you read this first.</li>
+</ol>
+<p>Do this once per project; the warmth lasts for months.</p>
+<hr />
+<h2 id="open-questions-for-you">Open questions for you</h2>
+<ul>
+<li>Is MTGSLIDER actually the right default? Or does Claudiens give you more dopamine when you extend it?</li>
+<li>Are there projects I missed that should be assessed (e.g., MarxistTradition, capital_interpreter, BachStudies)?</li>
+<li>Would a <code>WARM_MENU.md</code> per project actually help, or is one global file better?</li>
+<li>What's your post-school energy floor? If it's truly zero on some days, "warm" might still be too high a bar — what would <code>EVEN_COLDER_MODE.md</code> look like?</li>
+</ul>
+<p>Pick one warm-by-default project. Stop trying to keep all 8 warm. Heat is a budget.</p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

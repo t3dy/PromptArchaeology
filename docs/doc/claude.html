@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Agent Instructions (CLAUDE.md) — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="claudemd-promptarchaeology-heldscalla">CLAUDE.md — Promptarchaeology-Heldscalla</h1>
+<h2 id="project-overview">Project overview</h2>
+<p>Read-only analytical layer over <code>C:\Dev\megabase\megabase.db</code>. Surfaces patterns in the user's own prompt history (~1.45M prompts, 5,271 conversations across 11 sources). Does NOT analyze assistant outputs.</p>
+<h2 id="mandatory-rules">Mandatory rules</h2>
+<ol>
+<li><strong>Read-only.</strong> Always open megabase.db with <code>mode=ro</code>. Never write to it. Never create/modify/migrate megabase tables. Views live in TEMP.</li>
+<li><strong>Views, not copies.</strong> Define analytical views in <code>schema/views.sql</code>. Do not duplicate rows into a local DB.</li>
+<li><strong>Prompts only.</strong> All queries filter to <code>role='user'</code>. Assistant outputs are explicitly excluded from primary analyses.</li>
+<li><strong>Reports are markdown.</strong> Query outputs land in <code>reports/YYYY-MM-DD_&lt;query&gt;.md</code>. Append-only history.</li>
+<li><strong>No ingestion logic here.</strong> If a new source needs ingestion, that's megabase's job.</li>
+</ol>
+<h2 id="where-things-live">Where things live</h2>
+<ul>
+<li><code>schema/views.sql</code> — <code>pa_prompts</code> and <code>pa_cascades</code> TEMP views. Applied on every run.</li>
+<li><code>queries/NN_name.sql</code> — one file per saved analysis.</li>
+<li><code>tools/run.py</code> — runs a query by name, writes a report.</li>
+<li><code>tools/chunk_cascade.py</code> — chunks a single conversation into prompt-only chunks.</li>
+<li><code>reports/</code> — dated outputs. <code>reports/cascades/&lt;slug&gt;/</code> for chunked cascades.</li>
+<li><code>fixtures/</code> — known prompts to validate views against (optional).</li>
+</ul>
+<h2 id="when-the-user-asks-for-analysis">When the user asks for analysis</h2>
+<ol>
+<li>Match request to an existing query in <code>queries/</code>. If matched, run it.</li>
+<li>If no match, draft a new SQL file using views from <code>schema/views.sql</code>. Add it as <code>NN_descriptive_name.sql</code>.</li>
+<li>Run, surface the report path, summarize the top finding in &lt;100 words.</li>
+<li>Never run a query that scans all 1.45M prompts without <code>LIMIT</code> or aggregation.</li>
+</ol>
+<h2 id="when-the-user-asks-about-a-specific-cascade">When the user asks about a specific cascade</h2>
+<p>Use <code>tools/chunk_cascade.py &lt;conversation_id&gt;</code>. Do not try to dump 1000 pages into one file. Default chunk size is 50 prompts.</p>
+<p>To find the conversation ID:</p>
+<pre><code class="language-sql">SELECT conversation_id, conversation_title, estimated_pages
+FROM pa_cascades WHERE conversation_title LIKE '%&lt;keyword&gt;%';
+</code></pre>
+<h2 id="adding-a-new-query">Adding a new query</h2>
+<p>Each <code>.sql</code> file should:
+- Begin with a comment block: purpose, expected runtime, expected row count
+- Use views from <code>schema/views.sql</code>, not raw megabase tables
+- Include <code>LIMIT</code> on row-returning queries; aggregations don't need it
+- Use <code>LOWER()</code> on text comparisons (the corpus is mixed case)</p>
+<h2 id="smoke-test">Smoke test</h2>
+<p><code>python tools/run.py 01_first_prompts</code> should produce a report with at least 100 rows.</p>
+<h2 id="megabase-tables-for-reference-do-not-modify">Megabase tables (for reference, do not modify)</h2>
+<ul>
+<li><code>sources</code> — 11 sources (chatgpt, chatgpt-md, llm_logs_html, llm_logs_pdf, claude, sms, facebook, twitter, etc.)</li>
+<li><code>conversations</code> — 5,271 rows. Has <code>title</code>, <code>created_at</code>, <code>estimated_pages</code>.</li>
+<li><code>messages</code> — 3,968,349 rows. Has <code>role</code> ('user'/'assistant'), <code>content</code>, <code>created_at</code>.</li>
+<li><code>segments</code>, <code>segment_scores</code>, <code>prompt_catalog_entries</code>, <code>ideas</code>, <code>entities</code> — additional megabase analytical tables; do not depend on these for promptarchaeology queries unless explicitly asked.</li>
+</ul>
+<h2 id="style-of-output">Style of output</h2>
+<p>When summarizing query results to the user:
+- Lead with one observation, not a recap.
+- If you noticed something genuinely surprising in the data, flag it.
+- If the user asks "what does this mean about me," answer carefully — let the data speak first, your interpretation second.</p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

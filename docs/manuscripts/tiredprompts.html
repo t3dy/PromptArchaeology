@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TIREDPROMPTS — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="tiredprompts-a-copy-paste-library-for-token-burn-when-fried">TIREDPROMPTS — A copy-paste library for token-burn when fried</h1>
+<p><strong>Date:</strong> 2026-04-25
+<strong>Use:</strong> When you sit down post-school and need a prompt fast. Pick by energy level + intent. Paste, react, walk away.</p>
+<hr />
+<h2 id="low-energy-read-react-you-generate-10-words">LOW energy — read &amp; react (you generate ~10 words)</h2>
+<ol>
+<li><code>Read [file path]. Tell me in 3 bullet points what it does. End with one question I should ask myself about it.</code></li>
+<li><code>git log --since="1 week ago" --oneline. Summarize the past week in 100 words. What's the throughline?</code></li>
+<li><code>I'm tired. In 200 words, walk me through what we did in our last session and where we left off.</code></li>
+<li><code>Take my last voice note: [paste]. Compress to 5 bullet points. Don't add anything.</code></li>
+<li><code>Look at C:\Dev\&lt;project&gt;. Tell me what's stale and what's hot. No advice — just observations.</code></li>
+<li><code>Read [file]. Roast it gently. Three things that are weak.</code></li>
+<li><code>Quiz me on [topic I claimed to learn last week]. Five questions. I'll guess; you grade.</code></li>
+<li><code>Diff my LEARNING_JOURNAL.md from a month ago vs today. What did I learn?</code></li>
+<li><code>Pick the most over-engineered file in [project] and explain in plain English why.</code></li>
+<li><code>What's the smallest possible thing I could do in [project] in 20 minutes?</code></li>
+<li><code>Read this paragraph I wrote: [paste]. Translate it into something a smart 10-year-old would understand.</code></li>
+<li><code>Show me the first 30 lines of [unfamiliar file]. Annotate every block.</code></li>
+<li><code>Look at my MEMORY_INDEX.md. Which entries feel stale? Just list them.</code></li>
+<li><code>Open [project]/PARKING_LOT.md. Which 3 entries should I delete because they're dead?</code></li>
+<li><code>Read the 5 most recent files in [dir]. What was I obsessed with?</code></li>
+</ol>
+<h2 id="medium-energy-analyze-decide-you-generate-50-words">MEDIUM energy — analyze &amp; decide (you generate ~50 words)</h2>
+<ol>
+<li><code>Read [project]/CLAUDE.md. Identify the 3 instructions that are too vague to act on. Suggest tighter wording.</code></li>
+<li><code>Compare these two files [A] [B]. What's redundant? What's contradictory?</code></li>
+<li><code>Look at my git history for [project]. Identify the moment I switched directions and explain why I might have.</code></li>
+<li><code>Read [doc]. Now read [doc 2]. Are they consistent? Where do they diverge?</code></li>
+<li><code>Take this rough idea: [paste]. Draft three different framings — minimal, ambitious, esoteric. I'll pick.</code></li>
+<li><code>Survey the tools/ directory in [project]. Which scripts have I never run? Which look broken?</code></li>
+<li><code>Audit the SQLite schema in [project]/db.sqlite. What field is misnamed? What table should be split?</code></li>
+<li><code>Look at this Python file: [path]. Suggest one refactor under 20 lines that would meaningfully improve it.</code></li>
+<li><code>Read [old planning doc]. Write a 3-sentence "what we should have done" retrospective.</code></li>
+<li><code>My bash history shows I ran [X] command 12 times this week. Why might I be doing that? Suggest a script.</code></li>
+</ol>
+<h2 id="high-energy-design-commit-save-these-for-fresh-days">HIGH energy — design &amp; commit (save these for fresh days)</h2>
+<ol>
+<li><code>I want to add [feature] to [project]. Run /plan-joe-chip-scope. Frozen scope only — no extras.</code></li>
+<li><code>Run /plan-deckard-boundary on [decision]. I need to know what's in vs. out of LLM territory.</code></li>
+<li><code>Design a vertical slice for [feature]. Use /plan-runciter-slice format. Include acceptance gate.</code></li>
+<li><code>I'm choosing between [A] and [B] architecturally. Run /plan-bohlen-constraint to surface what constrains the decision.</code></li>
+<li><code>Stand up the smallest end-to-end version of [project] in one file. Constraint: under 150 lines.</code></li>
+</ol>
+<h2 id="crisis-prompts-when-the-urge-to-start-something-new-hits">Crisis prompts — when the urge to start something new hits</h2>
+<ol>
+<li><code>I want to start a new project called [X]. Talk me out of it. Be specific about what existing project this rhymes with.</code></li>
+<li><code>I'm about to make a new skill called /plan-[name]. Steel-man and then attack. Should I park it instead?</code></li>
+<li><code>I want to add a THE_*.md to [project]. Diagnose the urge. What am I avoiding?</code></li>
+<li><code>I keep wanting to refactor [X]. Is the urge real or aesthetic? Five questions to clarify.</code></li>
+<li><code>I'm tempted to rebuild [project] from scratch. Read the existing version first. Veto if appropriate.</code></li>
+</ol>
+<h2 id="joy-prompts-for-the-laughs">Joy prompts — for the laughs</h2>
+<ol>
+<li><code>Show me three weird Magic cards from MTG history I probably don't know. Tell me what's funny about each.</code></li>
+<li><code>Pick a PKD novel I haven't mentioned. Pitch me a one-paragraph adaptation set in [random domain].</code></li>
+<li><code>Generate a fake hermetic axiom that sounds Renaissance but is actually about software bugs.</code></li>
+<li><code>Translate one of my existing Python functions into a parable. Keep it short.</code></li>
+<li><code>What would [my project] look like if it were a Bach fugue? Map components to voices.</code></li>
+<li><code>Roast my project naming choices in the style of a 17th-century alchemist who is unimpressed.</code></li>
+<li><code>Write a 4-line poem in the voice of one of my dogs about my coding habits.</code></li>
+<li><code>Generate one absurd MTG card whose mechanic depends on knowing my CLAUDE.md instructions.</code></li>
+<li><code>Imagine a future archeologist excavating C:\Dev. Write their field notes.</code></li>
+<li><code>Give me a tarot card whose meaning is "this PR has too many files."</code></li>
+</ol>
+<h2 id="archaeology-prompts-visiting-old-work">Archaeology prompts — visiting old work</h2>
+<ol>
+<li><code>What's in [old project] that I've forgotten? Briefing in 300 words.</code></li>
+<li><code>Pick the most interesting file in [old project] I haven't touched in 3 months. Tell me why it's interesting.</code></li>
+<li><code>Read [old conversation log]. What was I trying to figure out? Did I figure it out?</code></li>
+<li><code>Diff [old project]'s structure 6 months ago vs now. What got abandoned?</code></li>
+<li><code>What promise did I make myself in [old README] that I haven't kept? No judgment, just observation.</code></li>
+</ol>
+<h2 id="cleaning-prompts-useful-junk-drawer-work">Cleaning prompts — useful junk-drawer work</h2>
+<ol>
+<li><code>Find all TODO and FIXME comments across [project]. Bucket them: real, dead, aspirational. I'll triage your buckets.</code></li>
+<li><code>Find duplicate-ish files across [project]. Suggest merges.</code></li>
+<li><code>Look at my dependencies. Which ones could I remove?</code></li>
+<li><code>Find files I've imported but never actually use.</code></li>
+<li><code>Generate a .gitignore review — what should be in it that isn't?</code></li>
+</ol>
+<h2 id="tutoring-prompts-convert-tokens-to-knowledge">Tutoring prompts — convert tokens to knowledge</h2>
+<ol>
+<li><code>Explain [CS concept] using a metaphor from my interests (PKD / alchemy / MTG / NES audio).</code></li>
+<li><code>Show me three different ways to write [function I just wrote]. Explain tradeoffs.</code></li>
+<li><code>Walk me through how SQLite stores a B-tree. Use diagrams in ASCII.</code></li>
+<li><code>Read [Python file in my project]. Quiz me on what it does. Five questions.</code></li>
+<li><code>Pick a design pattern I'm probably using accidentally. Name it and show me how to use it deliberately.</code></li>
+</ol>
+<hr />
+<h2 id="usage-rules">Usage rules</h2>
+<ul>
+<li>Don't pick more than ONE prompt per session.</li>
+<li>If a prompt's output makes you want to start something — <code>/plan-abendsen-parking</code> it.</li>
+<li>Save outputs you like into <code>LEARNING_JOURNAL.md</code> or <code>IDEAS.md</code>.</li>
+<li>If you're tempted to "just one more prompt" past 90 minutes, <code>/clear</code> instead.</li>
+<li>These prompts are tools, not assignments. Most of them you'll never use. The point is to have them ready when the brain fog says "what should I even do."</li>
+</ul>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

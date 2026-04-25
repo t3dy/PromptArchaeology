@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>INSIGHTS42525 — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="insights-2026-04-25">INSIGHTS — 2026-04-25</h1>
+<p>Conversation with Claude about recent session patterns, shipping vs. publishing, project readiness gaps, and AI coding environment improvements. Saved verbatim.</p>
+<hr />
+<h2 id="you">You</h2>
+<p>give me /insights into my recent sessions with ruthless critique into my methods of building when I'm deliriously tired from working with elementary school students, and lots of thoughts on how they might be drifting and how to right the ship. I'd also like ideas for similar project and how to get more serious about computer and data science</p>
+<h2 id="claude">Claude</h2>
+<p>Pulled enough signal. Here's the critique.</p>
+<h3 id="what-your-recent-sessions-actually-look-like">What your recent sessions actually look like</h3>
+<p>I read your memory index, the MTGSLIDER conversation log (Q01–Q29), DOGSGAME's CEAUDIT, REAPERBEYONDNES's CLAUDE.md/VISION.md, and recent file mtimes across <code>C:\Dev</code>. Some patterns are loud.</p>
+<p><strong>1. Meta has eaten the work.</strong> You have 33 PKD-themed slash commands (<code>/plan-*</code>, <code>/write-*</code>), a project-level CLAUDE.md that mandates running <code>/plan-joe-chip-scope</code> before code, a <code>CEAUDIT.md</code> (context engineering audit <em>of a project that has zero code</em>), and a "PARKING_LOT.md" with 30+ entries. DOGSGAME has 6 planning docs and 0 lines of game logic. The planning apparatus has become a comfort blanket. It <em>feels</em> like discipline; in practice it's a permission structure to never ship.</p>
+<p><strong>2. When you hit a hard problem, you start a grander project.</strong> NSFRIPPER's VISION.md is honest: "two DSP codebases drift apart with every fix… disk space hits 100% twice… driver-family parsers don't scale." Your response was not to close NSFRIPPER, ship a finished artifact, and stop. You spawned REAPERBEYONDNES with a "Liturgy," an "Emerald Table" prime axiom, a "Gazetteer," a "Memory Palace," and a "Liminal Threshold." That's not engineering. That's cosplay of engineering, with hermetic varnish you find soothing.</p>
+<p><strong>3. The aesthetic vocabulary is a tell.</strong> When project docs reach for <em>Liturgy / Emerald / Liminal / Gazetteer / Memory Palace</em>, you're aestheticizing the work instead of advancing it. Naming is cheap. It makes a directory feel important. It does not extract one more frame of NES audio, or render one more slide. Compare the energy density of <code>kb/chips/sms_sn76489.md</code> (technical, finishable) vs <code>THE_LITURGY.md</code> (procedural mystique). Guess which one moves you forward.</p>
+<p><strong>4. The MTGSLIDER conversation log is a delirium fingerprint.</strong> Look at it as data:
+- Q24 — you assert a fact about Attila's temperament. Q25 — you retract it. Two prompts apart.
+- Q27 — <code>;et</code>. A typo prompt. The agent dutifully logged it.
+- Q28 — deploy. Q29 — <em>study my own databases and tell me my scholarly values</em>.</p>
+<p>That last one is the giveaway. You were tired and asked a tool to do introspection for you. Q29 is what fishing for self-affirmation looks like when dressed in a prompt template. The output (SCHOLARLYVALUES.md) is the kind of thing that feels profound at midnight and dust-collecting at noon.</p>
+<p><strong>5. You are running 8+ active projects in parallel.</strong> NSFRIPPER, REAPERBEYONDNES, DOGSGAME, MTGSLIDER, EmeraldTablet, Claudiens, dungeon-architect, megabase, plus dormant ones. None are <em>done</em>. "Done" doesn't mean perfect — it means published, postable, no longer your current concern. You have, by your own count, 321 NES extractions and 8,900 MIDIs. <strong>Has anyone outside you heard one of them?</strong> Has a single MTGSLIDER deck been shown to a creator? Does Claudiens have a reader?</p>
+<h3 id="how-tiredness-shows-up-specifically">How tiredness shows up specifically</h3>
+<p>Triangulating your timestamps and the post-school window, the pattern looks like:</p>
+<ul>
+<li><strong>Late-evening sessions start broad and end branched.</strong> You begin with one task, by message 10 you've authored a new doc class, by 15 you're saving a memory entry. The retracted Attila save is the canary.</li>
+<li><strong>Tired you reaches for <em>more structure</em>, not less.</strong> A fresh person fixes a bug. A wiped-out person writes a CEAUDIT about how future agents should fix bugs. This is real — DOGSGAME's CEAUDIT was a tired-Ted artifact. It is well-written. It also produced no game.</li>
+<li><strong>You ask the AI to do reflective/synthetic work that should be a journal.</strong> Q29 should have been ten minutes with a notebook and a pen, not a tool invocation across four databases.</li>
+<li><strong>You let typo-prompts execute</strong> instead of stopping. <code>;et</code> got logged. A rested-Ted would have thrown it away.</li>
+</ul>
+<h3 id="righting-the-ship">Righting the ship</h3>
+<p>Concrete, in priority order:</p>
+<ol>
+<li><strong>30-day moratorium on new projects, new skills, new "framework" docs, and new aesthetic vocabulary.</strong> No new <code>/plan-*</code> skills. No new <code>THE_*.md</code> documents. Hard rule.</li>
+<li><strong>Pick one project. Ship it to "v1 done, walking away."</strong> My nomination: <strong>MTGSLIDER</strong>. It is the closest to shippable: 98 generated decks, tests passing, a GitHub repo, a writing layer. Define "done" as: 10 finished slide decks posted to YouTube or a static site, with audio narration or written essays, viewable by other humans. Set a date two weeks out. Do not extend.</li>
+<li><strong>NSFRIPPER closure ritual.</strong> Pick the <em>single best</em> extraction you've produced. Master it. Upload it to YouTube/SoundCloud with a short writeup of how it was made. That is the artifact NSFRIPPER was always supposed to produce. Then either freeze the repo or fold its wins into REAPERBEYONDNES — but don't run both.</li>
+<li><strong>Replace planning skills with one weekly metric.</strong> Friday afternoon, write one sentence per project: <em>what shipped this week</em>. If "shipped" = "wrote more planning docs," that doesn't count. Track it for a month. The data will be brutal and clarifying.</li>
+<li><strong>Tired-mode rules.</strong> When you sit down post-school and feel cooked: only do <em>receptive, low-creative, narrow-scope</em> work. Ingest data. Run an existing pipeline. Tag rows. Do <em>not</em> author new architecture, new memory entries, new skills, new vocabulary at low energy. The rule is: <strong>fatigue → data work, never framework work.</strong></li>
+<li><strong>Kill the per-query log as a default.</strong> It was clever; it is now noise. Q-files are documenting documentation. Keep it only when a session produces a real decision or artifact.</li>
+</ol>
+<h3 id="project-ideas-that-fit-your-taste-but-force-closure">Project ideas that fit your taste but force closure</h3>
+<p>These all have a property your current portfolio lacks: a <strong>natural endpoint</strong>.</p>
+<ul>
+<li><strong>"Ten Cards, Ten Histories"</strong> — pick ten MTG cards with rich etymological backstories (Demonic Tutor, Mox Sapphire, Black Lotus, Mishra's Workshop, Doomsday, Necropotence, Sol Ring, Wheel of Fortune, Mind Twist, Shahrazad). For each: a 600-word essay grounded in your alchemy/PKD/Marxist reading, plus one slide deck. Use MTGSLIDER as the renderer. Publish as a single zine or static site. <strong>Done state: ten essays exist. Not eleven, not nine.</strong></li>
+<li><strong>One PKD episode of a podcast.</strong> You have the SHWEP-style aesthetic, you have hours of source. Pick one PKD novel (<em>VALIS</em>, <em>Ubik</em>, <em>Three Stigmata</em>) and produce a 30-minute audio essay with chiptune background scoring (one of your NES extractions). Single deliverable. One file.</li>
+<li><strong>A finished Hypnerotomachia chapter explorer.</strong> You have the directory. Pick one chapter. Make a static page with your translation/commentary, woodcut images, hyperlinked glossary. Ship it on GitHub Pages. Walk away.</li>
+<li><strong>Distant reading of your own ChatGPT/Claude exports</strong> — but with a defined output. Not "study my values." Produce <em>one chart</em> (e.g. topic shifts month-by-month over 24 months) and <em>one 800-word essay</em> about what you see. Total time budget: one weekend.</li>
+</ul>
+<p>The shared property: a <strong>bounded artifact a human other than you can consume</strong>.</p>
+<h3 id="getting-more-serious-about-cs-data-science">Getting more serious about CS / data science</h3>
+<p>Honestly: less framework, more fundamentals. Suggestions tuned to what you already love:</p>
+<ol>
+<li><strong>One real textbook, finished.</strong></li>
+<li><em>Designing Data-Intensive Applications</em> (Kleppmann). You're SQLite-obsessed across half a dozen projects. This book is the upgrade path from "I made a SQLite" to "I understand what databases are."</li>
+<li><em>Crafting Interpreters</em> (Nystrom). You build parsers (NSFRIPPER drivers, MTG decklist parsing). This will make you 5x faster at all of them.</li>
+<li><em>SICP</em> if you want the canonical CS humbling. Hard but defining.</li>
+<li><strong>One Kaggle competition or one Fast.ai course, completed.</strong> Not skimmed. Submitted. The discipline of a leaderboard cuts directly against your drift pattern — you can't park your way out of a public score.</li>
+<li><strong>A new language, on a small project.</strong> Rust for chiptune DSP (memory layout matters; you'd learn things JSFX hides). Or Go for a tiny CLI tool. Pick one, do a tutorial, build one 200-line tool you actually use.</li>
+<li><strong>Test-driven on one module.</strong> In MTGSLIDER, write a failing test before each next feature for two weeks. You'll feel how much of your "29 passing tests" exists because you wrote the test after the code worked.</li>
+<li><strong>Read other people's code.</strong> One repo per week, 30 minutes. SQLite source. Redis source. A small Python lib you already use. Just read. Your codebases are isolated; they will calcify without external models.</li>
+<li><strong>A measurement habit.</strong> Once a week, run <code>git log --since="1 week ago" --shortstat</code> across <code>C:\Dev</code>. Look at lines added vs deleted vs commits. The number you want to grow over time is <strong>deletions</strong> and <strong>commits to existing repos</strong>, not lines added in new directories.</li>
+</ol>
+<h3 id="the-single-sharpest-thing-i-noticed">The single sharpest thing I noticed</h3>
+<p>You have built an elaborate disciplinary apparatus — CLAUDE.md mandates, planning skills, parking lots, gates — and that apparatus has become <em>the way you avoid the discipline it was designed to enforce</em>. The PKD names make it feel like a methodology. It is, structurally, a procrastination machine with very good UX. The fact that you can name <code>/plan-abendsen-parking</code> and <code>/plan-steiner-gate</code> from memory and yet have no shipped artifact from DOGSGAME after six planning docs is the diagnosis in one sentence.</p>
+<p>Right the ship by deleting half the apparatus and shipping one thing. The half you delete won't be missed; the thing you ship will be the first piece of evidence in years that the apparatus was ever load-bearing.</p>
+<hr />
+<h2 id="you_1">You</h2>
+<p>can you explain more about shipped no artifact that's not something I even really understand how to do or why</p>
+<h2 id="claude_1">Claude</h2>
+<p>That gap is itself the most important thing in the diagnosis. Two years of private LLM tinkering plus a planning-first habit has actually trained the shipping impulse <em>out of you</em>. Most builders feel a low-grade itch to put their work in front of someone. You don't, anymore. So let me unpack it concretely.</p>
+<h3 id="what-shipping-an-artifact-actually-means">What "shipping an artifact" actually means</h3>
+<p>A shipped artifact is <strong>a thing a stranger can encounter without you in the room</strong>. Three properties:</p>
+<ol>
+<li><strong>It has an address.</strong> A URL, a YouTube video, a downloadable file, a PDF on a server, a printed zine, an episode in a podcast feed. Not a path on your hard drive. Not a directory in <code>C:\Dev\</code>. Something with the property "I can text this link to someone."</li>
+<li><strong>It is self-contained.</strong> Someone arriving cold can understand what it is. There's a title, a one-line description, an entry point. They don't need to read your CLAUDE.md or know your planning vocabulary.</li>
+<li><strong>You stop touching it.</strong> It exists in a finished state, even if "finished" means "v1, ten items, done." The defining act is <em>walking away</em>.</li>
+</ol>
+<p>That's it. That's the whole concept.</p>
+<h3 id="what-it-would-look-like-for-your-actual-projects">What it would look like for your actual projects</h3>
+<ul>
+<li><strong>MTGSLIDER, shipped:</strong> <code>t3dy.github.io/MTGSLIDER</code> is a static site where strangers can click and read ten complete slide decks on alchemy-themed MTG topics. Each deck has either narrated audio on YouTube or a 600-word companion essay. There's an index. There's an "about" paragraph. You stop adding decks. <strong>That is shipping.</strong> Currently you have 98 decks in folders nobody has seen. Zero of them are shipped, even though almost all the work is done.</li>
+<li><strong>NSFRIPPER, shipped:</strong> ONE NES soundtrack — say <em>Castlevania III</em> — mastered, uploaded to YouTube as a 30-minute video, with the track list in the description and one paragraph explaining how it was extracted. Or one curated MIDI pack on itch.io with a "name your price" button. Currently you have <strong>8,900 MIDI files</strong> that exist only on your disk. Zero are shipped.</li>
+<li><strong>DOGSGAME, shipped:</strong> A 90-second screen recording of the prototype running, posted to your blog or Twitter, with a paragraph about what it is. Or a <code>pip install</code>-able Python package. Even <em>one</em> of those would beat six planning docs.</li>
+<li><strong>Claudiens / EmeraldTablet, shipped:</strong> A live URL where an alchemy researcher who has never heard of you can land via Google, read your H.M.E. De Jong material, and email you about it.</li>
+</ul>
+<p>You can see the pattern. In every case, <strong>most of the actual work is already done</strong>. What's missing is the last 10%: the publishing wrapper, the entry point, the "okay, this exists now, I'm done."</p>
+<h3 id="why-it-matters-this-is-the-part-you-may-not-feel-yet">Why it matters (this is the part you may not feel yet)</h3>
+<ul>
+<li><strong>It's the only honest test of quality.</strong> Inside your dev folder, everything looks fine — you wrote it, you understand it, the assumptions are in your head. The minute a stranger has to understand it without you, every gap shows up. You will discover things about your own work that you literally cannot discover any other way. This is non-negotiable; there is no substitute.</li>
+<li><strong>It forces closure.</strong> You can't ship a half-thing without confronting the half. The act of preparing-for-outside-eyes is what kills the "one more refactor" loop. Right now your projects all live in a permanent "almost ready" state because nothing forces them out of it.</li>
+<li><strong>It builds the only momentum that compounds.</strong> Shipped artifacts become reference points — for you and for others. "Read my Castlevania III essay" is something you can link to next time. A shelf of finished things is what a body of work <em>is</em>. Without shipping, every project is equally non-existent to the world; you have no body of work, only a private archive.</li>
+<li><strong>It creates feedback you can't manufacture.</strong> A comment, a star, a question, a "hey is this you?" — these things only happen on the other side of the publish button. Without them you are flying entirely on self-assessment, which is exactly the loop that produces 33 PKD-themed planning skills.</li>
+<li><strong>It is the practice → production transition.</strong> Right now you are practicing — endlessly, beautifully, with tremendous craft. But practice without performance is a closed system. Teachers know this: the kid has to actually <em>do the recital</em>, not just rehearse forever in the practice room. You teach elementary school students. You already know this in another domain. You haven't applied it to yourself.</li>
+</ul>
+<h3 id="why-you-specifically-dont-do-it">Why you specifically don't do it</h3>
+<p>A few likely reasons, ordered by my guess at impact:</p>
+<ol>
+<li><strong>No identified audience.</strong> When the work is for "the alchemy-MTG nexus" or "PKD scholars who like chiptune," the audience feels diffuse, so the publishing target feels arbitrary. The fix is to pick <em>one specific person or community</em> and ship to them, even if it's just a Discord with 80 people in it.</li>
+<li><strong>The publishing skill is atrophied.</strong> Building feels like home. Wrapping a thing for outside eyes — writing the README, recording the demo, choosing the URL — is a different muscle and it's weak. That's fine. It strengthens with reps. The first three artifacts you ship will be uglier than they should be. Ship them anyway.</li>
+<li><strong>Perfectionism dressed as craft.</strong> "It's not ready" is a true sentence about every piece of work that has ever existed. Real builders ship anyway, because they know v1 is the <em>start</em> of feedback, not the end of it. Your aesthetic standards (the hermetic vocabulary, the careful prose) make you allergic to publishing things that aren't finished-feeling. The cure is one ugly public thing.</li>
+<li><strong>The planning apparatus rewards the wrong loop.</strong> Your skills give dopamine for <em>parking</em> (<code>/plan-abendsen-parking</code>), <em>gating</em> (<code>/plan-steiner-gate</code>), <em>scoping</em> (<code>/plan-joe-chip-scope</code>). None of them give dopamine for <em>posting</em>. You'd benefit from inverting that: the only metric that should make you feel good for the next 30 days is "did a stranger see something I made this week."</li>
+</ol>
+<h3 id="the-single-smallest-thing-you-could-ship-this-week">The single smallest thing you could ship this week</h3>
+<p>Pick one MTGSLIDER deck. Render it as a PDF or push it to a GitHub Pages URL. Tweet it (or post it to one MTG Discord, or email it to one MTG-playing friend) with one sentence: "I built a tool that generates these. Here's the alchemy-themed one." Stop. Don't iterate. Don't add nine more.</p>
+<p>That is a shipped artifact. The fact that this feels weirdly hard, or unnecessary, or "not ready" — that feeling <em>is the muscle</em>. The only way to develop it is to push through it once, then again, then again, until it stops feeling weird.</p>
+<hr />
+<h2 id="you_2">You</h2>
+<p>give me a prompt for working on each project in a new window</p>
+<h2 id="claude_2">Claude</h2>
+<p>These are paste-into-new-window prompts. Each one is self-contained (a fresh Claude has no memory of our conversation) and bakes the shipping discipline directly into the brief — no new framework docs, no new vocabulary, no new skills. Read the closing note before opening any of them.</p>
+<h3 id="mtgslider">MTGSLIDER</h3>
+<pre><code>You are working in C:\Dev\MTGSLIDER. This is an MTG slide-deck generator with esoteric/alchemical research overlays. It already works: 98 decks have been generated, 29 tests pass, the GitHub repo is live at github.com/t3dy/MTGSLIDER.
+
+Your job in this session is SHIPPING, not building. The owner has identified that this project is stuck in private-tinkering mode and needs a publicly browseable artifact.
+
+Read first (briefly, then stop reading):
+1. C:\Dev\MTGSLIDER\README.md
+2. C:\Dev\MTGSLIDER\writing\10_representative_themes.md
+3. C:\Dev\MTGSLIDER\conversation_log\Q26_browseable_website.md and Q28_deploy_pages.md
+4. List the existing generated deck directories under themes/ or output/
+
+DO NOT READ: PARKING_LOT.md (skim for 30 seconds max), REFRAME_NOTES.md, ROADMAP.md, the full Q01–Q29 conversation log.
+
+Shipping target: a static GitHub Pages site (t3dy.github.io/MTGSLIDER or equivalent) that lets a stranger:
+- Land on an index page with a 3-sentence project description
+- See 10 finished slide decks linked (pick the most polished from the 98, prioritising alchemy/hermetic/PKD-aligned themes)
+- View each deck (HTML viewer or downloadable PDF)
+- Read a one-paragraph essay alongside each
+- Find an &quot;about&quot; page
+
+That is the entire goal.
+
+OUT OF SCOPE this session:
+- Slice-2 features (archetype-studies, format-questions, saved-queries)
+- New conversation_log/Q##_*.md files unless explicitly requested
+- New planning skills, new aesthetic vocabulary, new hermetic-themed names
+- Refactoring the compiler or template engine
+- Anything listed in PARKING_LOT.md
+
+If the user proposes scope expansion mid-session, respond &quot;that goes in PARKING_LOT.md&quot; and continue shipping. Done state: the URL works, ten decks visible, user has the link, you stop.
+</code></pre>
+<h3 id="nsfripper">NSFRIPPER</h3>
+<pre><code>You are working in C:\Dev\NSFRIPPER. NES music extraction pipeline. 321 games extracted, 8,900+ MIDI files, 278 REAPER projects. Zero have been published outside the local disk.
+
+Your job is SHIPPING. The owner has identified that the pipeline has been improving in private for too long; the next breakthrough is a published artifact, not Rule 39.
+
+Read first:
+1. C:\Dev\NSFRIPPER\README.md
+2. C:\Dev\NSFRIPPER\CLAUDE.md
+3. List C:\Dev\NSFRIPPER\BESTOUTPUT\ — this is where the cleanest renders live
+4. The most recent HANDOVER_*.md (skim only)
+
+Shipping target: ONE complete NES soundtrack, mastered as a single audio file or YouTube video, posted publicly. Specifically:
+- Pick the soundtrack that currently sounds best from BESTOUTPUT/ (Castlevania III, Mega Man 2, or whatever has the cleanest render)
+- Master: normalize levels, separate tracks by 1s of silence, optional intro/outro
+- Upload to YouTube (single video, track list in description) OR Bandcamp/SoundCloud
+- Write a 200-word description: what the project is, how the extraction works, what's interesting about this specific game's audio
+- Get a public URL the owner can share
+
+OUT OF SCOPE:
+- Improving the JSFX synth (the &quot;two DSP codebases drift apart&quot; problem is acknowledged and is not today's problem)
+- New architecture rules (no Rule 39)
+- New chip support
+- Touching REAPERBEYONDNES — leave the successor project alone
+
+If a quality issue surfaces in the chosen track and fixing it would take &gt;30 minutes: pick a different track. The goal is published, not perfect. Done state: a YouTube/Bandcamp URL exists, owner has the link, you stop.
+</code></pre>
+<h3 id="reaperbeyondnes">REAPERBEYONDNES</h3>
+<pre><code>You are working in C:\Dev\REAPERBEYONDNES, the multi-system chiptune successor to NSFRIPPER.
+
+IMPORTANT: The owner has identified that this project was started as an avoidance pivot when NSFRIPPER hit hard problems. Until NSFRIPPER ships a public artifact, REAPERBEYONDNES is on hold. Your session today is not to advance the project. It is one of two things — ask the user up front:
+
+OPTION A — Freeze cleanly.
+- Add C:\Dev\REAPERBEYONDNES\FROZEN.md explaining: as of [today's date], this project is paused until NSFRIPPER ships a public artifact. Vision preserved, Liturgy preserved. Nothing deleted.
+- Add a one-line freeze notice to the top of CLAUDE.md.
+- Stop.
+
+OPTION B — Smallest vertical slice, no new framework.
+- Only allowed move: execute HANDOVER_03 (SN76489 vertical slice) at C:\Dev\REAPERBEYONDNES\handover\HANDOVER_03_first_vertical_slice_sn76489.md exactly as specified.
+- Do NOT author new vision docs, Liturgy extensions, Memory Palace structures, or aesthetic naming.
+- Do NOT add chips beyond SN76489.
+
+OUT OF SCOPE either way:
+- New THE_*.md files
+- New &quot;memory artifact&quot; template types
+- New tools whose INSTRUCTIONS.md exceeds 50 lines
+- Expanding CLAUDE.md, the Liturgy, the Gazetteer, or DECISIONS.md beyond the slice's needs
+
+Ask the user &quot;freeze or vertical slice?&quot; before doing anything else.
+</code></pre>
+<h3 id="dogsgame">DOGSGAME</h3>
+<pre><code>You are working in C:\Dev\DOGSGAME. Text-adventure life sim of four real dogs in a real yard, Sultan WA. Currently in EXPLORATION phase: 6 planning docs, zero code.
+
+IMPORTANT: The owner has identified that this project's planning apparatus has become a procrastination machine. Six planning docs exist; no code does. Today is for code, not docs.
+
+Read first (briefly, then stop):
+1. C:\Dev\DOGSGAME\CLAUDE.md
+2. C:\Dev\DOGSGAME\canon\dogs.md
+3. C:\Dev\DOGSGAME\canon\yard.md
+4. C:\Dev\DOGSGAME\BEHAVIORS.md — the B001 entry only (Okie + blueberry bush)
+5. C:\Dev\DOGSGAME\design\ARCHITECTURE.md — the v1 minimum slice section only
+
+DO NOT READ: CEAUDIT.md, MOCKUPS.md, NOIR_LENS.md, SHAMANIC_VOYAGES.md, K9_PATROL_ROGUELIKE.md, DIALOGUE_*.md, PARKING.md. These are speculation and not load-bearing for v1.
+
+Shipping target: smallest playable v1 — a Python script at C:\Dev\DOGSGAME\code\dogsim.py that:
+- Loads the canonical dogs (from canon/dogs.md or hardcoded — whichever is faster)
+- Implements ONE behavior: B001 (Okie peeing on the blueberry bush), TEXT renderer only
+- Runs as a single command: python code/dogsim.py
+- Produces 5–10 lines of narrated text output describing the scene
+- Writes one event row to data/dogsim.db (create schema inline; don't author schema.sql first)
+
+100 lines of Python. One dog, one bush, one renderer. Not a kernel, not an event bus, not a narrative director.
+
+After it runs end-to-end once, record a 60-second terminal transcript or screen capture. That's the artifact.
+
+OUT OF SCOPE:
+- Tex / Attila / Crockett as playable
+- Ultima5 / Sims / NES renderers
+- New planning docs, new PARKING.md entries
+- New skills, new vocabulary
+- Multi-day time sim, dog-interview mode, persistent saves
+
+Done state: script runs, prints text, writes a row, transcript saved. You stop.
+</code></pre>
+<h3 id="claudiens-atalantaclaudiens">Claudiens (AtalantaClaudiens)</h3>
+<pre><code>You are working in C:\Dev\Claudiens. Digital humanities website on H.M.E. De Jong's scholarship on Michael Maier's Atalanta Fugiens (1618). Deploys to t3dy/AtalantaClaudiens via GitHub Pages.
+
+Read first:
+1. C:\Dev\Claudiens\CLAUDE.md
+2. C:\Dev\Claudiens\DOCUMENTAIRTRAFFICCONTROL.md — routing doc
+3. C:\Dev\Claudiens\PHASESTATUS.md — current state
+
+Your job is SHIPPING. Pick ONE goal, ask the user which:
+
+GOAL A — Make the current site publicly findable.
+- Verify the GitHub Pages deployment is live and working
+- Add a 3-sentence &quot;what is this&quot; paragraph to the homepage if absent
+- Suggest one alchemy/hermeticism community where the user could post the URL (academia.edu, a subreddit, a Discord)
+- Stop
+
+GOAL B — Ship one ready phase (3B or 4).
+- Read only that phase's doc
+- Implement only what that phase specifies
+- Deploy
+- Confirm the new pages render publicly
+- Stop
+
+OUT OF SCOPE:
+- Phases 5+ or anything beyond what's currently READY
+- New ontology tables (memory says 13 built + 7 planned — do NOT plan more today)
+- New pipeline scripts
+- New aesthetic vocabulary
+- Refactoring the SQLite → static-HTML pipeline
+
+Ask &quot;Goal A or Goal B?&quot; first. Done state: a public URL exists or has new pages, user has the link.
+</code></pre>
+<h3 id="emeraldtablet">EmeraldTablet</h3>
+<pre><code>You are working in C:\Dev\EmeraldTablet. Hermetic / alchemical reference database with biographies, concepts, eras, scholars, texts. Site lives in site/, data in db/, scripts in scripts/.
+
+Read first:
+1. C:\Dev\EmeraldTablet\README.md
+2. C:\Dev\EmeraldTablet\CLAUDE.md
+3. C:\Dev\EmeraldTablet\PHASESTATUS.md
+4. List C:\Dev\EmeraldTablet\site\ contents
+
+Your job is SHIPPING. Target: the site deployed to GitHub Pages, publicly browseable, with at least one fully populated content type.
+
+Concrete acceptance:
+- Pick ONE content type (biographies, concepts, eras, scholars, OR texts) — the one closest to complete
+- That section has at least 10 fully populated entries
+- Whole site deployed to GitHub Pages
+- A stranger can land on the URL and click through that section
+- User has the URL
+
+OUT OF SCOPE:
+- Filling in the other 4 content types this session
+- HERMETICDB schema changes
+- New scripts/
+- New cross-references with Claudiens
+- New aesthetic vocabulary or framing docs
+
+Done state: public URL exists, one content type populated, user has the link.
+</code></pre>
+<h3 id="pkd-fest-2026-site">PKD Fest 2026 site</h3>
+<pre><code>You are working on the PKD Fest 2026 site, a collab with Paul Shelton. Next.js / Vercel, VALIS-themed design system. Local path may be C:\Dev\pkd-fest-site or C:\Dev\pkd-planning-site — check both.
+
+Read first:
+1. The site's README and any package.json
+2. Most recent commits (git log -20 --oneline)
+3. Any DESIGN.md, BRIEF.md, or planning doc at root
+
+Your job is SHIPPING. This project has the easiest audience definition of any in the portfolio: Paul Shelton + the PKD Fest attendee community. The risk here is over-design before launch.
+
+Target: a deployed Vercel preview URL Paul can click on and react to, with:
+- A homepage with event date, location, basic information
+- One additional page (schedule, tickets, or about — whichever is most ready)
+- Basic VALIS-themed styling, but not perfect — &quot;feedback-ready&quot; not &quot;launch-ready&quot;
+- The URL sent to Paul
+
+OUT OF SCOPE:
+- Polishing the design system to completion
+- Building admin / submission / RSVP flows
+- New aesthetic systems beyond VALIS palette
+- Backend work beyond what static Next.js needs
+
+Done state: Paul has a clickable preview URL. Whatever he says next is the input for the *next* session, not this one.
+</code></pre>
+<h3 id="megabase">Megabase</h3>
+<pre><code>You are working in C:\Dev\megabase. The owner's Personal Knowledge Archaeology System — corpus-level ingestion and analysis of their own chats, docs, notes. Built across 8 sessions, zero API cost.
+
+Read first:
+1. C:\Dev\megabase\README.md (or CLAUDE.md if present)
+2. List top-level contents
+3. Any phase or status doc
+
+Your job is SHIPPING. Megabase is a self-tool — shipping means producing ONE consumable artifact from the corpus, not publishing the corpus itself. Pick with user:
+
+OPTION A — One chart.
+Run a query against existing megabase data, produce one chart: e.g., &quot;topics I wrote about per month, 2024–2026.&quot; Save as PNG. Write a 200-word interpretive note. Done.
+
+OPTION B — One essay.
+Surface 5 surprising findings about the owner's writing/thinking patterns. Write an 800-word essay drawing on those findings, saved as markdown.
+
+OPTION C — One queryable interface.
+If a CLI/web interface is partly built, finish it to the point where 3 saved queries can be run by name with readable output. Document the 3 queries in a README.
+
+OUT OF SCOPE:
+- New ingestion pipelines
+- New schema migrations
+- New &quot;archaeology&quot; framing docs
+- More than one of A/B/C this session
+
+Ask &quot;A, B, or C?&quot; first. Done state: one consumable artifact exists, user has it.
+</code></pre>
+<h3 id="closing-note-read-this-before-opening-any-of-them">Closing note — read this before opening any of them</h3>
+<p><strong>Do not open seven windows.</strong> Opening multiple of these in parallel is the exact drift pattern the critique was about. Pick <strong>one</strong> project. Finish that session. Walk away. Then pick the next.</p>
+<p>Recommended order:
+1. <strong>MTGSLIDER first.</strong> Closest to shipping, highest ratio of done-work to publish-work, fastest dopamine when a stranger sees it.
+2. <strong>NSFRIPPER second.</strong> Largest unshipped backlog (8,900 files); shipping one closes the longest open loop you have.
+3. <strong>REAPERBEYONDNES third — and only to freeze it.</strong> Until NSFRIPPER has a public URL, this project is the avoidance pivot.
+4. <strong>Then DOGSGAME</strong> to break the planning-without-code pattern with 100 lines of Python.
+5. <strong>Then PKD Fest</strong> because Paul is a real audience and external accountability is rocket fuel.
+6. <strong>Claudiens / EmeraldTablet / Megabase</strong> later — these are lower urgency.</p>
+<p>If you find yourself opening a second window before the first session's artifact has a URL, that <em>is the diagnosis playing out in real time</em>. Close the second window.</p>
+<hr />
+<h2 id="you_3">You</h2>
+<p>I don't really see the need to publish something when it isn't ready to show</p>
+<h2 id="claude_3">Claude</h2>
+<p>Hold that against your own evidence and it cracks.</p>
+<p>"Not ready to show" is a real category. It applies to a song missing its chorus, a book missing chapter 5, a site with broken links. <strong>Your projects aren't in that category.</strong> They're in a different one: fully-built things being held against a threshold that exists nowhere except in your head, and that recedes as you approach it.</p>
+<p>Look at the numbers from your own memory:</p>
+<ul>
+<li>8,900 MIDI files — not ready</li>
+<li>321 NES extractions — not ready</li>
+<li>98 generated slide decks — not ready</li>
+<li>A working GitHub repo with 29 passing tests and live CI — not ready</li>
+</ul>
+<p>At what point are these ready? 9,000 MIDIs? 200 decks? 50 passing tests? <strong>Name the number.</strong> If you can't, that's the diagnosis. The threshold is unfalsifiable. You will hold this position at any volume of completed work, because "ready" is a feeling about your work, and your feelings about your work are not calibrated to anything external. They're calibrated to your mood, your sleep, and whatever flaw you happened to notice last. They will <em>never</em> converge on "ready" without outside input.</p>
+<p>Now the part that should land hardest: <strong>you teach elementary kids.</strong> Imagine one of your students has practiced piano for two years and refuses to perform. "I'll do the recital when I'm ready." You know exactly what's wrong with that sentence — better than almost anyone alive. The recital is <em>what makes the kid ready.</em> The thing they're avoiding is the thing that creates the readiness they're waiting for. You apply this daily, generously, with patience, to other people's children. You have not applied it to yourself.</p>
+<p>Three things worth saying directly:</p>
+<p><strong>Showing does not mean claiming finished.</strong> When a musician plays an open mic, they're not asserting the song is final. When a writer posts a draft, they're not claiming Pulitzer prose. Every artist wants to revise; every developer wants one more refactor. Most published work is <em>not</em> ready by its creator's standards. Publishing-while-unready isn't a violation of quality. It's the universal condition of making things in the world. You have set up a binary — either ready and I show, or unready and I don't — that no working creator actually operates inside. You absorbed it from somewhere, but it isn't true.</p>
+<p><strong>Ready requires feedback you cannot get without showing.</strong> This is the trap. To know if something is ready, you need outside contact. To get outside contact, you have to show. If you require ready-before-showing, the loop never closes and you wait forever. The only exit is to show before ready and let feedback do the work of <em>making</em> you ready. That isn't a workaround. It's how every creator who has ever shipped has shipped.</p>
+<p><strong>Not showing has its own cost, and you've stopped seeing it.</strong> You're framing this as caution vs. recklessness. It isn't. It's one set of risks (criticism, awkwardness, "this isn't my taste") against another set (no audience, no calibration, no collaborators, eight projects in WIP forever, the slow erosion of the impulse to make at all). You experience the first set as risk because it's vivid and proximate. You experience the second as default because it's ambient and invisible. <strong>Staying private isn't safer. It's just less observable.</strong> Two years of intensive work with zero shipped artifacts is not a neutral position. It's a steadily accruing tax you've stopped noticing.</p>
+<p>You don't have to publish to the world. The first ratchet is <strong>one person who isn't you.</strong> Email one MTGSLIDER deck to an MTG-playing friend. DM one alchemy researcher a Claudiens link. Text Paul a single NSFRIPPER track. One human, one artifact, today. That's still showing. It still calibrates "ready." It does not require any public-facing courage you may not have on a given day. And it will give you, for the first time in years, the data point that tells you whether your gut threshold of "ready" is accurate — or whether, as the unshipped pile strongly implies, it's been broken for a long time.</p>
+<p>The reason to publish before "ready" is that "ready" is not a coordinate on the map you currently have. It's a horizon. You don't reach horizons. You walk toward them, and the only way to know where the ground actually is is to put something on it and see if it holds.</p>
+<hr />
+<h2 id="you_4">You</h2>
+<p>I'm not really interested in being pushed to show or collaborate I want insights into what these projects need before they are ready to ship. Give me some insights into how I can do a better job building environments for ai coding them</p>
+<h2 id="claude_4">Claude</h2>
+<p>Switching modes. Here are technical readiness gaps per project, then a deeper section on AI coding environments — that one is where I have the most useful signal because I see your apparatus from the inside.</p>
+<h3 id="part-1-what-each-project-actually-needs">Part 1 — What each project actually needs</h3>
+<p><strong>MTGSLIDER</strong>
+- The 10 "representative themes" copy hasn't been quality-checked against the other 90. Variance is unknown — you might have 30 great decks and 70 mid ones. A grading pass on the existing 98 would tell you what your <em>actual</em> quality bar is.
+- Etymology data is unverified at the source level. You're trusting whatever ingestion produced. Build a <code>etymology_provenance</code> table with citations and a flag for "manually verified."
+- Two of 100 themes failed bulk generation. Find out why before adding theme #101 — the failure mode is almost certainly latent in others.
+- No "regenerate one deck" path after a content fix. Currently a fix means rerunning bulk. Add <code>tools/regen_one.py --theme &lt;name&gt;</code>.
+- Speaker notes are generated but never read end-to-end for any deck. One full read-through of one deck's notes is the smallest meaningful QA.</p>
+<p><strong>NSFRIPPER</strong>
+- The big one: two DSP codebases (stems + JSFX) drift on every fix. Either unify them or explicitly declare a divergence policy with documented tolerance bounds. The current state is "drift accumulating silently."
+- No regression suite. Fixing Rule 39 may have broken something Rule 12 fixed. Without a fixture set of "this game's track 3 should sound like this," you cannot tell.
+- Driver-family parsers cap out at ~12 of the most-played games. Either accept that scope (and document it) or commit to extending coverage. The current state is "we'll add games as we hit them," which is unbounded.
+- Disk crisis happened twice. Output management is broken. A retention policy + content-addressed storage would fix this once, instead of repeatedly.
+- Non-linear DAC mix at master bus is approximate. Either characterize the error (compare against a calibrated reference render and quantify dB) or accept it formally.</p>
+<p><strong>REAPERBEYONDNES</strong>
+- The whole vision rests on architecture choices that have never been tested on a chip. Until SN76489 (Handover 03) actually runs end-to-end with a fidelity gate passing, every other doc in this project is speculation.
+- The fidelity gate (<code>wav_diff</code>, <code>kb_validator</code>, etc.) is <em>specified</em> but not <em>implemented</em>. Spec-without-implementation is not architecture, it's wishlist.
+- THE_LITURGY's protocols (no silent transformations, decision-log every quantization, etc.) have never had a real test. They will fail their first contact with reality. That's fine, but you should expect to revise them, not treat them as load-bearing.</p>
+<p><strong>DOGSGAME</strong>
+- The schema for events is not specified. ARCHITECTURE.md describes a kernel + event bus but doesn't define the event row shape. Without that, the SQLite layer is undefined.
+- The renderer protocol is examples, not contract. What does TEXT renderer take as input — an event row? A scene state? Both? The protocol is needed before any renderer can be implemented.
+- "Exploration phase" has no exit criterion. What conditions cause you to declare exploration done and v1 ready to build? Without a defined trigger, exploration is open-ended by design.
+- The data tier is sketched but not designed. <code>data/schema.sql</code> doesn't exist; canonical-fact ingestion (dogs.md → dogs table) has no script.</p>
+<p><strong>Claudiens (AtalantaClaudiens)</strong>
+- 7 of 20 ontology tables planned but not built. List the 7, decide which are blockers for "ready" and which can be cut.
+- Image pipeline is complete (5A) but coverage across texts is incomplete. Audit: which texts have all expected images, which don't.
+- No site-wide search. For a digital humanities site of any size, search is what makes it useful.
+- The Maier/De Jong scholarship corpus completeness is unknown. Have you ingested everything you intend to ingest? Or is the corpus open-ended?
+- Phase 3B and 4 are READY according to PHASESTATUS but not built. The gap between "ready" and "built" deserves a label — what's blocking?</p>
+<p><strong>EmeraldTablet</strong>
+- Five content types at varying completion. Pick a target percentage (say, 70% populated per type) and audit current state against it.
+- Cross-references (a scholar appears in a text from an era discussing a concept) — are these queryable as joins, or only as prose? If only prose, you have a bibliography, not a database.
+- Probably has schema/site drift: the SQLite has fields the templates don't render, or vice versa. A <code>verify_schema_to_site.py</code> would catch this.
+- No "rebuild from scratch" smoke command. Without it, you don't know if your pipeline is reproducible.</p>
+<p><strong>Megabase</strong>
+- 8 sessions of build, but the present state isn't summarized. Write a STATUS.md once: what's ingested, what's queryable, what's broken.
+- Named queries aren't documented. You have query patterns; surface them as <code>python megabase.py query &lt;name&gt;</code> so the agent (and you) can run them by name.
+- Retrieval quality is unmeasured. For a personal knowledge system, the metric isn't precision/recall against ground truth, it's "did the answer surprise me usefully." That's still measurable — log queries and rate the results.</p>
+<h3 id="part-2-building-better-ai-coding-environments">Part 2 — Building better AI coding environments</h3>
+<p>This is where you've already invested heavily, and where some of that investment is now working against you. Insights, ranked by impact:</p>
+<p><strong>1. Context budget is a real budget.</strong> Every mandatory pre-load is tokens spent before work begins. REAPERBEYONDNES requires reading CLAUDE.md + THE_LITURGY + MEMORY + tradeoffs/INDEX + CODEENV + VISION before the agent does anything. That's likely 20–40k tokens of overhead. The agent's working window for actual reasoning is whatever's left. <strong>Optimize for fewer mandatory reads.</strong> Move things into discoverable-on-demand context, not always-loaded.</p>
+<p><strong>2. Retrieval beats prose, but you only have prose.</strong> Your CEAUDIT correctly identifies a "computed context" tier — SQL views, vector searches, structured queries the agent runs to get tight summaries. <em>None of your projects implement this.</em> Everything is grep + read full file. The single biggest leverage move across your portfolio: put your canonical facts (behaviors, dogs, themes, scholars, decisions, tradeoffs) in SQLite tables the agent can query, not markdown files it has to parse. A behavior catalog in DOGSGAME should be <code>SELECT * FROM behaviors WHERE dog='okie'</code>, not five markdown reads.</p>
+<p><strong>3. One smoke command per project.</strong> Each project should have ONE command that exits 0 if the project still works, non-zero otherwise. Not a test suite — a smoke gate. <code>python tools/smoke.py</code> that exercises the critical path end-to-end. Without this, the agent has to read tests and <em>judge</em> whether things still work, which it does poorly. With it, the agent runs one command and knows.</p>
+<p><strong>4. Fixtures are how you make AI work reproducible.</strong> Canonical input → expected output pairs. For NSFRIPPER: one ROM, one song, the expected first 50 frames of MIDI as a checked-in file. Now any change is <em>measurable</em>, not <em>judged</em>. This is the single thing that would have prevented the JSFX/stems drift problem — you'd have caught divergence the moment a fixture's output changed.</p>
+<p><strong>5. Skill consolidation.</strong> Thirty-three PKD-themed skills is too many for the agent to hold top-of-mind. It has to read all skill descriptions to pick correctly. Consolidate to ~5–7 parameterized skills: <code>/plan scope</code>, <code>/plan slice</code>, <code>/plan park</code>, <code>/plan gate</code>, <code>/plan retro</code>. The PKD names are <em>harder</em> to recall correctly than parameter names — you've optimized them for evocative reading, not for fast invocation. The agent's accuracy at picking the right skill goes down as skill count goes up.</p>
+<p><strong>6. Greppable naming.</strong> <code>DECISIONS.md</code> greps better than <code>THE_GAZETTEER.md</code>. <code>MEMORY.md</code> is unambiguous; <code>THE_MEMORY_PALACE.md</code> collides with content prose. Bespoke aesthetic names break the agent's pattern-matching priors. Keep mystic vocabulary for <em>prose inside files</em> if you love it; use conventional names for <em>file paths and headers</em> the agent searches against. Or just stop using mystic names — the cost is real and the benefit is purely yours.</p>
+<p><strong>7. Memory hygiene.</strong> Your memory files accumulate without decay or validation. The Attila save/retract was the failure mode in miniature. A few rules: (a) add <code>last_reviewed: YYYY-MM-DD</code> to each memory file, (b) once a quarter, walk the index and prune/update, (c) when memories conflict with code, code wins and the memory gets corrected. Right now memory is write-mostly.</p>
+<p><strong>8. Single source of truth per fact.</strong> Attila currently lives in <code>project_dogsim.md</code> (memory), <code>canon/dogs.md</code> (project doc), and CLAUDE.md context dumps. When these diverge, the agent has no rule for which is authoritative. Pick ONE canonical home per fact class, link to it from elsewhere. For DOGSGAME: facts go in <code>canon/</code>. Period. Memory gets a one-line pointer.</p>
+<p><strong>9. Stop authoring per-query conversation logs.</strong> Q##_*.md files are append-only noise the agent now has to traverse to find context. They look like a corpus, function as folklore. If you want session history, rely on git commits with real messages. Or summarize logs weekly into a single SESSION_LOG.md that has a token budget. The current pattern grows linearly forever.</p>
+<p><strong>10. Convert audits into structure.</strong> CEAUDIT.md prescribes a directory layout. The value of that document is exhausted once the layout exists. Don't keep prescriptive documents around as living artifacts — execute them and delete them. THE_LITURGY's protocols should be enforced by tooling (a pre-commit hook that fails if you do silent transformations) not by an agent re-reading the doctrine each session.</p>
+<p><strong>11. Token-cheap status broadcasting.</strong> Replace pages of PHASESTATUS.md prose with a 3-line status block at the top of CLAUDE.md: <code>phase: 3A | last_commit: 2026-04-23 | in_flight: phase 3B</code>. The agent loads CLAUDE.md anyway; status is free.</p>
+<p><strong>12. One environment per project.</strong> A <code>pyproject.toml</code> (or <code>requirements.txt</code>), a <code>.python-version</code> file, a <code>Makefile</code> or single entry-point script. Several of your projects have implicit environment expectations the agent fails on silently. Make them explicit. The agent should be able to do <code>make verify</code> or equivalent without learning a new convention each project.</p>
+<p><strong>13. Decision logs over narrative.</strong> Instead of long prose explaining a tradeoff, use a structured DECISIONS.md with <code>decision / context / options / chosen / consequences / date</code>. ADR format. The agent reads structured decisions 5x faster than narrative tradeoffs and grounds its work in them more reliably.</p>
+<p>The pattern across all 13: <strong>make context cheap to fetch, expensive to ignore, and structured enough to reason about.</strong> Your current apparatus is rich in <em>prose-as-discipline</em>. The next level is <em>structure-as-discipline</em> — schema, fixtures, smoke gates, ADRs — which the agent actually executes against rather than re-reading.</p>
+<hr />
+<p><em>End of conversation. Saved 2026-04-25.</em></p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

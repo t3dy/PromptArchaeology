@@ -1,0 +1,331 @@
+/* Promptarchaeology-Heldscalla — sunken cathedral aesthetic */
+
+:root {
+  --abyss: #0a1628;
+  --deep: #14304a;
+  --water: #1f4d6e;
+  --shallow: #4a7794;
+  --foam: #c8d8e0;
+  --parchment: #f4ead2;
+  --aged: #e6d8a8;
+  --gold: #c9a14a;
+  --gold-bright: #e8c46f;
+  --ink: #1a1410;
+  --rust: #8b3a1c;
+  --moss: #4a6b3a;
+  --serif: 'EB Garamond', 'Hoefler Text', Georgia, 'Times New Roman', serif;
+  --display: 'Cinzel', 'Trajan Pro', 'Hoefler Text', Georgia, serif;
+  --mono: 'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% -200px, rgba(20, 48, 74, 0.18) 0%, transparent 60%),
+    linear-gradient(180deg, #f4ead2 0%, #ede0c0 100%);
+}
+
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+}
+
+/* Top bar */
+.bar {
+  background: var(--abyss);
+  color: var(--foam);
+  padding: 18px 32px;
+  border-bottom: 3px solid var(--gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--display);
+  letter-spacing: 0.05em;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(10, 22, 40, 0.3);
+}
+.bar a { color: var(--gold-bright); text-decoration: none; }
+.bar a:hover { color: var(--foam); }
+.bar .title { font-size: 16px; font-weight: 700; }
+.bar .nav { display: flex; gap: 24px; font-size: 14px; }
+.bar .nav a { transition: color 0.2s; }
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 60px 20px 80px;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(20, 48, 74, 0.15) 0%, transparent 70%);
+}
+.hero h1 {
+  font-family: var(--display);
+  font-size: 56px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--abyss);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+.hero .sub {
+  font-style: italic;
+  font-size: 22px;
+  color: var(--water);
+  margin-bottom: 28px;
+}
+.hero .epigraph {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--rust);
+  max-width: 540px;
+  margin: 32px auto 0;
+  line-height: 1.5;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  padding: 20px 0;
+}
+.hero .epigraph cite {
+  display: block;
+  font-size: 14px;
+  color: var(--shallow);
+  margin-top: 8px;
+  font-style: normal;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin: 40px 0;
+}
+.card {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--aged);
+  border-left: 4px solid var(--gold);
+  padding: 18px 20px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: all 0.2s;
+}
+.card:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-left-color: var(--rust);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(20, 48, 74, 0.15);
+}
+.card .card-label {
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.card h3 {
+  font-family: var(--serif);
+  font-size: 19px;
+  margin: 6px 0 4px;
+  color: var(--abyss);
+}
+.card p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--water);
+  font-style: italic;
+}
+
+/* Section headings */
+.section-title {
+  font-family: var(--display);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--rust);
+  text-transform: uppercase;
+  margin: 56px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--aged);
+}
+
+/* Page content */
+article h1 {
+  font-family: var(--display);
+  font-size: 38px;
+  color: var(--abyss);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 12px;
+  margin-top: 0;
+}
+article h2 {
+  font-family: var(--display);
+  font-size: 26px;
+  color: var(--deep);
+  margin-top: 48px;
+}
+article h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 21px;
+  color: var(--water);
+  margin-top: 32px;
+}
+article h4 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--water);
+}
+article p { margin: 1em 0; }
+article a {
+  color: var(--rust);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 3px;
+}
+article a:hover { color: var(--abyss); }
+article strong { color: var(--abyss); }
+article em { color: var(--water); }
+
+article blockquote {
+  border-left: 3px solid var(--gold);
+  margin: 24px 0;
+  padding: 4px 0 4px 20px;
+  color: var(--water);
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+article ul, article ol { padding-left: 28px; }
+article li { margin: 6px 0; }
+
+article hr {
+  border: none;
+  text-align: center;
+  margin: 40px 0;
+  height: 16px;
+  color: var(--gold);
+}
+article hr::before {
+  content: "❦";
+  font-size: 18px;
+  color: var(--gold);
+}
+
+/* Code */
+article code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: rgba(20, 48, 74, 0.08);
+  color: var(--abyss);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+article pre {
+  background: var(--abyss);
+  color: var(--foam);
+  padding: 20px 24px;
+  overflow-x: auto;
+  border-left: 4px solid var(--gold);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 24px 0;
+}
+article pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* Tables */
+article table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 24px 0;
+  font-size: 16px;
+}
+article th, article td {
+  border-bottom: 1px solid var(--aged);
+  padding: 8px 12px;
+  text-align: left;
+}
+article th {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--rust);
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--gold);
+}
+
+/* TOC */
+.toc {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--aged);
+  padding: 20px 24px;
+  margin-bottom: 40px;
+  font-size: 15px;
+}
+.toc h4 {
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin: 0 0 8px;
+}
+.toc ul { list-style: none; padding: 0; margin: 0; }
+.toc li { margin: 4px 0; }
+.toc a { color: var(--water); text-decoration: none; }
+.toc a:hover { color: var(--rust); }
+
+/* Footer */
+.foot {
+  text-align: center;
+  padding: 60px 20px 40px;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--water);
+  border-top: 1px solid var(--aged);
+  margin-top: 80px;
+}
+.foot .symbol {
+  display: block;
+  font-size: 28px;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+/* The water — subtle background ripple */
+.water-line {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 60px auto;
+  max-width: 200px;
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 38px; }
+  .bar { padding: 14px 20px; flex-direction: column; gap: 8px; }
+  .page { padding: 24px 18px 60px; }
+  article h1 { font-size: 28px; }
+  article h2 { font-size: 22px; }
+  article pre { font-size: 12px; padding: 14px; }
+}

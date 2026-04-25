@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>03 what im actually — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>03 what im actually</h1><p><em>From <code>queries/03_what_im_actually.sql</code></em></p><blockquote>03_what_im_actually.sql
+&quot;What I&#x27;m actually trying to do is...&quot; — the real-goal reveals.
+Usually appears around prompt 5-10 of a long conversation, after AI outputs
+have surfaced what you DON&#x27;T want by contrast. These are gold-tier sentences:
+the moment you finally articulate the underlying goal in your most lucid voice.</blockquote><pre><code class="language-sql">-- 03_what_im_actually.sql
+-- &quot;What I&#x27;m actually trying to do is...&quot; — the real-goal reveals.
+-- Usually appears around prompt 5-10 of a long conversation, after AI outputs
+-- have surfaced what you DON&#x27;T want by contrast. These are gold-tier sentences:
+-- the moment you finally articulate the underlying goal in your most lucid voice.
+
+SELECT
+  date(created_at) AS d,
+  source_name,
+  conversation_title,
+  substr(prompt_text, 1, 600) AS prompt_preview
+FROM pa_prompts
+WHERE
+     LOWER(prompt_text) LIKE &#x27;%what i&#x27;&#x27;m actually%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%what i really mean%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%what i really want%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%let me reconsider%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%the thing is%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%i think what%i&#x27;&#x27;m%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%i should clarify%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%let me clarify%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%my real goal%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%what i actually want%&#x27;
+  OR LOWER(prompt_text) LIKE &#x27;%let me back up%&#x27;
+ORDER BY created_at DESC;
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>
