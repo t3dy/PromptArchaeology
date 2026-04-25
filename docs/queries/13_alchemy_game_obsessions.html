@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>13 alchemy game obsessions — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../shards.html">Shards</a>
+      <a href="../coach.html">Coach</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1>13 alchemy game obsessions</h1><p><em>From <code>queries/13_alchemy_game_obsessions.sql</code></em></p><blockquote>13_alchemy_game_obsessions.sql
+Purpose: Surface user prompts that pre-figure the current alchemy beat-em-up
+discussion. Looks for the intersection of alchemy/lab/hermetic vocabulary
+with game/mechanic/sprite/hazard vocabulary. Returns conversation titles,
+date, and a snippet from the prompt.
+Expected runtime: 5-15s.
+Expected rows: ~150-400.</blockquote><pre><code class="language-sql">-- 13_alchemy_game_obsessions.sql
+-- Purpose: Surface user prompts that pre-figure the current alchemy beat-em-up
+-- discussion. Looks for the intersection of alchemy/lab/hermetic vocabulary
+-- with game/mechanic/sprite/hazard vocabulary. Returns conversation titles,
+-- date, and a snippet from the prompt.
+-- Expected runtime: 5-15s.
+-- Expected rows: ~150-400.
+
+WITH hits AS (
+  SELECT
+    conversation_id,
+    conversation_title,
+    source_name,
+    DATE(created_at) AS day,
+    approx_words,
+    SUBSTR(prompt_text, 1, 400) AS snippet,
+    -- score: weighted hit count
+    (CASE WHEN LOWER(prompt_text) LIKE &#x27;%alchem%&#x27;   THEN 1 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%hermet%&#x27;   THEN 1 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%vitriol%&#x27;  THEN 1 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%athanor%&#x27;  THEN 1 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%alembic%&#x27;  THEN 1 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%emblem%&#x27;   THEN 1 ELSE 0 END) AS alch_score,
+    (CASE WHEN LOWER(prompt_text) LIKE &#x27;%beat-em-up%&#x27; OR LOWER(prompt_text) LIKE &#x27;%beat em up%&#x27; OR LOWER(prompt_text) LIKE &#x27;%beatem%&#x27; THEN 3 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%streets of rage%&#x27; OR LOWER(prompt_text) LIKE &#x27;%king of the monsters%&#x27; THEN 3 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%fighting game%&#x27; THEN 2 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%roguelike%&#x27;  THEN 2 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%board game%&#x27; THEN 2 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%lab accident%&#x27; OR LOWER(prompt_text) LIKE &#x27;%cascading%&#x27; THEN 2 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%hazard%&#x27;    THEN 1 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%sprite%&#x27;    THEN 1 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%pixel art%&#x27; THEN 1 ELSE 0 END +
+     CASE WHEN LOWER(prompt_text) LIKE &#x27;%game mechanic%&#x27; OR LOWER(prompt_text) LIKE &#x27;%mechanic%&#x27; THEN 1 ELSE 0 END) AS game_score
+  FROM pa_prompts
+  WHERE
+    (LOWER(prompt_text) LIKE &#x27;%alchem%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%hermet%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%vitriol%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%athanor%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%alembic%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%emblem%&#x27;)
+    AND
+    (LOWER(prompt_text) LIKE &#x27;%game%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%mechanic%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%sprite%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%hazard%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%accident%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%roguelike%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%board game%&#x27;
+       OR LOWER(prompt_text) LIKE &#x27;%beat%&#x27;)
+    AND char_count &gt; 80
+    AND char_count &lt; 3000
+)
+SELECT
+  day,
+  source_name,
+  conversation_title,
+  alch_score,
+  game_score,
+  (alch_score + game_score) AS total_score,
+  approx_words,
+  snippet
+FROM hits
+WHERE (alch_score + game_score) &gt;= 3
+ORDER BY total_score DESC, day ASC
+LIMIT 200;
+</code></pre>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

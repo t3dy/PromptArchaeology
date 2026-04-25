@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>20 Questions on Megabase — Promptarchaeology-Heldscalla</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+  <nav class="bar">
+    <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
+    <span class="nav">
+      <a href="../narrative.html">Lineage</a>
+      <a href="../shards.html">Shards</a>
+      <a href="../coach.html">Coach</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../queries.html">Queries</a>
+      <a href="../code.html">Code</a>
+      <a href="../manuscripts.html">Manuscripts</a>
+      <a href="https://github.com/t3dy/PromptArchaeology">GitHub</a>
+    </span>
+  </nav>
+  <div class="page">
+    <article>
+<h1 id="20-questions-on-megabase">20 Questions on Megabase</h1>
+<p><em>The substrate. The unified corpus across 11 sources. 1.45M user prompts, 5,271 conversations. The ground without which Heldscalla is nothing.</em></p>
+<hr />
+<ol>
+<li>
+<p>Megabase is built across <strong>8 sessions</strong> with <strong>zero API cost</strong>. Do you remember which session was the breakthrough? (The corpus knows.)</p>
+</li>
+<li>
+<p>The <strong><code>ideas</code> table</strong> has 30+ columns at this point — primary_class, dh_subtype, family_id, score_game, etc. Was the schema additive (you added when needed) or was there a moment of redesign? Audit the answer.</p>
+</li>
+<li>
+<p>The <strong><code>segments</code> table</strong> with <code>segment_scores</code> and <code>segment_type</code> — is this still actively used, or is it scaffolding from an earlier ambition?</p>
+</li>
+<li>
+<p><strong>11 sources</strong> ingested: chatgpt, chatgpt-md, claude, llm_logs_html, llm_logs_pdf, sms, facebook, gmail, twitter, google_chat, pkd_chats. Which has the <strong>highest information density per prompt</strong>? (Not volume — density.)</p>
+</li>
+<li>
+<p><strong>gmail has zero conversations</strong>. Why?</p>
+</li>
+<li>
+<p>The <strong>Twitter Timeline as one 6,246-page conversation</strong> is a clever schema choice. Was it intentional, or did the ingester treat the timeline that way by default?</p>
+</li>
+<li>
+<p><em>"Personal Knowledge Archaeology System"</em> (PKAS) was the original framing. Promptarchaeology-Heldscalla now narrows that to prompts-only. <strong>Should megabase rebrand to absorb both, or stay as-is and let the siblings specialize?</strong></p>
+</li>
+<li>
+<p>The <strong><code>prompt_catalog_entries</code></strong> table has the columns <code>term</code>, <code>term_category</code>, <code>topic</code>. What's currently in <code>term_category</code>? (Open the DB; check.)</p>
+</li>
+<li>
+<p>Megabase has been touched in <strong>2026-02-23</strong> prompts on database storytelling: <em>"What else can I do to improve the database and search it to map out my life."</em> That's a coach question disguised as a tech question.</p>
+</li>
+<li>
+<p>The <strong><code>refine_names_local.py</code></strong> and <strong><code>apply_renames.py</code></strong> scripts imply a name-refinement subsystem. Is that still running, or has it stabilized?</p>
+</li>
+<li>
+<p><strong>NotebookLM-py</strong> (2026-03-02) — you scoped this. Did you ever integrate it with megabase, or is it still parked?</p>
+</li>
+<li>
+<p><strong>Aldous's <code>gemini_segment_reader.py</code></strong> — when did Gemini join the corpus? Was the schema flex enough to hold it without changes?</p>
+</li>
+<li>
+<p>The <strong><code>personal_census.json</code></strong> and <strong><code>personal_ranked.json</code></strong> files imply a ranking exercise was run. What was the question? What was the answer?</p>
+</li>
+<li>
+<p><strong>"All my projects"</strong> as a single megabase view: does that view exist, or only as a recurring opening prompt of yours? (E.g. 2026-03-14: <em>"All projects: Review progress on functionality improvements…"</em>.)</p>
+</li>
+<li>
+<p>Promptarchaeology lives at <code>C:\Dev\promptarchaeology\</code> and queries megabase read-only. Is there a <em>symmetric</em> tool that could query megabase <strong>for the assistant outputs only</strong> — a "outputs-archaeology" sibling? <strong>Probably not — but the symmetry is interesting.</strong></p>
+</li>
+<li>
+<p>The <strong><code>hidden</code></strong> column on <code>ideas</code> and the <strong><code>limbo_reason</code></strong> column suggest a triage workflow. Is the triage queue actively maintained, or has limbo become permanent?</p>
+</li>
+<li>
+<p>Megabase's <strong><code>schema.py</code></strong> is the ground truth. When you stand up the Marxist Knowledge Portal, will it inherit megabase's schema or build its own? <strong>The right answer might be: inherit and never fork.</strong></p>
+</li>
+<li>
+<p>The <strong><code>.spec</code></strong> file suggests a pyinstaller bundle. Did you ever ship megabase as a desktop app? Or was it always a local CLI?</p>
+</li>
+<li>
+<p>If a friend asked <em>"so what does megabase do, in plain English"</em> — what's your one-sentence answer? <strong>Practice it. The shape of the answer is its own diagnostic.</strong></p>
+</li>
+<li>
+<p>Megabase is the <strong>largest single thing you've built</strong>. It's also the <strong>least visible</strong>. Should it stay invisible — pure substrate — or should there be a "megabase showroom" page somewhere?</p>
+</li>
+</ol>
+<hr />
+<p><em>Megabase is the cathedral floor. Promptarchaeology is one chamber inside. Heldscalla rises one stone at a time.</em></p>
+    </article>
+  </div>
+  <footer class="foot">
+    <span class="symbol">❦</span>
+    <em>Promptarchaeology-Heldscalla — distant reading of one's own prompt history</em><br>
+    Built atop megabase. Read-only forever.
+  </footer>
+</body>
+</html>

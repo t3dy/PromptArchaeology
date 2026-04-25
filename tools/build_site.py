@@ -80,6 +80,11 @@ time into the light.</p>
 
 <div class="section-title">Surfaces</div>
 <div class="cards">
+  <a class="card" href="shards.html">
+    <div class="card-label">Shards</div>
+    <h3>Findings from the corpus</h3>
+    <p>Insights, rabbit holes, scholarly values, twenty-question coach decks per project.</p>
+  </a>
   <a class="card" href="coach.html">
     <div class="card-label">Coach</div>
     <h3>Glimmung-companion</h3>
@@ -213,6 +218,43 @@ def main():
         code_html.append(f'<li><a href="code/{slug}.html"><code>{html.escape(path.relative_to(ROOT).as_posix())}</code></a></li>')
     code_html.append("</ul>")
     write_page(DOCS / "code.html", "Code", "\n".join(code_html))
+
+    # 5b) Shards (findings/)
+    findings_dir = ROOT / "findings"
+    shards_links = [
+        '<h1>Shards from the deep</h1>',
+        '<p><em>What the Glimmung noticed. Synthesis documents and twenty-question coach decks drawn from one pass over the corpus. Each is the product of running the queries in this tool against the user&rsquo;s 1.45M-prompt history and reading what the water kept.</em></p>',
+        '<h2>Synthesis</h2>',
+        '<ul>',
+    ]
+    synthesis_files = [
+        ("THE_RAISED_POTSHARDS.md",       "The Raised Potshards"),
+        ("WHAT_THE_WATER_KEPT.md",        "What the Water Kept"),
+        ("THE_GLIMMUNG_NOTICED.md",       "Things the Glimmung Noticed"),
+        ("LITTLE_DOORS.md",               "Little Doors"),
+        ("THE_LOWER_HEAVEN_FILE.md",      "The Lower-Heaven File"),
+        ("CASCADES_BENEATH_THE_TIDE.md",  "Cascades Beneath the Tide"),
+    ]
+    if findings_dir.exists():
+        for fname, title in synthesis_files:
+            md_path = findings_dir / fname
+            if not md_path.exists():
+                continue
+            slug = slugify(md_path.stem)
+            md_text = md_path.read_text(encoding="utf-8")
+            write_page(DOCS / "shards" / f"{slug}.html", title, render_markdown(md_text))
+            shards_links.append(f'<li><a href="shards/{slug}.html">{html.escape(title)}</a></li>')
+        shards_links.append("</ul>")
+        shards_links.append("<h2>Twenty-question coach decks per project</h2><ul>")
+        for md_path in sorted(findings_dir.glob("20Questionson*.md")):
+            slug = slugify(md_path.stem)
+            project = md_path.stem.replace("20Questionson", "")
+            display = f"20 Questions on {project}"
+            md_text = md_path.read_text(encoding="utf-8")
+            write_page(DOCS / "shards" / f"{slug}.html", display, render_markdown(md_text))
+            shards_links.append(f'<li><a href="shards/{slug}.html">{html.escape(display)}</a></li>')
+    shards_links.append("</ul>")
+    write_page(DOCS / "shards.html", "Shards", "\n".join(shards_links))
 
     # 6a) Coach
     coach_dir = ROOT / "coach"

@@ -12,6 +12,7 @@
     <span class="title"><a href="../index.html">⌂ Heldscalla</a></span>
     <span class="nav">
       <a href="../narrative.html">Lineage</a>
+      <a href="../shards.html">Shards</a>
       <a href="../coach.html">Coach</a>
       <a href="../docs.html">Docs</a>
       <a href="../queries.html">Queries</a>
@@ -104,6 +105,11 @@ time into the light.&lt;/p&gt;
 
 &lt;div class=&quot;section-title&quot;&gt;Surfaces&lt;/div&gt;
 &lt;div class=&quot;cards&quot;&gt;
+  &lt;a class=&quot;card&quot; href=&quot;shards.html&quot;&gt;
+    &lt;div class=&quot;card-label&quot;&gt;Shards&lt;/div&gt;
+    &lt;h3&gt;Findings from the corpus&lt;/h3&gt;
+    &lt;p&gt;Insights, rabbit holes, scholarly values, twenty-question coach decks per project.&lt;/p&gt;
+  &lt;/a&gt;
   &lt;a class=&quot;card&quot; href=&quot;coach.html&quot;&gt;
     &lt;div class=&quot;card-label&quot;&gt;Coach&lt;/div&gt;
     &lt;h3&gt;Glimmung-companion&lt;/h3&gt;
@@ -237,6 +243,43 @@ def main():
         code_html.append(f&#x27;&lt;li&gt;&lt;a href=&quot;code/{slug}.html&quot;&gt;&lt;code&gt;{html.escape(path.relative_to(ROOT).as_posix())}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&#x27;)
     code_html.append(&quot;&lt;/ul&gt;&quot;)
     write_page(DOCS / &quot;code.html&quot;, &quot;Code&quot;, &quot;\n&quot;.join(code_html))
+
+    # 5b) Shards (findings/)
+    findings_dir = ROOT / &quot;findings&quot;
+    shards_links = [
+        &#x27;&lt;h1&gt;Shards from the deep&lt;/h1&gt;&#x27;,
+        &#x27;&lt;p&gt;&lt;em&gt;What the Glimmung noticed. Synthesis documents and twenty-question coach decks drawn from one pass over the corpus. Each is the product of running the queries in this tool against the user&amp;rsquo;s 1.45M-prompt history and reading what the water kept.&lt;/em&gt;&lt;/p&gt;&#x27;,
+        &#x27;&lt;h2&gt;Synthesis&lt;/h2&gt;&#x27;,
+        &#x27;&lt;ul&gt;&#x27;,
+    ]
+    synthesis_files = [
+        (&quot;THE_RAISED_POTSHARDS.md&quot;,       &quot;The Raised Potshards&quot;),
+        (&quot;WHAT_THE_WATER_KEPT.md&quot;,        &quot;What the Water Kept&quot;),
+        (&quot;THE_GLIMMUNG_NOTICED.md&quot;,       &quot;Things the Glimmung Noticed&quot;),
+        (&quot;LITTLE_DOORS.md&quot;,               &quot;Little Doors&quot;),
+        (&quot;THE_LOWER_HEAVEN_FILE.md&quot;,      &quot;The Lower-Heaven File&quot;),
+        (&quot;CASCADES_BENEATH_THE_TIDE.md&quot;,  &quot;Cascades Beneath the Tide&quot;),
+    ]
+    if findings_dir.exists():
+        for fname, title in synthesis_files:
+            md_path = findings_dir / fname
+            if not md_path.exists():
+                continue
+            slug = slugify(md_path.stem)
+            md_text = md_path.read_text(encoding=&quot;utf-8&quot;)
+            write_page(DOCS / &quot;shards&quot; / f&quot;{slug}.html&quot;, title, render_markdown(md_text))
+            shards_links.append(f&#x27;&lt;li&gt;&lt;a href=&quot;shards/{slug}.html&quot;&gt;{html.escape(title)}&lt;/a&gt;&lt;/li&gt;&#x27;)
+        shards_links.append(&quot;&lt;/ul&gt;&quot;)
+        shards_links.append(&quot;&lt;h2&gt;Twenty-question coach decks per project&lt;/h2&gt;&lt;ul&gt;&quot;)
+        for md_path in sorted(findings_dir.glob(&quot;20Questionson*.md&quot;)):
+            slug = slugify(md_path.stem)
+            project = md_path.stem.replace(&quot;20Questionson&quot;, &quot;&quot;)
+            display = f&quot;20 Questions on {project}&quot;
+            md_text = md_path.read_text(encoding=&quot;utf-8&quot;)
+            write_page(DOCS / &quot;shards&quot; / f&quot;{slug}.html&quot;, display, render_markdown(md_text))
+            shards_links.append(f&#x27;&lt;li&gt;&lt;a href=&quot;shards/{slug}.html&quot;&gt;{html.escape(display)}&lt;/a&gt;&lt;/li&gt;&#x27;)
+    shards_links.append(&quot;&lt;/ul&gt;&quot;)
+    write_page(DOCS / &quot;shards.html&quot;, &quot;Shards&quot;, &quot;\n&quot;.join(shards_links))
 
     # 6a) Coach
     coach_dir = ROOT / &quot;coach&quot;
